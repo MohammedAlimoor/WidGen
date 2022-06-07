@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:uuid/uuid.dart';
 import 'package:wid_gen/features/controllers/board_controller.dart';
@@ -21,8 +22,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
+      enableLog: true,
+      defaultTransition: Transition.fade,
+      opaqueRoute: Get.isOpaqueRouteDefault,
+      // popGesture: Get.isPopGestureEnable,
+
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -59,21 +65,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  Widget? _targetImageUrl;
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -154,14 +145,23 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           Container(
-            width: 200,
+            width: 300,
+            padding: const EdgeInsets.all(8),
             child: GetBuilder<BoardController>(
                 init: BoardController(),
                 initState: (_) {},
                 builder: (controller) {
-                  return controller.selectedWidget != null
-                      ? controller.selectedWidget!.widgetProperties
-                      : Text("Please select any Item");
+                  return Column(
+                    children: [
+                      Text(controller.selectedWidget?.keyID ?? ""),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      controller.selectedWidget != null
+                          ? controller.selectedWidget!.widgetProperties
+                          : Text("Please select any Item"),
+                    ],
+                  );
                 }),
           )
         ],

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
@@ -18,6 +19,8 @@ class FFText extends WidGen {
             TextField(onSubmitted: (value) {
               Get.find<WidGenController>(tag: keyID).setProperty("text", value);
               print("updated item");
+            
+              // (context as Element).markNeedsBuild();
             })
           ],
         ),

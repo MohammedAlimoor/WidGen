@@ -19,12 +19,9 @@ class FFScaffold extends WidGen {
 
   @override
   Widget get widgetProperties => Scaffold(
-        // body: widBody,
-        // appBar: (widBar is ActionBar)? widBar!.getWidget().wiget :null,
+      // body: widBody,
+      // appBar: (widBar is ActionBar)? widBar!.getWidget().wiget :null,
       );
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +35,12 @@ class FFScaffold extends WidGen {
                 ? controller.getValue<Widget?>("body")!
                 : DragTarget<Widget>(
                     onWillAccept: (v) {
-                      return controller.getValue<Widget?>("body") != null ? false : true;
+                      return controller.getValue<Widget?>("body") != null
+                          ? false
+                          : true;
                     },
                     onAccept: (value) {
                       controller.setValue("body", value);
-               
                     },
                     onLeave: (value) {
                       print("Leave");
