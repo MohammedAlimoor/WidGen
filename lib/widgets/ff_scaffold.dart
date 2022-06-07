@@ -25,7 +25,7 @@ class FFScaffold extends WidGen {
 
   @override
   Widget build(BuildContext context) {
-    putController();
+    putController(context);
     return GetBuilder<WidGenController>(
         init: controller,
         initState: (_) {},

@@ -8,13 +8,24 @@ abstract class WidGen extends StatelessWidget {
   Widget get widgetProperties;
   String? get json;
   final String keyID;
-  WidGenController putController() {
+  WidGenController putController(BuildContext context) {
+    _context = context;
+
     return Get.put(WidGenController(), permanent: true, tag: keyID);
   }
+
+  BuildContext? _context;
 
   WidGenController get controller => Get.find<WidGenController>(tag: keyID);
 
   itemClick() {
     Get.find<BoardController>().setSelectedWidget(this);
+  }
+
+  refreshWidget() {
+    if (_context == null) {
+      return;
+    }
+    (_context as Element).markNeedsBuild();
   }
 }

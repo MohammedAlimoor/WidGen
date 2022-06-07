@@ -12,7 +12,7 @@ class FFIcon extends WidGen {
 
   @override
   Widget build(BuildContext context) {
-    putController();
+    putController(context);
 
     return const Icon(Icons.add);
   }

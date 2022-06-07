@@ -23,7 +23,7 @@ class FFActionBar extends WidGen {
   double? height;
   @override
   Widget build(BuildContext context) {
-    putController();
+    putController(context);
     return GetBuilder<WidGenController>(
         init: controller,
         initState: (_) {},
@@ -54,7 +54,6 @@ class FFActionBar extends WidGen {
                 print("title accept");
 
                 controller.setValue("title", value);
-
               },
               builder: (_, candidateData, rejectedData) {
                 return controller.getValue<Widget?>("title") != null
