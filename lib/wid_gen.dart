@@ -23,6 +23,8 @@ abstract class WidGen extends StatelessWidget {
   }
 
   refreshWidget() {
+        Get.find<BoardController>().setSelectedWidget(this);
+
     if (_context == null) {
       return;
     }

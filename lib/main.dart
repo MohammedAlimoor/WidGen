@@ -140,8 +140,12 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           Expanded(
-            child: FFScaffold(
-              keyID: "mainKeyScafold",
+            child: Container(
+              padding: const EdgeInsets.all(50),
+              color: Colors.grey,
+              child: FFScaffold(
+                keyID: "mainKeyScafold",
+              ),
             ),
           ),
           Container(
