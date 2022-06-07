@@ -1,7 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:get/state_manager.dart';
 import 'package:uuid/uuid.dart';
+import 'package:wid_gen/features/controllers/board_controller.dart';
 import 'package:wid_gen/widgets/ff_appbar.dart';
 import 'package:wid_gen/widgets/ff_icon.dart';
 import 'package:wid_gen/widgets/ff_scaffold.dart';
@@ -89,6 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               children: [
                 Draggable<Widget>(
+                  onDragUpdate: (dd) {},
                   data: FFActionBar(
                     keyID: const Uuid().v1(),
                   ),
@@ -147,9 +150,20 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Expanded(
             child: FFScaffold(
-              keyID: const Uuid().v1(),
+              keyID: "mainKeyScafold",
             ),
           ),
+          Container(
+            width: 200,
+            child: GetBuilder<BoardController>(
+                init: BoardController(),
+                initState: (_) {},
+                builder: (controller) {
+                  return controller.selectedWidget != null
+                      ? controller.selectedWidget!.widgetProperties
+                      : Text("Please select any Item");
+                }),
+          )
         ],
       ),
     );

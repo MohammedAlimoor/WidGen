@@ -1,6 +1,8 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:uuid/uuid.dart';
+import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/wid_gen.dart';
 
 class FFActionBar extends WidGen {
@@ -11,43 +13,56 @@ class FFActionBar extends WidGen {
   String? get json => "";
 
   @override
-  AppBar get wiget => AppBar(
-        leading: widLeading,
-        title: widTitle,
+  AppBar get widgetProperties => AppBar(
+      // leading: widLeading,
+      // title: widTitle,
       );
 
-  Widget? widTitle;
-  Widget? widLeading;
+  // Widget? widTitle;
+  // Widget? widLeading;
   double? height;
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      leading: DragTarget<Widget>(
-        onWillAccept: (v) {
-          return widLeading != null ? false : true;
-        },
-        onAccept: (value) {
-          widLeading = value;
-          (context as Element).markNeedsBuild();
-        },
-        builder: (_, candidateData, rejectedData) {
-          return widLeading != null ? widLeading! : Placeholder();
-        },
-      ),
-      title: DragTarget<Widget>(
-        onWillAccept: (v) {
-          return widTitle != null ? false : true;
-        },
-        onAccept: (value) {
+    putController();
+    return GetBuilder<WidGenController>(
+        init: controller,
+        initState: (_) {},
+        builder: (_) {
+          return AppBar(
+            leading: DragTarget<Widget>(
+              onWillAccept: (v) {
+                return controller.getValue<Widget?>("leading") != null
+                    ? false
+                    : true;
+              },
+              onAccept: (value) {
+                controller.setValue("leading", value);
+              },
+              builder: (_, candidateData, rejectedData) {
+                return controller.getValue<Widget?>("leading") != null
+                    ? controller.getValue<Widget?>("leading")!
+                    : Placeholder();
+              },
+            ),
+            title: DragTarget<Widget>(
+              onWillAccept: (v) {
+                return controller.getValue<Widget?>("title") != null
+                    ? false
+                    : true;
+              },
+              onAccept: (value) {
+                print("title accept");
 
-          print("title accept");
-          widTitle = value;
-          (context as Element).markNeedsBuild();
-        },
-        builder: (_, candidateData, rejectedData) {
-          return  widTitle != null ? widTitle! : Placeholder() ;
-        },
-      ),
-    );
+                controller.setValue("title", value);
+
+              },
+              builder: (_, candidateData, rejectedData) {
+                return controller.getValue<Widget?>("title") != null
+                    ? controller.getValue<Widget?>("title")!
+                    : Placeholder();
+              },
+            ),
+          );
+        });
   }
 }

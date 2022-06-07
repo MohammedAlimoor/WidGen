@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/wid_gen.dart';
 
 class FFText extends WidGen {
@@ -10,13 +12,33 @@ class FFText extends WidGen {
   String? text;
 
   @override
-  Widget get wiget => Container(
-        child: widChild,
+  Widget get widgetProperties => Container(
+        child: Column(
+          children: [
+            TextField(onSubmitted: (value) {
+              Get.find<WidGenController>(tag: keyID).setProperty("text", value);
+              print("updated item");
+            })
+          ],
+        ),
       );
 
-  Widget? widChild;
   @override
   Widget build(BuildContext context) {
-    return Text(text ?? "test text");
+    putController();
+
+    return GestureDetector(
+      onTap: () {
+        print("Click");
+        itemClick();
+      },
+      child: GetBuilder<WidGenController>(
+          init: controller,
+          initState: (_) {},
+          builder: (_) {
+            return Text(controller.getProperty("text") ??
+                "test text ${TimeOfDay.now()}");
+          }),
+    );
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/wid_gen.dart';
 
 class FFContainer extends WidGen {
@@ -9,40 +11,45 @@ class FFContainer extends WidGen {
   String? get json => "";
 
   @override
-  Widget get wiget => Container(
-        child: widChild,
+  Widget get widgetProperties => Container(
         color: color,
       );
 
-  Widget? widChild;
   Color? color;
   double? width;
   double? height;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
-      color: color,
-      child: DragTarget<Widget>(
-        onWillAccept: (v) {
-          return widChild != null ? false : true;
-        },
-        onAccept: (value) {
-          widChild = value;
-          (context as Element).markNeedsBuild();
-        },
-        builder: (_, candidateData, rejectedData) {
-          return Container(
-            // color: Colors.red,
-            alignment: Alignment.center,
-            child: widChild != null ? widChild! : Placeholder(),
-            
-          );
-        },
-      ),
+    putController();
+    return GetBuilder<WidGenController>(
+      init: controller,
+      initState: (_) {},
+      builder: (_) {
+        return Container(
+          width: width,
+          height: height,
+          color: color,
+          child: DragTarget<Widget>(
+            onWillAccept: (v) {
+              return controller.getValue<Widget?>("child") != null
+                  ? false
+                  : true;
+            },
+            onAccept: (value) {
+              controller.setValue("child", value);
+            },
+            builder: (_, candidateData, rejectedData) {
+              return Container(
+                // color: Colors.red,
+                alignment: Alignment.center,
+                child: controller.getValue<Widget?>("child") != null
+                    ? controller.getValue<Widget?>("child")!
+                    : Placeholder(),
+              );
+            },
+          ),
+        );
+      },
     );
   }
-
- 
 }
