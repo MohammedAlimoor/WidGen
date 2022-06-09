@@ -5,10 +5,7 @@ import 'package:wid_gen/wid_gen.dart';
 import 'package:wid_gen/widgets/ff_scaffold.dart';
 
 class BoardController extends GetxController with StateMixin {
-  var widTree = {
-    "scafold": FFScaffold(keyID: "mainKeyScafold") 
-  }.obs;
-
+  var widTree = {"scafold": FFScaffold(keyID: "mainKeyScafold")}.obs;
 
   WidGen? selectedWidget;
   setSelectedWidget(WidGen selectedWidget) {
@@ -22,21 +19,31 @@ class BoardController extends GetxController with StateMixin {
   Widget? getWidgetTree(WidGen wid) {
     List<Widget> list = [];
 
-    Get.find<WidGenController>(tag: wid.keyID)
-        .widgetsValues
-        .forEach((key, value) {
-      if (value is WidGen) {
-        list.add(Row(
-          children: [
-            Text(value.name ?? "none"),
-            Text(key),
-            getWidgetTree(value) ?? Container()
-          ],
-        ));
-      }
-    });
+    var reg = Get.isRegistered<WidGenController>(tag: wid.keyID);
+    print("Controller is $reg  ${wid.keyID} ");
+    print("tree k ${wid.name}");
+
+    if (reg) {
+      wid.controller.widgetsValues.forEach((key, value) {
+        if (value is WidGen) {
+          print("tree ${value.name!}");
+          list.add(Row(
+            children: [
+              Text(value.name! + "dddd"),
+              // Text(key),
+              getWidgetTree(value) ?? Container()
+            ],
+          ));
+        } else {
+          print("tree k ${key}");
+        }
+      });
+    }
+
     if (list.isEmpty) {
-      return Container();
+      return Container(
+        child: Text("none"),
+      );
     }
     Column(children: list);
   }

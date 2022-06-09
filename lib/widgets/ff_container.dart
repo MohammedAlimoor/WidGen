@@ -33,9 +33,9 @@ class FFContainer extends WidGen {
             width: width,
             height: height,
             color: color,
-            child: DragTarget<Widget>(
+            child: DragTarget<WidGen>(
               onWillAccept: (v) {
-                return controller.getValue<Widget?>("child") != null
+                return controller.getValue<WidGen?>("child") != null
                     ? false
                     : true;
               },
@@ -46,8 +46,8 @@ class FFContainer extends WidGen {
                 return Container(
                   // color: Colors.red,
                   alignment: Alignment.center,
-                  child: controller.getValue<Widget?>("child") != null
-                      ? controller.getValue<Widget?>("child")!
+                  child: controller.getValue<WidGen?>("child") != null
+                      ? controller.getValue<WidGen?>("child")!
                       : Placeholder(),
                 );
               },

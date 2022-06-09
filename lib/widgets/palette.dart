@@ -3,8 +3,9 @@ import 'package:uuid/uuid.dart';
 import 'package:wid_gen/widgets/widgets.dart';
 
 class PaletteWidget extends StatefulWidget {
-  PaletteWidget({Key? key}) : super(key: key);
+  PaletteWidget({Key? key, required this.onChange}) : super(key: key);
 
+  final Function onChange;
   @override
   State<PaletteWidget> createState() => _PaletteWidgetState();
 }

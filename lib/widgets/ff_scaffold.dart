@@ -33,23 +33,23 @@ class FFScaffold extends WidGen {
         initState: (_) {},
         builder: (_) {
           return Scaffold(
-            body: controller.getValue<Widget?>("body") != null
-                ? controller.getValue<Widget?>("body")!
-                : DragTarget<Widget>(
+            body: controller.getValue<WidGen?>("body") != null
+                ? controller.getValue<WidGen?>("body")!
+                : DragTarget<WidGen>(
                     onWillAccept: (v) {
-                      return controller.getValue<Widget?>("body") != null
+                      return controller.getValue<WidGen?>("body") != null
                           ? false
                           : true;
                     },
                     onAccept: (value) {
-                      controller.setValue("body", value);
+                      controller.setValue<WidGen>("body", value);
                     },
                     onLeave: (value) {
                       print("Leave");
                     },
                     builder: (_, candidateData, rejectedData) {
-                      return controller.getValue<Widget?>("body") != null
-                          ? controller.getValue<Widget?>("body")!
+                      return controller.getValue<WidGen?>("body") != null
+                          ? controller.getValue<WidGen?>("body")!
                           : Placeholder(
                               color: Colors.red,
                             );

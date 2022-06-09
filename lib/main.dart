@@ -77,7 +77,32 @@ class _MyHomePageState extends State<MyHomePage> {
           Container(
             color: Colors.grey,
             width: 300,
-            child: PaletteWidget(),
+            child: Column(
+              children: [
+                PaletteWidget(
+                  onChange: () {
+                    setState(() {});
+                  },
+                ),
+                Expanded(
+                    child: Container(
+                        width: double.infinity,
+                        color: Colors.white,
+                        child: Obx(() => Column(
+                              children: [
+                                // Text(Get.find<BoardController>(
+                                //         tag: "boardController")
+                                //     .widTree
+                                //     .keys
+                                //     .first),
+                                Get.find<BoardController>(
+                                            tag: "boardController")
+                                        .tree ??
+                                    Container()
+                              ],
+                            ))))
+              ],
+            ),
           ),
           Expanded(
             child: Container(
@@ -87,7 +112,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 init: Get.find<BoardController>(tag: "boardController"),
                 initState: (_) {},
                 builder: (controller) {
-                  return controller.widTree["scafold"]!;
+                  return Get.find<BoardController>(tag: "boardController")
+                      .widTree["scafold"]!;
                 },
               ),
             ),
@@ -98,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
             // color: Color.fromARGB(255, 49, 49, 49),
 
             child: GetBuilder<BoardController>(
-                init: BoardController(),
+                init: Get.find<BoardController>(tag: "boardController"),
                 initState: (_) {},
                 builder: (controller) {
                   return Column(
