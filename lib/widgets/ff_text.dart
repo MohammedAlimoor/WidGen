@@ -15,7 +15,6 @@ class FFText extends WidGen {
   String? get json => "";
   String? text;
   @override
-  // TODO: implement name
   String? get name => "Text";
   @override
   Widget get widgetProperties => Container(

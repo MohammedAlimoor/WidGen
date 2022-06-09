@@ -5,9 +5,10 @@ import 'package:wid_gen/wid_gen.dart';
 import 'package:wid_gen/widgets/ff_scaffold.dart';
 
 class BoardController extends GetxController with StateMixin {
-  Map<String, WidGen> widTree = {
-    "scafold": FFScaffold(keyID: "mainKeyScafold")
-  };
+  var widTree = {
+    "scafold": FFScaffold(keyID: "mainKeyScafold") 
+  }.obs;
+
 
   WidGen? selectedWidget;
   setSelectedWidget(WidGen selectedWidget) {

@@ -9,6 +9,7 @@ class FFContainer extends WidGen {
 
   @override
   String? get json => "";
+  @override
   String? get name => "Container";
 
   @override
@@ -22,35 +23,38 @@ class FFContainer extends WidGen {
   @override
   Widget build(BuildContext context) {
     putController(context);
-    return GetBuilder<WidGenController>(
-      init: controller,
-      initState: (_) {},
-      builder: (_) {
-        return Container(
-          width: width,
-          height: height,
-          color: color,
-          child: DragTarget<Widget>(
-            onWillAccept: (v) {
-              return controller.getValue<Widget?>("child") != null
-                  ? false
-                  : true;
-            },
-            onAccept: (value) {
-              controller.setValue("child", value);
-            },
-            builder: (_, candidateData, rejectedData) {
-              return Container(
-                // color: Colors.red,
-                alignment: Alignment.center,
-                child: controller.getValue<Widget?>("child") != null
-                    ? controller.getValue<Widget?>("child")!
-                    : Placeholder(),
-              );
-            },
-          ),
-        );
-      },
+    return GestureDetector(
+      onTap: () => itemClick(),
+      child: GetBuilder<WidGenController>(
+        init: controller,
+        initState: (_) {},
+        builder: (_) {
+          return Container(
+            width: width,
+            height: height,
+            color: color,
+            child: DragTarget<Widget>(
+              onWillAccept: (v) {
+                return controller.getValue<Widget?>("child") != null
+                    ? false
+                    : true;
+              },
+              onAccept: (value) {
+                controller.setValue("child", value);
+              },
+              builder: (_, candidateData, rejectedData) {
+                return Container(
+                  // color: Colors.red,
+                  alignment: Alignment.center,
+                  child: controller.getValue<Widget?>("child") != null
+                      ? controller.getValue<Widget?>("child")!
+                      : Placeholder(),
+                );
+              },
+            ),
+          );
+        },
+      ),
     );
   }
 }

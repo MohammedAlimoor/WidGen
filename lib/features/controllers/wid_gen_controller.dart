@@ -13,6 +13,10 @@ class WidGenController extends GetxController with StateMixin {
     return widgetsValues[key];
   }
 
+  bool hasValue(String key) {
+    return widgetsValues.containsKey(key);
+  }
+
   void setProperty<K>(String key, K value) {
     widgetProperties[key] = value;
     update();

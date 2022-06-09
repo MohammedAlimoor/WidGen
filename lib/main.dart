@@ -1,16 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
-import 'package:uuid/uuid.dart';
 import 'package:wid_gen/features/controllers/board_controller.dart';
-import 'package:wid_gen/widgets/ff_appbar.dart';
-import 'package:wid_gen/widgets/ff_icon.dart';
-import 'package:wid_gen/widgets/ff_scaffold.dart';
-
-import 'widgets/ff_container.dart';
-import 'widgets/ff_text.dart';
+import 'package:wid_gen/widgets/widgets.dart';
 
 void main() {
   runApp(const MyApp());
@@ -86,75 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Container(
             color: Colors.grey,
             width: 300,
-            child: Column(
-              children: [
-                Draggable<Widget>(
-                  onDragUpdate: (dd) {},
-                  data: FFActionBar(
-                    keyID: const Uuid().v1(),
-                  ),
-                  child: const Text("AppBar"),
-                  // The widget to show under the pointer when a drag is under way
-                  feedback: const Opacity(
-                    opacity: 0.4,
-                    child: Text("AppBar"),
-                  ),
-                ),
-                const Divider(),
-                Draggable<Widget>(
-                  data: FFContainer(
-                    keyID: const Uuid().v1(),
-                  ),
-                  child: const Text("Container"),
-                  // The widget to show under the pointer when a drag is under way
-                  feedback: const Opacity(
-                    opacity: 0.4,
-                    child: Text("Container"),
-                  ),
-                ),
-                const Divider(),
-                Draggable<Widget>(
-                  data: FFText(
-                    keyID: const Uuid().v1(),
-                  ),
-
-                  child: const Text("Text"),
-                  // The widget to show under the pointer when a drag is under way
-                  feedback: const Opacity(
-                    opacity: 0.4,
-                    child: Text("Text"),
-                  ),
-                ),
-                const Divider(),
-                Draggable<Widget>(
-                  data: FFIcon(
-                    keyID: const Uuid().v1(),
-                  ),
-                  child: const Text("Icon"),
-                  // The widget to show under the pointer when a drag is under way
-                  feedback: Opacity(
-                    opacity: 0.4,
-                    child: Container(
-                      color: Colors.purple,
-                      width: 105,
-                      height: 105,
-                      alignment: Alignment.center,
-                      child: const Text("Icon"),
-                    ),
-                  ),
-                ),
-                const Divider(),
-                Expanded(
-                  child: GetBuilder<BoardController>(
-                    init: Get.find<BoardController>(tag: "boardController"),
-                    initState: (_) {},
-                    builder: (controller) {
-                      return controller.tree ?? Container();
-                    },
-                  ),
-                )
-              ],
-            ),
+            child: PaletteWidget(),
           ),
           Expanded(
             child: Container(
@@ -171,20 +94,47 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Container(
             width: 300,
-            padding: const EdgeInsets.all(8),
+            // padding: const EdgeInsets.all(8),
+            // color: Color.fromARGB(255, 49, 49, 49),
+
             child: GetBuilder<BoardController>(
                 init: BoardController(),
                 initState: (_) {},
                 builder: (controller) {
                   return Column(
                     children: [
-                      Text(controller.selectedWidget?.keyID ?? ""),
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        color: Color.fromARGB(255, 49, 49, 49),
+                        child: Row(
+                          children: [
+                            Text(
+                              controller.selectedWidget?.name ?? "",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            Icon(
+                              Icons.arrow_back_ios_rounded,
+                              color: Colors.white,
+                            ),
+                            Expanded(
+                                child: Text(
+                              controller.selectedWidget?.keyID ?? "",
+                              maxLines: 1,
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 10),
+                            )),
+                          ],
+                        ),
+                      ),
                       const SizedBox(
                         height: 10,
                       ),
-                      controller.selectedWidget != null
-                          ? controller.selectedWidget!.widgetProperties
-                          : Text("Please select any Item"),
+                      Container(
+                        color: Colors.white,
+                        child: controller.selectedWidget != null
+                            ? controller.selectedWidget!.widgetProperties
+                            : Text("Please select any Item"),
+                      ),
                     ],
                   );
                 }),
