@@ -14,7 +14,9 @@ class FFText extends WidGen {
   @override
   String? get json => "";
   String? text;
-
+  @override
+  // TODO: implement name
+  String? get name => "Text";
   @override
   Widget get widgetProperties => Container(
         child: Column(
@@ -92,4 +94,6 @@ class FFText extends WidGen {
           }),
     );
   }
+  
+
 }

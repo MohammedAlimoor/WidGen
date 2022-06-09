@@ -66,6 +66,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
+  void initState() {
+    Get.put(BoardController(), tag: "boardController");
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
@@ -93,37 +100,37 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Text("AppBar"),
                   ),
                 ),
-                Divider(),
+                const Divider(),
                 Draggable<Widget>(
                   data: FFContainer(
                     keyID: const Uuid().v1(),
                   ),
-                  child: Text("Container"),
+                  child: const Text("Container"),
                   // The widget to show under the pointer when a drag is under way
-                  feedback: Opacity(
+                  feedback: const Opacity(
                     opacity: 0.4,
                     child: Text("Container"),
                   ),
                 ),
-                Divider(),
+                const Divider(),
                 Draggable<Widget>(
                   data: FFText(
                     keyID: const Uuid().v1(),
                   ),
 
-                  child: Text("Text"),
+                  child: const Text("Text"),
                   // The widget to show under the pointer when a drag is under way
-                  feedback: Opacity(
+                  feedback: const Opacity(
                     opacity: 0.4,
                     child: Text("Text"),
                   ),
                 ),
-                Divider(),
+                const Divider(),
                 Draggable<Widget>(
                   data: FFIcon(
                     keyID: const Uuid().v1(),
                   ),
-                  child: Text("Icon"),
+                  child: const Text("Icon"),
                   // The widget to show under the pointer when a drag is under way
                   feedback: Opacity(
                     opacity: 0.4,
@@ -132,10 +139,20 @@ class _MyHomePageState extends State<MyHomePage> {
                       width: 105,
                       height: 105,
                       alignment: Alignment.center,
-                      child: Text("Icon"),
+                      child: const Text("Icon"),
                     ),
                   ),
                 ),
+                const Divider(),
+                Expanded(
+                  child: GetBuilder<BoardController>(
+                    init: Get.find<BoardController>(tag: "boardController"),
+                    initState: (_) {},
+                    builder: (controller) {
+                      return controller.tree ?? Container();
+                    },
+                  ),
+                )
               ],
             ),
           ),
@@ -143,8 +160,12 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Container(
               padding: const EdgeInsets.all(50),
               color: Colors.grey,
-              child: FFScaffold(
-                keyID: "mainKeyScafold",
+              child: GetBuilder<BoardController>(
+                init: Get.find<BoardController>(tag: "boardController"),
+                initState: (_) {},
+                builder: (controller) {
+                  return controller.widTree["scafold"]!;
+                },
               ),
             ),
           ),

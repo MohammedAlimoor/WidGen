@@ -8,7 +8,7 @@ import 'package:wid_gen/wid_gen.dart';
 class FFActionBar extends WidGen {
   FFActionBar({Key? key, this.height, required keyID})
       : super(key: key, keyID: keyID);
-
+  String? get name => "ActionBar";
   @override
   String? get json => "";
 

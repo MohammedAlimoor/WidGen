@@ -10,6 +10,7 @@ import 'package:wid_gen/widgets/ff_container.dart';
 class FFScaffold extends WidGen {
   // FFScaffold({Key? key}) : super(key: key);
   FFScaffold({Key? key, required String keyID}) : super(key: key, keyID: keyID);
+  String? get name => "Scaffold";
 
   @override
   String? get json => "";

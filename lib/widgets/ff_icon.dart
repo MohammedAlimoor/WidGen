@@ -4,6 +4,8 @@ import 'package:wid_gen/wid_gen.dart';
 class FFIcon extends WidGen {
   FFIcon({Key? key, required String keyID}) : super(key: key, keyID: keyID);
 
+  String? get name => "Icon";
+
   @override
   String? get json => "";
 

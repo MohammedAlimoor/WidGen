@@ -9,6 +9,7 @@ class FFContainer extends WidGen {
 
   @override
   String? get json => "";
+  String? get name => "Container";
 
   @override
   Widget get widgetProperties => Container(

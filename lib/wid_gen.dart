@@ -7,6 +7,7 @@ abstract class WidGen extends StatelessWidget {
   WidGen({Key? key, required this.keyID}) : super(key: key);
   Widget get widgetProperties;
   String? get json;
+  String? get name;
   final String keyID;
   WidGenController putController(BuildContext context) {
     _context = context;
@@ -23,11 +24,10 @@ abstract class WidGen extends StatelessWidget {
   }
 
   refreshWidget() {
-        Get.find<BoardController>().setSelectedWidget(this);
+    Get.find<BoardController>().setSelectedWidget(this);
 
-    if (_context == null) {
-      return;
-    }
+    if (_context == null) return;
+
     (_context as Element).markNeedsBuild();
   }
 }
