@@ -17,7 +17,7 @@ class CrossAxisAlignmentProperties extends StatelessWidget {
     return Container(
         child: Row(
       children: [
-        Text("CrossAxisAlignment"),
+        Text("Cross Axis Alignment"),
         SizedBox(width: 10),
         Expanded(
           child: DropdownButton<CrossAxisAlignment>(
@@ -31,7 +31,7 @@ class CrossAxisAlignmentProperties extends StatelessWidget {
             ].map((CrossAxisAlignment value) {
               return DropdownMenuItem<CrossAxisAlignment>(
                 value: value,
-                child: Text(value.name),
+                child: Text(value.name.toUpperCase()),
               );
             }).toList(),
             onChanged: (select) {

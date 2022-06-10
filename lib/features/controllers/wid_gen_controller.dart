@@ -8,6 +8,12 @@ class WidGenController extends GetxController with StateMixin {
     update();
   }
 
+  @override
+  void onReady() {
+    super.onReady();
+    change(null, status: RxStatus.success());
+  }
+
   K? getValue<K>(String key) {
     if (!widgetsValues.containsKey(key)) return null;
     return widgetsValues[key];
@@ -20,7 +26,13 @@ class WidGenController extends GetxController with StateMixin {
   void setProperty<K>(String key, K value) {
     widgetProperties[key] = value;
     update();
-    refresh();
+    change(null, status: RxStatus.success());
+  }
+
+  void clearProperty<K>(String key) {
+    widgetProperties.remove(key);
+    update();
+    change(null, status: RxStatus.success());
   }
 
   K? getProperty<K>(String key) {

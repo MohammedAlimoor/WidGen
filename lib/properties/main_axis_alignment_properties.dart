@@ -17,7 +17,7 @@ class MainAxisAlignmentProperties extends StatelessWidget {
     return Container(
         child: Row(
       children: [
-        Text("MainAxisAlignment"),
+        Text("Main Axis Alignment"),
         SizedBox(width: 10),
         Expanded(
           child: DropdownButton<MainAxisAlignment>(
@@ -32,7 +32,7 @@ class MainAxisAlignmentProperties extends StatelessWidget {
             ].map((MainAxisAlignment value) {
               return DropdownMenuItem<MainAxisAlignment>(
                 value: value,
-                child: Text(value.name),
+                child: Text(value.name.toUpperCase()),
               );
             }).toList(),
             onChanged: (select) {

@@ -14,38 +14,54 @@ class BoardController extends GetxController with StateMixin {
     update();
   }
 
-  Widget? get tree => getWidgetTree(widTree["scafold"]!);
+  Widget? get tree => getWidgetTree(widTree["scafold"]!, firstTime: true);
 
-  Widget? getWidgetTree(WidGen wid) {
+  Widget? getWidgetTree(WidGen wid, {firstTime = false}) {
     List<Widget> list = [];
 
-    var reg = Get.isRegistered<WidGenController>(tag: wid.keyID);
-    print("Controller is $reg  ${wid.keyID} ");
-    print("tree k ${wid.name}");
+    if (firstTime) list.add(Text(wid.name!));
 
+    var reg = Get.isRegistered<WidGenController>(tag: wid.keyID);
     if (reg) {
       wid.controller.widgetsValues.forEach((key, value) {
         if (value is WidGen) {
-          print("tree ${value.name!}");
-          list.add(Row(
-            children: [
-              Text(value.name! + "dddd"),
-              // Text(key),
-              getWidgetTree(value) ?? Container()
-            ],
+          list.add(
+           wrapWithClick(  Text("[$key]" + value.name!),value ),
+          );
+          list.add(Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: getWidgetTree(value) ?? Container(),
           ));
+        } else if (value is List<Widget>) {
+          for (var element in value as List<WidGen>) {
+            list.add(
+             wrapWithClick( Text( "[$key]" + element.name!),element),
+            );
+            list.add(Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: getWidgetTree(element) ?? Container(),
+            ));
+          }
         } else {
-          print("tree k ${key}");
+          value.runtimeType.toString();
         }
       });
     }
 
     if (list.isEmpty) {
       return Container(
-        child: Text("none"),
-      );
+          // child: Text("none"),
+          );
     }
-    Column(children: list);
+
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);
+  }
+
+  Widget wrapWithClick(Widget widget,WidGen widGen) {
+    return GestureDetector(
+      onTap: () => setSelectedWidget(widGen),
+      child: widget,
+    );
   }
 
   unSelectedWidget() {

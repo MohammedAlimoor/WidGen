@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:wid_gen/features/controllers/board_controller.dart';
@@ -10,20 +12,13 @@ abstract class WidGen extends GetView<WidGenController> {
   String? get name;
   final String keyID;
   @override
-  // TODO: implement tag
-  String? get tag => this.keyID;
+  String? get tag => keyID;
   WidGenController putController(BuildContext context) {
-
-    print("Controller put ${keyID}");
     _context = context;
-
-    // return controller;
     return Get.put(WidGenController(), permanent: false, tag: keyID);
   }
 
   BuildContext? _context;
-
-  // WidGenController get controller => Get.find<WidGenController>(tag: keyID);
 
   itemClick() {
     Get.find<BoardController>().setSelectedWidget(this);
@@ -31,7 +26,6 @@ abstract class WidGen extends GetView<WidGenController> {
 
   refreshWidget() {
     Get.find<BoardController>().setSelectedWidget(this);
-
     if (_context == null) return;
 
     (_context as Element).markNeedsBuild();

@@ -12,7 +12,7 @@ class TextAlignProperties extends StatelessWidget {
     return Container(
         child: Row(
       children: [
-        Text("TextAlign"),
+        Text("Text Align"),
         SizedBox(width: 10),
         Expanded(
           child: DropdownButton<TextAlign>(
@@ -27,7 +27,7 @@ class TextAlignProperties extends StatelessWidget {
             ].map((TextAlign value) {
               return DropdownMenuItem<TextAlign>(
                 value: value,
-                child: Text(value.name),
+                child: Text(value.name.toUpperCase()),
               );
             }).toList(),
             onChanged: (select) {

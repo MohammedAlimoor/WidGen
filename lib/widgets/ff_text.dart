@@ -5,6 +5,7 @@ import 'package:wid_gen/properties/color_properties.dart';
 import 'package:wid_gen/properties/int_properties.dart';
 import 'package:wid_gen/properties/string_properties.dart';
 import 'package:wid_gen/properties/text_align_properties.dart';
+import 'package:wid_gen/properties/text_style_properties.dart';
 import 'package:wid_gen/wid_gen.dart';
 
 class FFText extends WidGen {
@@ -37,7 +38,7 @@ class FFText extends WidGen {
                     .setProperty("textSize", value);
                 refreshWidget();
               },
-              currentString: controller.getProperty("textSize") ?? 10,
+              value: controller.getProperty("textSize") ?? 15,
             ),
             SizedBox(
               height: 10,
@@ -55,11 +56,32 @@ class FFText extends WidGen {
               height: 10,
             ),
             TextAlignProperties(
-              textAlign:
-                  controller.getProperty("textAlign") ,
+              textAlign: controller.getProperty("textAlign"),
               onSubmitted: (c) {
                 Get.find<WidGenController>(tag: keyID)
                     .setProperty("textAlign", c);
+                refreshWidget();
+              },
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            TextStyleProperties(
+              textStyle: controller.getProperty("StyleGoogleFonts"),
+              enableGoogleFonts:
+                  controller.getProperty("EnableGoogleFonts") ?? false,
+              onSubmitted: (c) {
+                Get.find<WidGenController>(tag: keyID)
+                    .setProperty("StyleGoogleFonts", c);
+                refreshWidget();
+              },
+              onSubmittedEnableGoogleFonts: (enable) {
+                if (!enable) {
+                  Get.find<WidGenController>(tag: keyID)
+                      .clearProperty("StyleGoogleFonts");
+                }
+                Get.find<WidGenController>(tag: keyID)
+                    .setProperty("EnableGoogleFonts", enable);
                 refreshWidget();
               },
             ),
@@ -69,30 +91,26 @@ class FFText extends WidGen {
 
   BuildContext? context;
 
+  TextStyle get getStyle =>
+      Get.find<WidGenController>(tag: keyID)
+          .getProperty<TextStyle?>("StyleGoogleFonts") ??
+      const TextStyle();
   @override
   Widget build(BuildContext context) {
     putController(context);
 
     return GestureDetector(
-      onTap: () {
-        print("Click");
-        itemClick();
-      },
+      onTap: () => itemClick(),
       child: GetBuilder<WidGenController>(
           init: controller,
           initState: (_) {},
           builder: (_) {
-            return Text(
-              controller.getProperty("text") ?? "test text ${TimeOfDay.now()}",
-              textAlign: controller.getProperty("textAlign"),
-              style: TextStyle(
-
-                  color: controller.getProperty("textColor"),
-                  fontSize: controller.getProperty("textSize")),
-            );
+            return Text(controller.getProperty("text") ?? "test text",
+                textAlign: controller.getProperty("textAlign"),
+                style: getStyle.copyWith(
+                    color: controller.getProperty("textColor"),
+                    fontSize: controller.getProperty("textSize")));
           }),
     );
   }
-  
-
 }

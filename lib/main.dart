@@ -81,7 +81,9 @@ class _MyHomePageState extends State<MyHomePage> {
               children: [
                 PaletteWidget(
                   onChange: () {
-                    setState(() {});
+                    Future.delayed(const Duration(milliseconds: 500), () {
+                      setState(() {});
+                    });
                   },
                 ),
                 Expanded(
@@ -157,6 +159,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       Container(
                         color: Colors.white,
+                        padding: const EdgeInsets.all(8),
                         child: controller.selectedWidget != null
                             ? controller.selectedWidget!.widgetProperties
                             : Text("Please select any Item"),

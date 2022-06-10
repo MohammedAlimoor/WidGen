@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class StringProperties extends StatelessWidget {
   StringProperties(
       {Key? key, required this.onSubmitted, required this.currentString})
@@ -25,6 +24,10 @@ class StringProperties extends StatelessWidget {
             autocorrect: true,
             onSubmitted: onSubmitted,
             decoration: const InputDecoration(
+              contentPadding: EdgeInsets.all(1),
+              isDense: true, // Added this
+              border: InputBorder.none ,  //none 
+
               hintText: 'Type Text Here...',
               hintStyle: TextStyle(color: Colors.grey),
               filled: true,
