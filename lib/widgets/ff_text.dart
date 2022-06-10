@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bootstrap_widgets/bootstrap_widgets.dart';
 import 'package:get/get.dart';
 import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/properties/color_properties.dart';
@@ -29,42 +30,49 @@ class FFText extends WidGen {
               },
               currentString: controller.getProperty("text") ?? '',
             ),
-            SizedBox(
-              height: 10,
-            ),
-            IntProperties(
-              onSubmitted: (value) {
-                Get.find<WidGenController>(tag: keyID)
-                    .setProperty("textSize", value);
-                refreshWidget();
-              },
-              value: controller.getProperty("textSize") ?? 15,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            ColorProperties(
-              currentColor:
-                  controller.getProperty("textColor") ?? Color(0xff443a49),
-              selectColor: (c) {
-                Get.find<WidGenController>(tag: keyID)
-                    .setProperty("textColor", c);
-                refreshWidget();
-              },
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            TextAlignProperties(
-              textAlign: controller.getProperty("textAlign"),
-              onSubmitted: (c) {
-                Get.find<WidGenController>(tag: keyID)
-                    .setProperty("textAlign", c);
-                refreshWidget();
-              },
-            ),
-            SizedBox(
-              height: 10,
+            BootstrapPanel(
+              header: SelectableText('Style'),
+              body: Column(
+                children: [
+                  SizedBox(
+                    height: 10,
+                  ),
+                  IntProperties(
+                    onSubmitted: (value) {
+                      Get.find<WidGenController>(tag: keyID)
+                          .setProperty("textSize", value);
+                      refreshWidget();
+                    },
+                    value: controller.getProperty("textSize") ?? 15,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ColorProperties(
+                    currentColor: controller.getProperty("textColor") ??
+                        Color(0xff443a49),
+                    selectColor: (c) {
+                      Get.find<WidGenController>(tag: keyID)
+                          .setProperty("textColor", c);
+                      refreshWidget();
+                    },
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  TextAlignProperties(
+                    textAlign: controller.getProperty("textAlign"),
+                    onSubmitted: (c) {
+                      Get.find<WidGenController>(tag: keyID)
+                          .setProperty("textAlign", c);
+                      refreshWidget();
+                    },
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
             ),
             TextStyleProperties(
               textStyle: controller.getProperty("StyleGoogleFonts"),

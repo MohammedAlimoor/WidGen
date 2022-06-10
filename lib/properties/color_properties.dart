@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:get/get.dart';
+import 'package:wid_gen/core/widgets/item_properties.dart';
 
 class ColorProperties extends StatelessWidget {
   ColorProperties(
@@ -13,24 +14,17 @@ class ColorProperties extends StatelessWidget {
   //
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => showColorPicker(context),
-      child: Container(
-        child: Row(
-          children: [
-            Text("Color"),
-            SizedBox(width: 10),
-            Container(
-                width: 50,
-                height: 25,
+    return ItemProperties(
+        title: "Color",
+        child: GestureDetector(
+            onTap: () => showColorPicker(context),
+            child: Container(
+                // width: 50,
+                // height: 20,
                 decoration: BoxDecoration(
-                  color: currentColor,
-                  borderRadius: BorderRadius.circular(5),
-                )),
-          ],
-        ),
-      ),
-    );
+              color: currentColor,
+              borderRadius: BorderRadius.circular(5),
+            ))));
   }
 
   showColorPicker(BuildContext context) {
