@@ -19,82 +19,79 @@ class FFText extends WidGen {
   @override
   String? get name => "Text";
   @override
-  Widget get widgetProperties => Container(
-        child: Column(
-          children: [
-            StringProperties(
-              onSubmitted: (value) {
-                Get.find<WidGenController>(tag: keyID)
-                    .setProperty("text", value);
-                refreshWidget();
-              },
-              currentString: controller.getProperty("text") ?? '',
-            ),
-            BootstrapPanel(
-              header: SelectableText('Style'),
-              body: Column(
-                children: [
-                  SizedBox(
-                    height: 10,
-                  ),
-                  IntProperties(
-                    onSubmitted: (value) {
-                      Get.find<WidGenController>(tag: keyID)
-                          .setProperty("textSize", value);
-                      refreshWidget();
-                    },
-                    value: controller.getProperty("textSize") ?? 15,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  ColorProperties(
-                    currentColor: controller.getProperty("textColor") ??
-                        Color(0xff443a49),
-                    selectColor: (c) {
-                      Get.find<WidGenController>(tag: keyID)
-                          .setProperty("textColor", c);
-                      refreshWidget();
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextAlignProperties(
-                    textAlign: controller.getProperty("textAlign"),
-                    onSubmitted: (c) {
-                      Get.find<WidGenController>(tag: keyID)
-                          .setProperty("textAlign", c);
-                      refreshWidget();
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                ],
-              ),
-            ),
-            TextStyleProperties(
-              textStyle: controller.getProperty("StyleGoogleFonts"),
-              enableGoogleFonts:
-                  controller.getProperty("EnableGoogleFonts") ?? false,
-              onSubmitted: (c) {
-                Get.find<WidGenController>(tag: keyID)
-                    .setProperty("StyleGoogleFonts", c);
-                refreshWidget();
-              },
-              onSubmittedEnableGoogleFonts: (enable) {
-                if (!enable) {
+  Widget get widgetProperties => Column(
+        children: [
+          BootstrapPanel(
+              header: SelectableText('Data'),
+              body: StringProperties(
+                onSubmitted: (value) {
                   Get.find<WidGenController>(tag: keyID)
-                      .clearProperty("StyleGoogleFonts");
-                }
-                Get.find<WidGenController>(tag: keyID)
-                    .setProperty("EnableGoogleFonts", enable);
-                refreshWidget();
-              },
+                      .setProperty("text", value);
+                  refreshWidget();
+                },
+                currentString: controller.getProperty("text") ?? '',
+              )),
+          BootstrapPanel(
+            header: SelectableText('Style'),
+            body: Column(
+              children: [
+                SizedBox(
+                  height: 10,
+                ),
+                IntProperties(
+                  onSubmitted: (value) {
+                    Get.find<WidGenController>(tag: keyID)
+                        .setProperty("textSize", value);
+                    refreshWidget();
+                  },
+                  value: controller.getProperty("textSize") ?? 15,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                ColorProperties(
+                  currentColor:
+                      controller.getProperty("textColor") ?? Color(0xff443a49),
+                  selectColor: (c) {
+                    Get.find<WidGenController>(tag: keyID)
+                        .setProperty("textColor", c);
+                    refreshWidget();
+                  },
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                TextAlignProperties(
+                  textAlign: controller.getProperty("textAlign"),
+                  onSubmitted: (c) {
+                    Get.find<WidGenController>(tag: keyID)
+                        .setProperty("textAlign", c);
+                    refreshWidget();
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+          TextStyleProperties(
+            textStyle: controller.getProperty("StyleGoogleFonts"),
+            enableGoogleFonts:
+                controller.getProperty("EnableGoogleFonts") ?? false,
+            onSubmitted: (c) {
+              Get.find<WidGenController>(tag: keyID)
+                  .setProperty("StyleGoogleFonts", c);
+              refreshWidget();
+            },
+            onSubmittedEnableGoogleFonts: (enable) {
+              if (!enable) {
+                Get.find<WidGenController>(tag: keyID)
+                    .clearProperty("StyleGoogleFonts");
+              }
+              Get.find<WidGenController>(tag: keyID)
+                  .setProperty("EnableGoogleFonts", enable);
+              refreshWidget();
+            },
+          ),
+        ],
       );
 
   BuildContext? context;
