@@ -20,10 +20,7 @@ class FFScaffold extends WidGen {
   // String? get keyID => const Uuid().v1();
 
   @override
-  Widget get widgetProperties => Scaffold(
-      // body: widBody,
-      // appBar: (widBar is ActionBar)? widBar!.getWidget().wiget :null,
-      );
+  Widget get widgetProperties => Container();
 
   @override
   Widget build(BuildContext context) {
