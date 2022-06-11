@@ -3,6 +3,7 @@ import 'package:flutter_bootstrap_widgets/bootstrap_widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
+import 'package:wid_gen/properties/alignment_properties.dart';
 import 'package:wid_gen/properties/color_properties.dart';
 import 'package:wid_gen/properties/edgeinsets_properties.dart';
 import 'package:wid_gen/properties/int_properties.dart';
@@ -62,6 +63,15 @@ class FFContainer extends WidGen {
                     selected: (value) {
                       Get.find<WidGenController>(tag: keyID)
                           .setProperty("margin", value);
+                      refreshWidget();
+                    },
+                  ),
+                  const Gap(4),
+                  AlignmentProperties(
+                    alignment: controller.getProperty("alignment"),
+                    onSubmitted: (value) {
+                      Get.find<WidGenController>(tag: keyID)
+                          .setProperty("alignment", value);
                       refreshWidget();
                     },
                   )
@@ -203,44 +213,6 @@ class FFContainer extends WidGen {
         initState: (_) {},
         builder: (_) {
           return Container(
-            width: controller.getProperty("width"),
-            height: controller.getProperty("height"),
-            padding: controller.getProperty("padding"),
-            margin: controller.getProperty("margin"),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(
-                    controller.getProperty("BorderTopLeft") ?? 0),
-                topRight: Radius.circular(
-                    controller.getProperty("BorderTopRight") ?? 0),
-                bottomLeft: Radius.circular(
-                    controller.getProperty("BorderBottomLeft") ?? 0),
-                bottomRight: Radius.circular(
-                    controller.getProperty("BorderBottomRight") ?? 0),
-              ),
-              color: controller.getProperty("color"),
-              border: Border(
-                  right: BorderSide(
-                    color: controller.getProperty("BorderColor") ??
-                        Colors.transparent,
-                    width: controller.getProperty("BorderRight") ?? 0,
-                  ),
-                  bottom: BorderSide(
-                    color: controller.getProperty("BorderColor") ??
-                        Colors.transparent,
-                    width: controller.getProperty("BorderBottom") ?? 0,
-                  ),
-                  left: BorderSide(
-                    color: controller.getProperty("BorderColor") ??
-                        Colors.transparent,
-                    width: controller.getProperty("BorderLeft") ?? 0,
-                  ),
-                  top: BorderSide(
-                    color: controller.getProperty("BorderColor") ??
-                        Colors.transparent,
-                    width: controller.getProperty("BorderTop") ?? 0,
-                  )),
-            ),
             child: DragTarget<WidGen>(
               onWillAccept: (v) {
                 return controller.getValue<WidGen?>("child") != null
@@ -252,7 +224,45 @@ class FFContainer extends WidGen {
               },
               builder: (_, candidateData, rejectedData) {
                 return Container(
-                  alignment: Alignment.center,
+                  alignment: controller.getProperty("alignment"),
+                  width: controller.getProperty("width"),
+                  height: controller.getProperty("height"),
+                  padding: controller.getProperty("padding"),
+                  margin: controller.getProperty("margin"),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(
+                          controller.getProperty("BorderTopLeft") ?? 0),
+                      topRight: Radius.circular(
+                          controller.getProperty("BorderTopRight") ?? 0),
+                      bottomLeft: Radius.circular(
+                          controller.getProperty("BorderBottomLeft") ?? 0),
+                      bottomRight: Radius.circular(
+                          controller.getProperty("BorderBottomRight") ?? 0),
+                    ),
+                    color: controller.getProperty("color"),
+                    border: Border(
+                        right: BorderSide(
+                          color: controller.getProperty("BorderColor") ??
+                              Colors.transparent,
+                          width: controller.getProperty("BorderRight") ?? 0,
+                        ),
+                        bottom: BorderSide(
+                          color: controller.getProperty("BorderColor") ??
+                              Colors.transparent,
+                          width: controller.getProperty("BorderBottom") ?? 0,
+                        ),
+                        left: BorderSide(
+                          color: controller.getProperty("BorderColor") ??
+                              Colors.transparent,
+                          width: controller.getProperty("BorderLeft") ?? 0,
+                        ),
+                        top: BorderSide(
+                          color: controller.getProperty("BorderColor") ??
+                              Colors.transparent,
+                          width: controller.getProperty("BorderTop") ?? 0,
+                        )),
+                  ),
                   child: controller.getValue<WidGen?>("child") != null
                       ? controller.getValue<WidGen?>("child")!
                       : Placeholder(),

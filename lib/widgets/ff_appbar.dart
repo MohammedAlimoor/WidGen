@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:uuid/uuid.dart';
 import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
+import 'package:wid_gen/properties/cross_axis_alignment_properties.dart';
 import 'package:wid_gen/wid_gen.dart';
 
 class FFActionBar extends WidGen {
@@ -13,9 +14,37 @@ class FFActionBar extends WidGen {
   String? get json => "";
 
   @override
-  AppBar get widgetProperties => AppBar(
-      // leading: widLeading,
-      // title: widTitle,
+  AppBar get widgetProperties => BootstrapPanel(
+            header: SelectableText('Style'),
+            body:  Column(
+          children: [
+            SizedBox(
+              height: 10,
+            ),
+            MainAxisAlignmentProperties(
+              alignment: controller.getProperty("mainAxisAlignment"),
+              onSubmitted: (c) {
+                Get.find<WidGenController>(tag: keyID)
+                    .setProperty("mainAxisAlignment", c);
+                refreshWidget();
+
+                print("Changed mainAxisAlignment to $c");
+              },
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            CrossAxisAlignmentProperties(
+              alignment: controller.getProperty("crossAxisAlignment"),
+              onSubmitted: (c) {
+                Get.find<WidGenController>(tag: keyID)
+                    .setProperty("crossAxisAlignment", c);
+                refreshWidget();
+                print("Changed  crossAxisAlignment  to $c");
+              },
+            ),
+          ],
+        ),
       );
 
   // Widget? widTitle;

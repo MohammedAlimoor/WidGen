@@ -57,8 +57,35 @@ class FFScaffold extends WidGen {
                   ),
             appBar: PreferredSize(
               preferredSize: Size.fromHeight(50.0),
-              child: FFActionBar(height: 50, keyID: const Uuid().v1()),
-            ),
+              child:
+              
+              controller.getValue<WidGen?>("appBar") != null
+                ? controller.getValue<WidGen?>("appBar")!
+                : DragTarget<WidGen>(
+                    onWillAccept: (v) {
+                      if(v is FFActionBar && controller.getValue<WidGen?>("appBar") == null){
+                        return true;
+                      }else {
+                        return false;
+                      
+                      }
+                   
+                    },
+                    onAccept: (value) {
+                      controller.setValue<WidGen>("appBar", value);
+                    },
+                    onLeave: (value) {
+                      print("Leave");
+                    },
+                    builder: (_, candidateData, rejectedData) {
+                      return controller.getValue<WidGen?>("appBar") != null
+                          ? controller.getValue<WidGen?>("appBar")!
+                          : Placeholder(
+                              color: Colors.red,
+                            );
+                    },
+                  )
+                  ),
           );
         });
   }
