@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bootstrap_widgets/bootstrap_widgets.dart';
 import 'package:get/get.dart';
 import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/properties/cross_axis_alignment_properties.dart';
@@ -14,8 +15,9 @@ class FFColumn extends WidGen {
   String? get name => "Column";
 
   @override
-  Widget get widgetProperties => Container(
-        child: Column(
+  Widget get widgetProperties => BootstrapPanel(
+            header: SelectableText('Style'),
+            body:  Column(
           children: [
             SizedBox(
               height: 10,

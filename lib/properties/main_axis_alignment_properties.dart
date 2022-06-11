@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wid_gen/core/widgets/item_properties.dart';
 
 class MainAxisAlignmentProperties extends StatelessWidget {
   MainAxisAlignmentProperties(
@@ -14,35 +15,30 @@ class MainAxisAlignmentProperties extends StatelessWidget {
   //
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Row(
-      children: [
-        Text("Main Axis Alignment"),
-        SizedBox(width: 10),
-        Expanded(
-          child: DropdownButton<MainAxisAlignment>(
-            value: alignment,
-            items: <MainAxisAlignment>[
-              MainAxisAlignment.center,
-              MainAxisAlignment.start,
-              MainAxisAlignment.end,
-              MainAxisAlignment.spaceAround,
-              MainAxisAlignment.spaceEvenly,
-              MainAxisAlignment.spaceBetween,
-            ].map((MainAxisAlignment value) {
-              return DropdownMenuItem<MainAxisAlignment>(
-                value: value,
-                child: Text(value.name.toUpperCase()),
-              );
-            }).toList(),
-            onChanged: (select) {
-              if (select != null) {
-                onSubmitted?.call(select);
-              }
-            },
-          ),
-        )
-      ],
-    ));
+    return ItemProperties(
+        title: "Main Axis ",
+        child: DropdownButton<MainAxisAlignment>(
+          value: alignment,
+          isDense: true,
+          isExpanded: true,
+          items: <MainAxisAlignment>[
+            MainAxisAlignment.center,
+            MainAxisAlignment.start,
+            MainAxisAlignment.end,
+            MainAxisAlignment.spaceAround,
+            MainAxisAlignment.spaceEvenly,
+            MainAxisAlignment.spaceBetween,
+          ].map((MainAxisAlignment value) {
+            return DropdownMenuItem<MainAxisAlignment>(
+              value: value,
+              child: Text(value.name.toUpperCase()),
+            );
+          }).toList(),
+          onChanged: (select) {
+            if (select != null) {
+              onSubmitted?.call(select);
+            }
+          },
+        ));
   }
 }
