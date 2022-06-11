@@ -122,9 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Container(
             width: 300,
-            // padding: const EdgeInsets.all(8),
-            // color: Color.fromARGB(255, 49, 49, 49),
-
+    
             child: GetBuilder<BoardController>(
                 init: Get.find<BoardController>(tag: "boardController"),
                 initState: (_) {},
@@ -157,12 +155,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       const SizedBox(
                         height: 10,
                       ),
-                      Container(
-                        color: Colors.white,
-                        padding: const EdgeInsets.all(8),
-                        child: controller.selectedWidget != null
-                            ? controller.selectedWidget!.widgetProperties
-                            : Text("Please select any Item"),
+                      Expanded(
+                        child: Container(
+                          color: Colors.white,
+                          padding: const EdgeInsets.all(8),
+                          child: controller.selectedWidget != null
+                              ? controller.selectedWidget!.widgetProperties
+                              : Text("Please select any Item"),
+                        ),
                       ),
                     ],
                   );

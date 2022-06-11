@@ -102,7 +102,7 @@ class MacAlertDialog extends StatelessWidget {
         case TargetPlatform.android:
         case TargetPlatform.fuchsia:
           label = semanticLabel ??
-              MaterialLocalizations.of(context)?.alertDialogLabel;
+              MaterialLocalizations.of(context).alertDialogLabel;
       }
     }
 

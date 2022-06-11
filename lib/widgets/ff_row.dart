@@ -6,18 +6,18 @@ import 'package:wid_gen/properties/cross_axis_alignment_properties.dart';
 import 'package:wid_gen/properties/main_axis_alignment_properties.dart';
 import 'package:wid_gen/wid_gen.dart';
 
-class FFColumn extends WidGen {
-   FFColumn({Key? key, required keyID}) : super(key: key, keyID: keyID);
+class FFRow extends WidGen {
+  FFRow({Key? key, required keyID}) : super(key: key, keyID: keyID);
 
   @override
   String? get json => "";
   @override
-  String? get name => "Column";
+  String? get name => "Row";
 
   @override
   Widget get widgetProperties => BootstrapPanel(
-            header: SelectableText('Style'),
-            body:  Column(
+        header: SelectableText('Style'),
+        body: Column(
           children: [
             SizedBox(
               height: 10,
@@ -48,7 +48,6 @@ class FFColumn extends WidGen {
         ),
       );
 
-
   bool get hasChildren =>
       controller.hasValue("children") &&
       controller.getValue<List<Widget>>("children")!.isNotEmpty;
@@ -74,14 +73,13 @@ class FFColumn extends WidGen {
 
               refreshWidget();
             }, builder: (_, candidateData, rejectedData) {
-              return Column(
+              return Row(
                 mainAxisAlignment: controller
                         .getProperty<MainAxisAlignment?>('mainAxisAlignment') ??
                     MainAxisAlignment.center,
                 crossAxisAlignment: controller.getProperty<CrossAxisAlignment?>(
                         'crossAxisAlignment') ??
                     CrossAxisAlignment.center,
-        
                 children: !hasChildren
                     ? [
                         Container(

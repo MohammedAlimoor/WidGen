@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
+import 'package:wid_gen/widgets/ff_expanded.dart';
 import 'package:wid_gen/widgets/widgets.dart';
 
 class PaletteWidget extends StatefulWidget {
-const  PaletteWidget({Key? key, required this.onChange}) : super(key: key);
+  const PaletteWidget({Key? key, required this.onChange}) : super(key: key);
 
   final Function onChange;
   @override
@@ -62,6 +63,36 @@ class _PaletteWidgetState extends State<PaletteWidget> {
             feedback: const Opacity(
               opacity: 0.4,
               child: Text("Column"),
+            ),
+          ),
+          const Divider(),
+          Draggable<Widget>(
+            onDragEnd: (info) {
+              if (info.wasAccepted) refrshkeys();
+            },
+            data: FFRow(
+              keyID: const Uuid().v1(),
+            ),
+            child: const Text("Row"),
+            // The widget to show under the pointer when a drag is under way
+            feedback: const Opacity(
+              opacity: 0.4,
+              child: Text("Row"),
+            ),
+          ),
+          const Divider(),
+          Draggable<Widget>(
+            onDragEnd: (info) {
+              if (info.wasAccepted) refrshkeys();
+            },
+            data: FFExpanded(
+              keyID: const Uuid().v1(),
+            ),
+            child: const Text("Expanded"),
+            // The widget to show under the pointer when a drag is under way
+            feedback: const Opacity(
+              opacity: 0.4,
+              child: Text("Expanded"),
             ),
           ),
           const Divider(),
