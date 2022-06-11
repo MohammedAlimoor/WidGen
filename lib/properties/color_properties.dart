@@ -5,17 +5,17 @@ import 'package:wid_gen/core/widgets/item_properties.dart';
 
 class ColorProperties extends StatelessWidget {
   ColorProperties(
-      {Key? key, required this.selectColor, required this.currentColor})
+      {Key? key, required this.selectColor, required this.currentColor,this.title = "Color"})
       : super(key: key);
 
   final Function(Color) selectColor;
   Color currentColor;
-
+  String title;
   //
   @override
   Widget build(BuildContext context) {
     return ItemProperties(
-        title: "Color",
+        title: title,
         child: GestureDetector(
             onTap: () => showColorPicker(context),
             child: Container(
