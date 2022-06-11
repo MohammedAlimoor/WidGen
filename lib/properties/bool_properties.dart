@@ -1,8 +1,5 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:get/get.dart';
 import 'package:wid_gen/core/widgets/item_properties.dart';
 
 class BoolProperties extends StatelessWidget {

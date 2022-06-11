@@ -7,6 +7,7 @@ import 'package:wid_gen/properties/int_properties.dart';
 import 'package:wid_gen/properties/string_properties.dart';
 import 'package:wid_gen/properties/text_align_properties.dart';
 import 'package:wid_gen/properties/text_style_properties.dart';
+import 'package:wid_gen/properties/text_weight_properties.dart';
 import 'package:wid_gen/wid_gen.dart';
 
 class FFText extends WidGen {
@@ -55,6 +56,17 @@ class FFText extends WidGen {
                   selectColor: (c) {
                     Get.find<WidGenController>(tag: keyID)
                         .setProperty("textColor", c);
+                    refreshWidget();
+                  },
+                ), SizedBox(
+                  height: 10,
+                ),
+                TextWeightProperties(
+                  value:
+                      controller.getProperty("textWeight") ,
+                  onSubmitted: (c) {
+                    Get.find<WidGenController>(tag: keyID)
+                        .setProperty("textWeight", c);
                     refreshWidget();
                   },
                 ),
@@ -113,6 +125,8 @@ class FFText extends WidGen {
             return Text(controller.getProperty("text") ?? "test text",
                 textAlign: controller.getProperty("textAlign"),
                 style: getStyle.copyWith(
+
+                  fontWeight: controller.getProperty("textWeight"),
                     color: controller.getProperty("textColor"),
                     fontSize: controller.getProperty("textSize")));
           }),

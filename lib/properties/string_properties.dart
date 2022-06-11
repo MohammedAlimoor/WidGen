@@ -3,19 +3,22 @@ import 'package:wid_gen/core/widgets/item_properties.dart';
 
 class StringProperties extends StatelessWidget {
   StringProperties(
-      {Key? key, required this.onSubmitted, required this.currentString})
+      {Key? key,
+      required this.onSubmitted,
+      required this.currentString,
+      this.title = "Text"})
       : super(key: key);
 
   Function(String)? onSubmitted;
   String currentString;
-  //
+  String title;
   @override
   Widget build(BuildContext context) {
     final TextEditingController? controller =
         new TextEditingController(text: currentString);
 
     return ItemProperties(
-        title: "Text ",
+        title: title,
         child: TextField(
           controller: controller,
           autocorrect: true,

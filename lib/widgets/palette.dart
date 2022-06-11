@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
+import 'package:wid_gen/widgets/ff_Image_network.dart';
 import 'package:wid_gen/widgets/ff_expanded.dart';
 import 'package:wid_gen/widgets/widgets.dart';
 
@@ -93,6 +94,20 @@ class _PaletteWidgetState extends State<PaletteWidget> {
             feedback: const Opacity(
               opacity: 0.4,
               child: Text("Expanded"),
+            ),
+          ),   const Divider(),
+          Draggable<Widget>(
+            onDragEnd: (info) {
+              if (info.wasAccepted) refrshkeys();
+            },
+            data: FFImageNetwork(
+              keyID: const Uuid().v1(),
+            ),
+            child: const Text("ImageNetwork"),
+            // The widget to show under the pointer when a drag is under way
+            feedback: const Opacity(
+              opacity: 0.4,
+              child: Text("ImageNetwork"),
             ),
           ),
           const Divider(),
