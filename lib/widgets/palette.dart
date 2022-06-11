@@ -29,7 +29,12 @@ class _PaletteWidgetState extends State<PaletteWidget> {
             data: FFActionBar(
               keyID: const Uuid().v1(),
             ),
-            child: const Text("AppBar"),
+            child: Column(
+              children: [
+                const Icon(Icons.drag_handle),
+                const Text("AppBar"),
+              ],
+            ),
             // The widget to show under the pointer when a drag is under way
             feedback: const Opacity(
               opacity: 0.4,
@@ -44,7 +49,12 @@ class _PaletteWidgetState extends State<PaletteWidget> {
             data: FFContainer(
               keyID: const Uuid().v1(),
             ),
-            child: const Text("Container"),
+            child: Column(
+              children: [
+                const Icon(Icons.check_box_outline_blank_rounded),
+                const Text("Container"),
+              ],
+            ),
             // The widget to show under the pointer when a drag is under way
             feedback: const Opacity(
               opacity: 0.4,
@@ -59,7 +69,12 @@ class _PaletteWidgetState extends State<PaletteWidget> {
             data: FFColumn(
               keyID: const Uuid().v1(),
             ),
-            child: const Text("Column"),
+            child: Column(
+              children: [
+                const Icon(Icons.view_column_outlined),
+                const Text("Column"),
+              ],
+            ),
             // The widget to show under the pointer when a drag is under way
             feedback: const Opacity(
               opacity: 0.4,
@@ -74,7 +89,13 @@ class _PaletteWidgetState extends State<PaletteWidget> {
             data: FFRow(
               keyID: const Uuid().v1(),
             ),
-            child: const Text("Row"),
+            child: Column(
+              children: [
+                // Container(child: const Icon(Icons.view_column_outlined)),
+
+                const Text("Row"),
+              ],
+            ),
             // The widget to show under the pointer when a drag is under way
             feedback: const Opacity(
               opacity: 0.4,
@@ -95,7 +116,8 @@ class _PaletteWidgetState extends State<PaletteWidget> {
               opacity: 0.4,
               child: Text("Expanded"),
             ),
-          ),   const Divider(),
+          ),
+          const Divider(),
           Draggable<Widget>(
             onDragEnd: (info) {
               if (info.wasAccepted) refrshkeys();
