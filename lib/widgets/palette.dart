@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
+import 'package:wid_gen/core/widgets/palette_item.dart';
 import 'package:wid_gen/widgets/ff_Image_network.dart';
 import 'package:wid_gen/widgets/ff_expanded.dart';
 import 'package:wid_gen/widgets/widgets.dart';
@@ -20,7 +21,8 @@ class _PaletteWidgetState extends State<PaletteWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
+      color: Colors.white,
+      child: Wrap(
         children: [
           Draggable<Widget>(
             onDragEnd: (info) {
@@ -29,19 +31,13 @@ class _PaletteWidgetState extends State<PaletteWidget> {
             data: FFActionBar(
               keyID: const Uuid().v1(),
             ),
-            child: Column(
-              children: [
-                const Icon(Icons.drag_handle),
-                const Text("AppBar"),
-              ],
-            ),
+            child: const PaletteItem(title: "AppBar", icon: Icons.drag_handle),
             // The widget to show under the pointer when a drag is under way
             feedback: const Opacity(
               opacity: 0.4,
               child: Text("AppBar"),
             ),
           ),
-          const Divider(),
           Draggable<Widget>(
             onDragEnd: (info) {
               if (info.wasAccepted) refrshkeys();
@@ -49,19 +45,13 @@ class _PaletteWidgetState extends State<PaletteWidget> {
             data: FFContainer(
               keyID: const Uuid().v1(),
             ),
-            child: Column(
-              children: [
-                const Icon(Icons.check_box_outline_blank_rounded),
-                const Text("Container"),
-              ],
-            ),
+            child: const PaletteItem(title: "Container", icon: Icons.check_box_outline_blank_rounded),
             // The widget to show under the pointer when a drag is under way
             feedback: const Opacity(
               opacity: 0.4,
               child: Text("Container"),
             ),
           ),
-          const Divider(),
           Draggable<Widget>(
             onDragEnd: (info) {
               if (info.wasAccepted) refrshkeys();
@@ -69,19 +59,13 @@ class _PaletteWidgetState extends State<PaletteWidget> {
             data: FFColumn(
               keyID: const Uuid().v1(),
             ),
-            child: Column(
-              children: [
-                const Icon(Icons.view_column_outlined),
-                const Text("Column"),
-              ],
-            ),
+            child: const PaletteItem(title: "Column", icon: Icons.view_column_outlined),
             // The widget to show under the pointer when a drag is under way
             feedback: const Opacity(
               opacity: 0.4,
               child: Text("Column"),
             ),
           ),
-          const Divider(),
           Draggable<Widget>(
             onDragEnd: (info) {
               if (info.wasAccepted) refrshkeys();
@@ -89,20 +73,13 @@ class _PaletteWidgetState extends State<PaletteWidget> {
             data: FFRow(
               keyID: const Uuid().v1(),
             ),
-            child: Column(
-              children: [
-                // Container(child: const Icon(Icons.view_column_outlined)),
-
-                const Text("Row"),
-              ],
-            ),
+            child: const PaletteItem(title: "Row", icon: Icons.view_column_outlined) ,
             // The widget to show under the pointer when a drag is under way
             feedback: const Opacity(
               opacity: 0.4,
               child: Text("Row"),
             ),
           ),
-          const Divider(),
           Draggable<Widget>(
             onDragEnd: (info) {
               if (info.wasAccepted) refrshkeys();
@@ -110,14 +87,13 @@ class _PaletteWidgetState extends State<PaletteWidget> {
             data: FFExpanded(
               keyID: const Uuid().v1(),
             ),
-            child: const Text("Expanded"),
+            child: const PaletteItem(title: "Expanded", icon: Icons.fullscreen_outlined),
             // The widget to show under the pointer when a drag is under way
             feedback: const Opacity(
               opacity: 0.4,
               child: Text("Expanded"),
             ),
           ),
-          const Divider(),
           Draggable<Widget>(
             onDragEnd: (info) {
               if (info.wasAccepted) refrshkeys();
@@ -125,14 +101,13 @@ class _PaletteWidgetState extends State<PaletteWidget> {
             data: FFImageNetwork(
               keyID: const Uuid().v1(),
             ),
-            child: const Text("ImageNetwork"),
+            child: const PaletteItem(title: "Image", icon: Icons.image_outlined) ,
             // The widget to show under the pointer when a drag is under way
             feedback: const Opacity(
               opacity: 0.4,
-              child: Text("ImageNetwork"),
+              child: Text("Image"),
             ),
           ),
-          const Divider(),
           Draggable<Widget>(
             onDragEnd: (info) {
               if (info.wasAccepted) refrshkeys();
@@ -141,22 +116,21 @@ class _PaletteWidgetState extends State<PaletteWidget> {
               keyID: const Uuid().v1(),
             ),
 
-            child: const Text("Text"),
+            child: const PaletteItem(title: "Text", icon: Icons.text_fields) ,
             // The widget to show under the pointer when a drag is under way
             feedback: const Opacity(
               opacity: 0.4,
               child: Text("Text"),
             ),
           ),
-          const Divider(),
           Draggable<Widget>(
             onDragEnd: (info) {
               if (info.wasAccepted) refrshkeys();
             },
-            data: FFIcon(
+            data: FFDivider(
               keyID: const Uuid().v1(),
             ),
-            child: const Text("Icon"),
+            child: const PaletteItem(title: "Divider", icon: Icons.horizontal_rule_outlined) ,
             // The widget to show under the pointer when a drag is under way
             feedback: Opacity(
               opacity: 0.4,
@@ -165,20 +139,10 @@ class _PaletteWidgetState extends State<PaletteWidget> {
                 width: 105,
                 height: 105,
                 alignment: Alignment.center,
-                child: const Text("Icon"),
+                child: const Text("Divider"),
               ),
             ),
           ),
-          // const Divider(),
-          // Expanded(
-          //   child: GetBuilder<BoardController>(
-          //     init: Get.find<BoardController>(tag: "boardController"),
-          //     initState: (_) {},
-          //     builder: (controller) {
-          //       return controller.tree ?? Container();
-          //     },
-          //   ),
-          // )
         ],
       ),
     );

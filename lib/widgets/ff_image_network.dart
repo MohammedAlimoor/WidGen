@@ -9,7 +9,7 @@ import 'package:wid_gen/properties/string_properties.dart';
 import 'package:wid_gen/wid_gen.dart';
 
 class FFImageNetwork extends WidGen {
-  FFImageNetwork({Key? key, this.height, required keyID})
+  FFImageNetwork({Key? key, required keyID})
       : super(key: key, keyID: keyID);
   String? get name => "Image.network";
   @override
@@ -63,7 +63,6 @@ class FFImageNetwork extends WidGen {
 
   // Widget? widTitle;
   // Widget? widLeading;
-  double? height;
 
   get defaultUrl =>
       "https://iconape.com/wp-content/files/yb/61798/png/flutter-logo.png";

@@ -5,11 +5,11 @@ import 'package:wid_gen/core/widgets/item_properties.dart';
 
 class ColorProperties extends StatelessWidget {
   ColorProperties(
-      {Key? key, required this.selectColor, required this.currentColor,this.title = "Color"})
+      {Key? key, required this.selectColor,  this.currentColor,this.title = "Color"})
       : super(key: key);
 
-  final Function(Color) selectColor;
-  Color currentColor;
+  final Function(Color ?) selectColor;
+  Color ?currentColor;
   String title;
   //
   @override
@@ -30,7 +30,7 @@ class ColorProperties extends StatelessWidget {
   showColorPicker(BuildContext context) {
     Get.defaultDialog(
       content: ColorPicker(
-        pickerColor: currentColor,
+        pickerColor: currentColor  ?? Colors.white,
         onColorChanged: (color) {
           currentColor = color;
         },

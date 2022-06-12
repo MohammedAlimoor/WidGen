@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bootstrap_widgets/bootstrap_widgets.dart';
 import 'package:get/get.dart';
+import 'package:wid_gen/core/widgets/place_holder.dart';
 import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/properties/cross_axis_alignment_properties.dart';
 import 'package:wid_gen/properties/main_axis_alignment_properties.dart';
 import 'package:wid_gen/wid_gen.dart';
 
 class FFColumn extends WidGen {
-   FFColumn({Key? key, required keyID}) : super(key: key, keyID: keyID);
+  FFColumn({Key? key, required keyID}) : super(key: key, keyID: keyID);
 
   @override
   String? get json => "";
@@ -16,8 +17,8 @@ class FFColumn extends WidGen {
 
   @override
   Widget get widgetProperties => BootstrapPanel(
-            header: SelectableText('Style'),
-            body:  Column(
+        header: SelectableText('Style'),
+        body: Column(
           children: [
             SizedBox(
               height: 10,
@@ -47,7 +48,6 @@ class FFColumn extends WidGen {
           ],
         ),
       );
-
 
   bool get hasChildren =>
       controller.hasValue("children") &&
@@ -81,13 +81,9 @@ class FFColumn extends WidGen {
                 crossAxisAlignment: controller.getProperty<CrossAxisAlignment?>(
                         'crossAxisAlignment') ??
                     CrossAxisAlignment.center,
-        
                 children: !hasChildren
                     ? [
-                        Container(
-                          color: Colors.red,
-                          child: Text("Add them to $name"),
-                        )
+                        const DragPlaceholder(color: Colors.black45),
                       ]
                     : controller.getValue<List<WidGen>>("children")!,
               );

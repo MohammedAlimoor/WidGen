@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:wid_gen/features/controllers/board_controller.dart';
 import 'package:wid_gen/widgets/widgets.dart';
@@ -75,10 +76,31 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Row(
         children: [
           Container(
-            color: Colors.grey,
+            // color: Colors.grey,
             width: 300,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: Color.fromARGB(255, 49, 49, 49),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.palette_outlined,
+                        color: Colors.white,
+                      ),
+                      Gap(5),
+                      Text(
+                        "Palette",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 15),
+                      ),
+                    ],
+                  ),
+                ),
                 PaletteWidget(
                   onChange: () {
                     Future.delayed(const Duration(milliseconds: 500), () {
@@ -92,6 +114,26 @@ class _MyHomePageState extends State<MyHomePage> {
                         color: Colors.white,
                         child: Obx(() => Column(
                               children: [
+                                Container(
+                                  padding: const EdgeInsets.all(8),
+                                  color: Color.fromARGB(255, 49, 49, 49),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.account_tree_outlined,
+                                        color: Colors.white,
+                                      ),
+                                      Gap(5),
+                                      Text(
+                                        "Tree",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                            fontSize: 15),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                                 // Text(Get.find<BoardController>(
                                 //         tag: "boardController")
                                 //     .widTree
@@ -122,7 +164,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Container(
             width: 300,
-    
             child: GetBuilder<BoardController>(
                 init: Get.find<BoardController>(tag: "boardController"),
                 initState: (_) {},
@@ -156,12 +197,14 @@ class _MyHomePageState extends State<MyHomePage> {
                         height: 10,
                       ),
                       Expanded(
-                        child: Container(
-                          color: Colors.white,
-                          padding: const EdgeInsets.all(8),
-                          child: controller.selectedWidget != null
-                              ? controller.selectedWidget!.widgetProperties
-                              : Text("Please select any Item"),
+                        child: SingleChildScrollView(
+                          child: Container(
+                            color: Colors.white,
+                            padding: const EdgeInsets.all(8),
+                            child: controller.selectedWidget != null
+                                ? controller.selectedWidget!.widgetProperties
+                                : Text("Please select any Item"),
+                          ),
                         ),
                       ),
                     ],
