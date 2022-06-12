@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:wid_gen/features/controllers/board_controller.dart';
-import 'dart:async';
 
 class WidGenController extends GetxController with StateMixin {
   late Map<String, dynamic> widgetsValues = {};
@@ -12,27 +11,19 @@ class WidGenController extends GetxController with StateMixin {
     update();
   }
 
-  var isStartDarg = false.obs;
-  StreamSubscription<bool>? _dragDropSubscription;
+  
 
   @override
   void onReady() {
     super.onReady();
     change(null, status: RxStatus.success());
 
-    _dragDropSubscription = dragDropStreamController.stream
-        .asBroadcastStream()
-        .listen((bool value) {
-
-          print("DDDDDDDDD $value");
-         isStartDarg.value = value;
-    });
+   
   }
 
   @override
   void onClose() {
     super.onClose();
-    _dragDropSubscription?.cancel();
   }
 
   K? getValue<K>(String key) {
