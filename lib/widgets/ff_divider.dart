@@ -60,6 +60,6 @@ class FFDivider extends WidGen {
   Widget build(BuildContext context) {
     putController(context);
 
-    return  Divider(height: controller.getProperty("height"),thickness:controller.getProperty("thickness") , color: controller.getProperty("color") ,);
+    return   controller.obx((_) => Divider(height: controller.getProperty("height"),thickness:controller.getProperty("thickness") , color: controller.getProperty("color") ,));
   }
 }

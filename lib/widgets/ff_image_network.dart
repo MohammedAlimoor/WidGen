@@ -69,11 +69,7 @@ class FFImageNetwork extends WidGen {
   @override
   Widget build(BuildContext context) {
     putController(context);
-    return GetBuilder<WidGenController>(
-        init: controller,
-        initState: (_) {},
-        builder: (_) {
-          return GestureDetector(
+    return controller.obx((_) =>  GestureDetector(
             onTap: () => itemClick(),
             child: Image.network(
               controller.getProperty("src") ?? defaultUrl,
@@ -81,7 +77,7 @@ class FFImageNetwork extends WidGen {
               height: controller.getProperty("height"),
               width: controller.getProperty("width"),
             ),
-          );
-        });
+          )
+        );
   }
 }

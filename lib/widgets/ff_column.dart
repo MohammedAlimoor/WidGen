@@ -55,14 +55,10 @@ class FFColumn extends WidGen {
   @override
   Widget build(BuildContext context) {
     putController(context);
-    return controller.obx((state) {
+    return controller.obx((_) {
       return GestureDetector(
         onTap: () => itemClick(),
-        child: GetBuilder<WidGenController>(
-          init: controller,
-          initState: (_) {},
-          builder: (_) {
-            return DragTarget<WidGen>(onWillAccept: (v) {
+        child: DragTarget<WidGen>(onWillAccept: (v) {
               return true;
             }, onAccept: (it) {
               List<WidGen> list = [];
@@ -87,9 +83,7 @@ class FFColumn extends WidGen {
                       ]
                     : controller.getValue<List<WidGen>>("children")!,
               );
-            });
-          },
-        ),
+            }),
       );
     });
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bootstrap_widgets/bootstrap_widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:wid_gen/core/widgets/place_holder.dart';
 import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/properties/color_properties.dart';
 import 'package:wid_gen/properties/edgeinsets_properties.dart';
@@ -45,13 +46,9 @@ class FFExpanded extends WidGen {
   @override
   Widget build(BuildContext context) {
     putController(context);
-    return GestureDetector(
+    return controller.obx((_) => GestureDetector(
       onTap: () => itemClick(),
-      child: GetBuilder<WidGenController>(
-        init: controller,
-        initState: (_) {},
-        builder: (_) {
-          return Expanded(
+      child: Expanded(
             flex: int.tryParse(controller.getProperty("flex").toString()) ?? 1,
     
             child: DragTarget<WidGen>(
@@ -68,13 +65,12 @@ class FFExpanded extends WidGen {
                   alignment: Alignment.center,
                   child: controller.getValue<WidGen?>("child") != null
                       ? controller.getValue<WidGen?>("child")!
-                      : Placeholder(),
+                      : DragPlaceholder(
+                      ),
                 );
               },
             ),
-          );
-        },
-      ),
-    );
+          ),
+    ));
   }
 }

@@ -9,7 +9,6 @@ import 'package:wid_gen/widgets/ff_appbar.dart';
 import 'package:wid_gen/widgets/ff_container.dart';
 
 class FFScaffold extends WidGen {
-  // FFScaffold({Key? key}) : super(key: key);
   FFScaffold({Key? key, required String keyID}) : super(key: key, keyID: keyID);
   @override
   String? get name => "Scaffold";
@@ -17,8 +16,7 @@ class FFScaffold extends WidGen {
   @override
   String? get json => "";
 
-  // @override
-  // String? get keyID => const Uuid().v1();
+
 
   @override
   Widget get widgetProperties => Container();
@@ -26,11 +24,7 @@ class FFScaffold extends WidGen {
   @override
   Widget build(BuildContext context) {
     putController(context);
-    return GetBuilder<WidGenController>(
-        init: controller,
-        initState: (_) {},
-        builder: (_) {
-          return Scaffold(
+    return controller.obx((state) =>  Scaffold(
             body: controller.getValue<WidGen?>("body") != null
                 ? controller.getValue<WidGen?>("body")!
                 : DragTarget<WidGen>(
@@ -48,9 +42,7 @@ class FFScaffold extends WidGen {
                     builder: (_, candidateData, rejectedData) {
                       return controller.getValue<WidGen?>("body") != null
                           ? controller.getValue<WidGen?>("body")!
-                          : Placeholder(
-                              color: Colors.red,
-                            );
+                          : DragPlaceholder();
                     },
                   ),
             appBar: PreferredSize(
@@ -80,7 +72,7 @@ class FFScaffold extends WidGen {
                                 );
                         },
                       )),
-          );
-        });
+          )
+        );
   }
 }

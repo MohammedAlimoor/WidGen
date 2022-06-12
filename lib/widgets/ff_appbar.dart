@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:uuid/uuid.dart';
+import 'package:wid_gen/core/widgets/place_holder.dart';
 import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/properties/bool_properties.dart';
 import 'package:wid_gen/properties/color_properties.dart';
@@ -69,50 +70,47 @@ class FFActionBar extends WidGen {
   @override
   Widget build(BuildContext context) {
     putController(context);
-    return GetBuilder<WidGenController>(
-        init: controller,
-        initState: (_) {},
-        builder: (_) {
-          return  GestureDetector(
-        onTap: () => itemClick(),
-            child: AppBar(
-              elevation: controller.getProperty("elevation"),
-              centerTitle: controller.getProperty("centerTitle"),
-              backgroundColor: controller.getProperty("backgroundColor"),
-              leading: DragTarget<Widget>(
-                onWillAccept: (v) {
-                  return controller.getValue<Widget?>("leading") != null
-                      ? false
-                      : true;
-                },
-                onAccept: (value) {
-                  controller.setValue("leading", value);
-                },
-                builder: (_, candidateData, rejectedData) {
-                  return controller.getValue<Widget?>("leading") != null
-                      ? controller.getValue<Widget?>("leading")!
-                      : Placeholder();
-                },
-              ),
-              title: DragTarget<Widget>(
-                onWillAccept: (v) {
-                  return controller.getValue<Widget?>("title") != null
-                      ? false
-                      : true;
-                },
-                onAccept: (value) {
-                  print("title accept");
-
-                  controller.setValue("title", value);
-                },
-                builder: (_, candidateData, rejectedData) {
-                  return controller.getValue<Widget?>("title") != null
-                      ? controller.getValue<Widget?>("title")!
-                      : Placeholder();
-                },
-              ),
+    return controller.obx((_) => GestureDetector(
+          onTap: () => itemClick(),
+          child: AppBar(
+            elevation: controller.getProperty("elevation"),
+            centerTitle: controller.getProperty("centerTitle"),
+            backgroundColor: controller.getProperty("backgroundColor"),
+            leading: DragTarget<Widget>(
+              onWillAccept: (v) {
+                return controller.getValue<Widget?>("leading") != null
+                    ? false
+                    : true;
+              },
+              onAccept: (value) {
+                controller.setValue("leading", value);
+              },
+              builder: (_, candidateData, rejectedData) {
+                return controller.getValue<Widget?>("leading") != null
+                    ? controller.getValue<Widget?>("leading")!
+                    : DragPlaceholder(
+                        title: "Drag",
+                      );
+              },
             ),
-          );
-        });
+            title: DragTarget<Widget>(
+              onWillAccept: (v) {
+                return controller.getValue<Widget?>("title") != null
+                    ? false
+                    : true;
+              },
+              onAccept: (value) {
+                print("title accept");
+
+                controller.setValue("title", value);
+              },
+              builder: (_, candidateData, rejectedData) {
+                return controller.getValue<Widget?>("title") != null
+                    ? controller.getValue<Widget?>("title")!
+                    : DragPlaceholder();
+              },
+            ),
+          ),
+        ));
   }
 }

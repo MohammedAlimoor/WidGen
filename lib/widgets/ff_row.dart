@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bootstrap_widgets/bootstrap_widgets.dart';
 import 'package:get/get.dart';
+import 'package:wid_gen/core/widgets/place_holder.dart';
 import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/properties/cross_axis_alignment_properties.dart';
 import 'package:wid_gen/properties/main_axis_alignment_properties.dart';
@@ -57,41 +58,30 @@ class FFRow extends WidGen {
     return controller.obx((state) {
       return GestureDetector(
         onTap: () => itemClick(),
-        child: GetBuilder<WidGenController>(
-          init: controller,
-          initState: (_) {},
-          builder: (_) {
-            return DragTarget<WidGen>(onWillAccept: (v) {
-              return true;
-            }, onAccept: (it) {
-              List<WidGen> list = [];
-              if (hasChildren) {
-                list = controller.getValue<List<WidGen>?>("children")!;
-              }
-              list.add(it);
-              controller.setValue<List<WidGen>>("children", list);
+        child: DragTarget<WidGen>(onWillAccept: (v) {
+          return true;
+        }, onAccept: (it) {
+          List<WidGen> list = [];
+          if (hasChildren) {
+            list = controller.getValue<List<WidGen>?>("children")!;
+          }
+          list.add(it);
+          controller.setValue<List<WidGen>>("children", list);
 
-              refreshWidget();
-            }, builder: (_, candidateData, rejectedData) {
-              return Row(
-                mainAxisAlignment: controller
-                        .getProperty<MainAxisAlignment?>('mainAxisAlignment') ??
-                    MainAxisAlignment.center,
-                crossAxisAlignment: controller.getProperty<CrossAxisAlignment?>(
-                        'crossAxisAlignment') ??
-                    CrossAxisAlignment.center,
-                children: !hasChildren
-                    ? [
-                        Container(
-                          color: Colors.red,
-                          child: Text("Add them to $name"),
-                        )
-                      ]
-                    : controller.getValue<List<WidGen>>("children")!,
-              );
-            });
-          },
-        ),
+          refreshWidget();
+        }, builder: (_, candidateData, rejectedData) {
+          return Row(
+            mainAxisAlignment: controller
+                    .getProperty<MainAxisAlignment?>('mainAxisAlignment') ??
+                MainAxisAlignment.center,
+            crossAxisAlignment: controller
+                    .getProperty<CrossAxisAlignment?>('crossAxisAlignment') ??
+                CrossAxisAlignment.center,
+            children: !hasChildren
+                ? [DragPlaceholder()]
+                : controller.getValue<List<WidGen>>("children")!,
+          );
+        }),
       );
     });
   }
