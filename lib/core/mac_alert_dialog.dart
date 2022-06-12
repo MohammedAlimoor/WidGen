@@ -17,8 +17,7 @@ class MacAlertDialog extends StatelessWidget {
     this.contentPadding = const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 24.0),
     this.actions,
     this.semanticLabel,
-  })  : assert(contentPadding != null),
-        super(key: key);
+  })  : super(key: key);
 
   /// The (optional) title of the dialog is displayed in a large font at the top
   /// of the dialog.
