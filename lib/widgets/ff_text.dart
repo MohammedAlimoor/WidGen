@@ -160,7 +160,7 @@ class FFText extends WidGen {
           onTap: () => itemClick(),
           child: Text(controller.getProperty("text") ?? "test text",
               textAlign: controller.getProperty("textAlign"),
-              maxLines: controller.getProperty("textAlign"),
+              maxLines: controller.getProperty("maxLines"),
               style: getStyle.copyWith(
                   fontWeight: controller.getProperty("textWeight"),
                   color: controller.getProperty("textColor"),

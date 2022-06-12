@@ -50,6 +50,7 @@ class WidGenController extends GetxController with StateMixin {
     update();
     change(null, status: RxStatus.success());
   }
+  
 
   K? getProperty<K>(String key) {
     if (!widgetProperties.containsKey(key)) return null;

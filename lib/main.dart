@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bootstrap_widgets/bootstrap_widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:wid_gen/features/controllers/board_controller.dart';
@@ -119,12 +120,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                   color: Color.fromARGB(255, 49, 49, 49),
                                   child: Row(
                                     children: [
-                                     const Icon(
+                                      const Icon(
                                         Icons.account_tree_outlined,
                                         color: Colors.white,
                                       ),
-                                     const Gap(5),
-                                    const  Text(
+                                      const Gap(5),
+                                      const Text(
                                         "Tree",
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
@@ -196,6 +197,23 @@ class _MyHomePageState extends State<MyHomePage> {
                       const SizedBox(
                         height: 10,
                       ),
+                      if (controller.selectedWidget != null)
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(8),
+                          child: BootstrapButton(
+                            type: BootstrapButtonType.danger,
+                            child: Text('Remove Item'),
+                            onPressed: () {
+                              controller.removeWidgetTree(
+                                  controller.widTree["scafold"]!,
+                                  controller.selectedWidget!);
+                              setState(() {
+                                controller.selectedWidget = null;
+                              });
+                            },
+                          ),
+                        ),
                       Expanded(
                         child: SingleChildScrollView(
                           child: Container(

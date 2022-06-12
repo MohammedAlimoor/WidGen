@@ -18,6 +18,43 @@ class BoardController extends GetxController with StateMixin {
     update();
   }
 
+  void removeWidgetTree(WidGen root, WidGen del) {
+    print("start remove ${del.keyID}");
+
+    var reg = Get.isRegistered<WidGenController>(tag: root.keyID);
+
+    if (reg) {
+      print("start remove 2 ${del.keyID}");
+      root.controller.widgetsValues.forEach((key, value) {
+        if (value is WidGen) {
+          if (value.keyID == del.keyID) {
+            root.controller.widgetsValues[key] = null;
+            root.refreshWidget();
+            print("Found ${del.keyID}");
+          }
+          removeWidgetTree(value, del);
+        } else if (value is List<Widget>) {
+          var index = 0;
+          (value as List<WidGen>)
+              .removeWhere((element) => element.keyID == del.keyID);
+          root.refreshWidget();
+
+          for (var element in value as List<WidGen>) {
+            if (element.keyID == del.keyID) {
+              // value.removeAt(index);
+              // root.refreshWidget();
+            } else {
+              removeWidgetTree(element, del);
+            }
+            index++;
+          }
+        }
+      });
+    }
+
+    update();
+  }
+
   Widget? get tree => getWidgetTree(widTree["scafold"]!, firstTime: true);
 
   Widget? getWidgetTree(WidGen wid, {firstTime = false}) {
@@ -30,7 +67,7 @@ class BoardController extends GetxController with StateMixin {
     var reg = Get.isRegistered<WidGenController>(tag: wid.keyID);
 
     if (reg) {
-      if (firstTime) print(wid.json);
+      // if (firstTime) print(wid.json);
 
       wid.controller.widgetsValues.forEach((key, value) {
         if (value is WidGen) {
