@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/wid_gen.dart';
 import 'package:wid_gen/widgets/ff_scaffold.dart';
+import 'dart:async';
 
+ final StreamController<bool> dragDropStreamController = StreamController<bool>.broadcast();
 class BoardController extends GetxController with StateMixin {
   var widTree = {"scafold": FFScaffold(keyID: "mainKeyScafold")}.obs;
 

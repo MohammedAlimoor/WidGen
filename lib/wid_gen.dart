@@ -22,6 +22,7 @@ abstract class WidGen extends GetView<WidGenController> {
 
   itemClick() {
     Get.find<BoardController>().setSelectedWidget(this);
+   
   }
 
   refreshWidget() {
@@ -30,4 +31,6 @@ abstract class WidGen extends GetView<WidGenController> {
 
     (_context as Element).markNeedsBuild();
   }
+
+  
 }

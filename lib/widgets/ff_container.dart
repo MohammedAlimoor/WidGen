@@ -68,7 +68,7 @@ class FFContainer extends WidGen {
                 ),
                 const Gap(4),
                 AlignmentProperties(
-                  alignment: controller.getProperty("alignment"),
+                  alignment: controller.getProperty("alignment"),// ??Alignment.center,
                   onSubmitted: (value) {
                     Get.find<WidGenController>(tag: keyID)
                         .setProperty("alignment", value);
@@ -215,9 +215,9 @@ class FFContainer extends WidGen {
           },
           builder: (_, candidateData, rejectedData) {
             return Container(
-              alignment: controller.getProperty("alignment"),
-              // width: controller.getProperty("width"),
-              // height: controller.getProperty("height"),
+              alignment: controller.getProperty("alignment") ,// ??Alignment.center,
+              width: controller.getProperty("width"),
+              height: controller.getProperty("height"),
               padding: controller.getProperty("padding"),
               margin: controller.getProperty("margin"),
               decoration: BoxDecoration(

@@ -36,41 +36,37 @@ class FFExpanded extends WidGen {
                     },
                     value: controller.getProperty("flex"),
                   ),
-             ],
+                ],
               ),
             ),
-           ],
+          ],
         ),
       );
 
   @override
   Widget build(BuildContext context) {
     putController(context);
-    return controller.obx((_) => GestureDetector(
-      onTap: () => itemClick(),
-      child: Expanded(
-            flex: int.tryParse(controller.getProperty("flex").toString()) ?? 1,
-    
-            child: DragTarget<WidGen>(
-              onWillAccept: (v) {
-                return controller.getValue<WidGen?>("child") != null
-                    ? false
-                    : true;
-              },
-              onAccept: (value) {
-                controller.setValue("child", value);
-              },
-              builder: (_, candidateData, rejectedData) {
-                return Container(
-                  alignment: Alignment.center,
-                  child: controller.getValue<WidGen?>("child") != null
+    return controller.obx((_) => Expanded(
+          flex: int.tryParse(controller.getProperty("flex").toString()) ?? 1,
+          child: DragTarget<WidGen>(
+            onWillAccept: (v) {
+              return controller.getValue<WidGen?>("child") != null
+                  ? false
+                  : true;
+            },
+            onAccept: (value) {
+              controller.setValue("child", value);
+            },
+            builder: (_, candidateData, rejectedData) {
+              return GestureDetector(
+                onTap: () => itemClick(),
+                child:  controller.getValue<WidGen?>("child") != null
                       ? controller.getValue<WidGen?>("child")!
-                      : DragPlaceholder(
-                      ),
-                );
-              },
-            ),
+                      : DragPlaceholder(),
+                
+              );
+            },
           ),
-    ));
+        ));
   }
 }

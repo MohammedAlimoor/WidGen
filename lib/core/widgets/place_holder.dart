@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 import 'dart:math' as math;
 
+import 'package:wid_gen/wid_gen.dart';
+
 class RPSCustomPainter extends CustomPainter {
   // final Path originalPath;
   final Color pathColor;
@@ -90,19 +92,25 @@ class RPSCustomPainter extends CustomPainter {
   }
 }
 
-class DragPlaceholder extends StatelessWidget {
-  /// Creates a widget which draws a box.
-  const DragPlaceholder(
+class DragPlaceholder extends WidGen {
+  DragPlaceholder(
       {Key? key,
+      keyID = "DragPlaceholder",
       this.color = const Color(0xFF455A64), // Blue Grey 700
       this.strokeWidth = 2.0,
       this.fallbackWidth = 400.0,
       this.fallbackHeight = 400.0,
       this.title = "Drag item here",
       this.child})
-      : super(key: key);
+      : super(key: key, keyID: keyID);
 
-  /// The color to draw the placeholder box.
+  @override
+  String? get json => "";
+  @override
+  String? get name => "Column";
+
+  @override
+  Widget get widgetProperties => Container();
   final Color color;
   final String title;
 
@@ -136,8 +144,7 @@ class DragPlaceholder extends StatelessWidget {
       maxHeight: fallbackHeight,
       child: CustomPaint(
         size: Size.infinite,
-        painter: RPSCustomPainter(pathColor: color,
-        title: title
+        painter: RPSCustomPainter(pathColor: color, title: title
             // color: color,
             // strokeWidth: strokeWidth,
             ),

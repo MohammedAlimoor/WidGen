@@ -52,6 +52,22 @@ class FFColumn extends WidGen {
   bool get hasChildren =>
       controller.hasValue("children") &&
       controller.getValue<List<Widget>>("children")!.isNotEmpty;
+
+  getChildren() {
+    List<Widget> list = [];
+    controller.getValue<List<Widget>>("children");
+
+    if (hasChildren) {
+      list = controller.getValue<List<Widget>>("children")!;
+    }
+
+    // if (controller.isStartDarg.value) {
+    //   list.add( DragPlaceholder( title: "add item to $name",color: Colors.blue));
+    // }
+
+    return list;
+  }
+
   @override
   Widget build(BuildContext context) {
     putController(context);
@@ -59,31 +75,31 @@ class FFColumn extends WidGen {
       return GestureDetector(
         onTap: () => itemClick(),
         child: DragTarget<WidGen>(onWillAccept: (v) {
-              return true;
-            }, onAccept: (it) {
-              List<WidGen> list = [];
-              if (hasChildren) {
-                list = controller.getValue<List<WidGen>?>("children")!;
-              }
-              list.add(it);
-              controller.setValue<List<WidGen>>("children", list);
+          return true;
+        }, onAccept: (it) {
+          List<WidGen> list = [];
+          if (hasChildren) {
+            list = controller.getValue<List<WidGen>?>("children")!;
+          }
+          list.add(it);
+          controller.setValue<List<WidGen>>("children", list);
 
-              refreshWidget();
-            }, builder: (_, candidateData, rejectedData) {
-              return Column(
-                mainAxisAlignment: controller
-                        .getProperty<MainAxisAlignment?>('mainAxisAlignment') ??
-                    MainAxisAlignment.center,
-                crossAxisAlignment: controller.getProperty<CrossAxisAlignment?>(
-                        'crossAxisAlignment') ??
-                    CrossAxisAlignment.center,
-                children: !hasChildren
-                    ? [
-                        const DragPlaceholder(color: Colors.black45),
-                      ]
-                    : controller.getValue<List<WidGen>>("children")!,
-              );
-            }),
+          refreshWidget();
+        }, builder: (_, candidateData, rejectedData) {
+          return Column(
+            mainAxisAlignment: controller
+                    .getProperty<MainAxisAlignment?>('mainAxisAlignment') ??
+                MainAxisAlignment.center,
+            crossAxisAlignment: controller
+                    .getProperty<CrossAxisAlignment?>('crossAxisAlignment') ??
+                CrossAxisAlignment.center,
+            children: !hasChildren
+                ? [
+                    DragPlaceholder(color: Colors.black45),
+                  ]
+                : getChildren(),
+          );
+        }),
       );
     });
   }

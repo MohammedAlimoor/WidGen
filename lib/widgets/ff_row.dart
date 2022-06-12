@@ -78,7 +78,7 @@ class FFRow extends WidGen {
                     .getProperty<CrossAxisAlignment?>('crossAxisAlignment') ??
                 CrossAxisAlignment.center,
             children: !hasChildren
-                ? [DragPlaceholder()]
+                ? [ DragPlaceholder()]
                 : controller.getValue<List<WidGen>>("children")!,
           );
         }),

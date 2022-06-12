@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 import 'package:wid_gen/core/widgets/palette_item.dart';
+import 'package:wid_gen/features/controllers/board_controller.dart';
 import 'package:wid_gen/widgets/ff_Image_network.dart';
 import 'package:wid_gen/widgets/ff_expanded.dart';
 import 'package:wid_gen/widgets/widgets.dart';
@@ -16,6 +17,8 @@ class PaletteWidget extends StatefulWidget {
 class _PaletteWidgetState extends State<PaletteWidget> {
   refrshkeys() {
     setState(() {});
+
+    widget.onChange();
   }
 
   @override
@@ -25,6 +28,9 @@ class _PaletteWidgetState extends State<PaletteWidget> {
       child: Wrap(
         children: [
           Draggable<Widget>(
+            onDragStarted: () => dragDropStreamController.add(true),
+            onDragCompleted: () => dragDropStreamController.add(false),
+            onDraggableCanceled: (_, __) => dragDropStreamController.add(false),
             onDragEnd: (info) {
               if (info.wasAccepted) refrshkeys();
             },
@@ -39,13 +45,18 @@ class _PaletteWidgetState extends State<PaletteWidget> {
             ),
           ),
           Draggable<Widget>(
+            onDragStarted: () => dragDropStreamController.add(true),
+            onDragCompleted: () => dragDropStreamController.add(false),
+            onDraggableCanceled: (_, __) => dragDropStreamController.add(false),
             onDragEnd: (info) {
               if (info.wasAccepted) refrshkeys();
             },
             data: FFContainer(
               keyID: const Uuid().v1(),
             ),
-            child: const PaletteItem(title: "Container", icon: Icons.check_box_outline_blank_rounded),
+            child: const PaletteItem(
+                title: "Container",
+                icon: Icons.check_box_outline_blank_rounded),
             // The widget to show under the pointer when a drag is under way
             feedback: const Opacity(
               opacity: 0.4,
@@ -53,13 +64,17 @@ class _PaletteWidgetState extends State<PaletteWidget> {
             ),
           ),
           Draggable<Widget>(
+            onDragStarted: () => dragDropStreamController.add(true),
+            onDragCompleted: () => dragDropStreamController.add(false),
+            onDraggableCanceled: (_, __) => dragDropStreamController.add(false),
             onDragEnd: (info) {
               if (info.wasAccepted) refrshkeys();
             },
             data: FFColumn(
               keyID: const Uuid().v1(),
             ),
-            child: const PaletteItem(title: "Column", icon: Icons.view_column_outlined),
+            child: const PaletteItem(
+                title: "Column", icon: Icons.view_column_outlined),
             // The widget to show under the pointer when a drag is under way
             feedback: const Opacity(
               opacity: 0.4,
@@ -67,13 +82,17 @@ class _PaletteWidgetState extends State<PaletteWidget> {
             ),
           ),
           Draggable<Widget>(
+                 onDragStarted: () => dragDropStreamController.add(true),
+            onDragCompleted: () => dragDropStreamController.add(false),
+            onDraggableCanceled: (_,__) => dragDropStreamController.add(false),
             onDragEnd: (info) {
               if (info.wasAccepted) refrshkeys();
             },
             data: FFRow(
               keyID: const Uuid().v1(),
             ),
-            child: const PaletteItem(title: "Row", icon: Icons.view_column_outlined) ,
+            child: const PaletteItem(
+                title: "Row", icon: Icons.view_column_outlined),
             // The widget to show under the pointer when a drag is under way
             feedback: const Opacity(
               opacity: 0.4,
@@ -81,13 +100,17 @@ class _PaletteWidgetState extends State<PaletteWidget> {
             ),
           ),
           Draggable<Widget>(
+                 onDragStarted: () => dragDropStreamController.add(true),
+            onDragCompleted: () => dragDropStreamController.add(false),
+            onDraggableCanceled: (_,__) => dragDropStreamController.add(false),
             onDragEnd: (info) {
               if (info.wasAccepted) refrshkeys();
             },
             data: FFExpanded(
               keyID: const Uuid().v1(),
             ),
-            child: const PaletteItem(title: "Expanded", icon: Icons.fullscreen_outlined),
+            child: const PaletteItem(
+                title: "Expanded", icon: Icons.fullscreen_outlined),
             // The widget to show under the pointer when a drag is under way
             feedback: const Opacity(
               opacity: 0.4,
@@ -95,13 +118,17 @@ class _PaletteWidgetState extends State<PaletteWidget> {
             ),
           ),
           Draggable<Widget>(
+                 onDragStarted: () => dragDropStreamController.add(true),
+            onDragCompleted: () => dragDropStreamController.add(false),
+            onDraggableCanceled: (_,__) => dragDropStreamController.add(false),
             onDragEnd: (info) {
               if (info.wasAccepted) refrshkeys();
             },
             data: FFImageNetwork(
               keyID: const Uuid().v1(),
             ),
-            child: const PaletteItem(title: "Image", icon: Icons.image_outlined) ,
+            child:
+                const PaletteItem(title: "Image", icon: Icons.image_outlined),
             // The widget to show under the pointer when a drag is under way
             feedback: const Opacity(
               opacity: 0.4,
@@ -109,6 +136,9 @@ class _PaletteWidgetState extends State<PaletteWidget> {
             ),
           ),
           Draggable<Widget>(
+                 onDragStarted: () => dragDropStreamController.add(true),
+            onDragCompleted: () => dragDropStreamController.add(false),
+            onDraggableCanceled: (_,__) => dragDropStreamController.add(false),
             onDragEnd: (info) {
               if (info.wasAccepted) refrshkeys();
             },
@@ -116,7 +146,7 @@ class _PaletteWidgetState extends State<PaletteWidget> {
               keyID: const Uuid().v1(),
             ),
 
-            child: const PaletteItem(title: "Text", icon: Icons.text_fields) ,
+            child: const PaletteItem(title: "Text", icon: Icons.text_fields),
             // The widget to show under the pointer when a drag is under way
             feedback: const Opacity(
               opacity: 0.4,
@@ -124,13 +154,17 @@ class _PaletteWidgetState extends State<PaletteWidget> {
             ),
           ),
           Draggable<Widget>(
+                 onDragStarted: () => dragDropStreamController.add(true),
+            onDragCompleted: () => dragDropStreamController.add(false),
+            onDraggableCanceled: (_,__) => dragDropStreamController.add(false),
             onDragEnd: (info) {
               if (info.wasAccepted) refrshkeys();
             },
             data: FFDivider(
               keyID: const Uuid().v1(),
             ),
-            child: const PaletteItem(title: "Divider", icon: Icons.horizontal_rule_outlined) ,
+            child: const PaletteItem(
+                title: "Divider", icon: Icons.horizontal_rule_outlined),
             // The widget to show under the pointer when a drag is under way
             feedback: Opacity(
               opacity: 0.4,
