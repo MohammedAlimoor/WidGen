@@ -119,12 +119,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                   color: Color.fromARGB(255, 49, 49, 49),
                                   child: Row(
                                     children: [
-                                      Icon(
+                                     const Icon(
                                         Icons.account_tree_outlined,
                                         color: Colors.white,
                                       ),
-                                      Gap(5),
-                                      Text(
+                                     const Gap(5),
+                                    const  Text(
                                         "Tree",
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,

@@ -17,6 +17,8 @@ class EdgeInsetsProperties extends StatelessWidget {
 
   EdgeInsets get value => current ?? EdgeInsets.zero;
 
+  static  getValue(EdgeInsets edgeInsets) =>
+      "${edgeInsets.left},${edgeInsets.top},${edgeInsets.right},${edgeInsets.bottom}";
   @override
   Widget build(BuildContext context) {
     final TextEditingController? controllerTop =

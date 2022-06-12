@@ -5,7 +5,9 @@ import 'package:wid_gen/wid_gen.dart';
 import 'package:wid_gen/widgets/ff_scaffold.dart';
 import 'dart:async';
 
- final StreamController<bool> dragDropStreamController = StreamController<bool>.broadcast();
+final StreamController<bool> dragDropStreamController =
+    StreamController<bool>.broadcast();
+
 class BoardController extends GetxController with StateMixin {
   var widTree = {"scafold": FFScaffold(keyID: "mainKeyScafold")}.obs;
 
@@ -21,14 +23,19 @@ class BoardController extends GetxController with StateMixin {
   Widget? getWidgetTree(WidGen wid, {firstTime = false}) {
     List<Widget> list = [];
 
-    if (firstTime) list.add(Text(wid.name!));
+    if (firstTime) {
+      list.add(Text(wid.name!));
+    }
 
     var reg = Get.isRegistered<WidGenController>(tag: wid.keyID);
+
     if (reg) {
+      if (firstTime) print(wid.json);
+
       wid.controller.widgetsValues.forEach((key, value) {
         if (value is WidGen) {
           list.add(
-           wrapWithClick(  Text("[$key]" + value.name!),value ),
+            wrapWithClick(Text("[$key]" + value.name!), value),
           );
           list.add(Padding(
             padding: const EdgeInsets.only(left: 10),
@@ -37,7 +44,7 @@ class BoardController extends GetxController with StateMixin {
         } else if (value is List<Widget>) {
           for (var element in value as List<WidGen>) {
             list.add(
-             wrapWithClick( Text( "[$key]" + element.name!),element),
+              wrapWithClick(Text("[$key]" + element.name!), element),
             );
             list.add(Padding(
               padding: const EdgeInsets.only(left: 10),
@@ -59,7 +66,7 @@ class BoardController extends GetxController with StateMixin {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: list);
   }
 
-  Widget wrapWithClick(Widget widget,WidGen widGen) {
+  Widget wrapWithClick(Widget widget, WidGen widGen) {
     return GestureDetector(
       onTap: () => setSelectedWidget(widGen),
       child: widget,

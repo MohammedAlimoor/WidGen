@@ -16,7 +16,33 @@ class FFText extends WidGen {
       : super(key: key, keyID: keyID);
 
   @override
-  String? get json => "";
+  String? get json {
+    var code = "";
+
+    var eee = controller.widgetsValues.entries
+        .map((val) => '"${val.key}": ${val.value.json} ,')
+        .toList();
+
+    code = '''
+        {
+          "type": "$name",
+          "data": "${(controller.getProperty<String?>("text") ?? "")}",
+          "maxLines":${(controller.getProperty<double?>("maxLines") ?? 1)}
+          "style": {
+                "color":"#${(controller.getProperty<Color?>("textColor") ?? Colors.white).value.toRadixString(16)}",
+                "fontSize":${(controller.getProperty<double?>("textSize") ?? 15)}
+                "fontFamily":"${getStyle.fontFamily}"
+              }
+        ''';
+    eee.forEach((element) {
+      code += element + "\n";
+    });
+
+    code += " }";
+
+    return code.replaceAll(RegExp(r'\,(?=\s*?[\}\]])'), '');
+  }
+
   String? text;
   @override
   String? get name => "Text";

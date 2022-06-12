@@ -23,6 +23,20 @@ class AlignmentProperties extends StatelessWidget {
         '${alignment.y.toStringAsFixed(1)})';
   }
 
+  static String getValue(Alignment alignment) {
+    if (alignment.x == -1.0 && alignment.y == -1.0) return 'topLeft';
+    if (alignment.x == 0.0 && alignment.y == -1.0) return 'topCenter';
+    if (alignment.x == 1.0 && alignment.y == -1.0) return 'topRight';
+    if (alignment.x == -1.0 && alignment.y == 0.0) return 'centerLeft';
+    if (alignment.x == 0.0 && alignment.y == 0.0) return 'center';
+    if (alignment.x == 1.0 && alignment.y == 0.0) return 'centerRight';
+    if (alignment.x == -1.0 && alignment.y == 1.0) return 'bottomLeft';
+    if (alignment.x == 0.0 && alignment.y == 1.0) return 'bottomCenter';
+    if (alignment.x == 1.0 && alignment.y == 1.0) return 'bottomRight';
+    return 'Alignment(${alignment.x.toStringAsFixed(1)}, '
+        '${alignment.y.toStringAsFixed(1)})';
+  }
+
   @override
   Widget build(BuildContext context) {
     return ItemProperties(

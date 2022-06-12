@@ -18,11 +18,28 @@ class FFScaffold extends WidGen {
   String? get name => "Scaffold";
 
   @override
-  String? get json => "";
+  String? get json {
+    var code = "";
 
+    var eee = controller.widgetsValues.entries
+        .map((val) => '"${val.key}": ${val.value.json} ,')
+        .toList();
 
+    code = '''
+        {
+          "type": "$name",
+          "backgroundColor": "#${(controller.getProperty<Color?>("backgroundColor") ?? Colors.white).value.toRadixString(16)}",
+        ''';
+    eee.forEach((element) {
+      code += element + "\n";
+    });
 
- @override
+    code += " }";
+
+    return code.replaceAll(RegExp(r'\,(?=\s*?[\}\]])'), '');
+  }
+
+  @override
   Widget get widgetProperties => BootstrapPanel(
         header: SelectableText('Style'),
         body: Column(
@@ -32,20 +49,20 @@ class FFScaffold extends WidGen {
             ),
             ColorProperties(
               title: "Background Color",
-              currentColor: controller.getProperty("backgroundColor") ,
+              currentColor: controller.getProperty("backgroundColor"),
               selectColor: (c) {
-                Get.find<WidGenController>(tag: keyID).setProperty("backgroundColor", c);
+                Get.find<WidGenController>(tag: keyID)
+                    .setProperty("backgroundColor", c);
                 refreshWidget();
               },
             ),
-      
-           
             Gap(4),
             BoolProperties(
               title: "Show Appbar",
-              value: controller.getProperty("showAppbar") ??true,
+              value: controller.getProperty("showAppbar") ?? true,
               onSubmitted: (c) {
-                Get.find<WidGenController>(tag: keyID).setProperty("showAppbar", c);
+                Get.find<WidGenController>(tag: keyID)
+                    .setProperty("showAppbar", c);
                 refreshWidget();
               },
             ),
@@ -57,58 +74,60 @@ class FFScaffold extends WidGen {
   Widget build(BuildContext context) {
     putController(context);
     return controller.obx((state) => GestureDetector(
-          onTap: () => itemClick(),
-          child: Scaffold(
-
-      backgroundColor: controller.getProperty("backgroundColor"),
-            body: controller.getValue<WidGen?>("body") != null
-                ? controller.getValue<WidGen?>("body")!
-                : DragTarget<WidGen>(
-                    onWillAccept: (v) {
-                      return controller.getValue<WidGen?>("body") != null
-                          ? false
-                          : true;
-                    },
-                    onAccept: (value) {
-                      controller.setValue<WidGen>("body", value);
-                    },
-                    onLeave: (value) {
-                      print("Leave");
-                    },
-                    builder: (_, candidateData, rejectedData) {
-                      return controller.getValue<WidGen?>("body") != null
-                          ? controller.getValue<WidGen?>("body")!
-                          : DragPlaceholder();
-                    },
-                  ),
-            appBar:(controller.getProperty("showAppbar") ??true)? PreferredSize(
-                preferredSize: Size.fromHeight(50.0),
-                child: controller.getValue<WidGen?>("appBar") != null
-                    ? controller.getValue<WidGen?>("appBar")!
-                    : DragTarget<WidGen>(
-                        onWillAccept: (v) {
-                          if (v is FFActionBar &&
-                              controller.getValue<WidGen?>("appBar") == null) {
-                            return true;
-                          } else {
-                            return false;
-                          }
-                        },
-                        onAccept: (value) {
-                          controller.setValue<WidGen>("appBar", value);
-                        },
-                        onLeave: (value) {
-                          print("Leave");
-                        },
-                        builder: (_, candidateData, rejectedData) {
-                          return controller.getValue<WidGen?>("appBar") != null
-                              ? controller.getValue<WidGen?>("appBar")!
-                              :  DragPlaceholder(
-                                  title: "Drag appBar here",
-                                );
-                        },
-                      )):null,
-          ))
-        );
+        onTap: () => itemClick(),
+        child: Scaffold(
+          backgroundColor: controller.getProperty("backgroundColor"),
+          body: controller.getValue<WidGen?>("body") != null
+              ? controller.getValue<WidGen?>("body")!
+              : DragTarget<WidGen>(
+                  onWillAccept: (v) {
+                    return controller.getValue<WidGen?>("body") != null
+                        ? false
+                        : true;
+                  },
+                  onAccept: (value) {
+                    controller.setValue<WidGen>("body", value);
+                  },
+                  onLeave: (value) {
+                    print("Leave");
+                  },
+                  builder: (_, candidateData, rejectedData) {
+                    return controller.getValue<WidGen?>("body") != null
+                        ? controller.getValue<WidGen?>("body")!
+                        : DragPlaceholder();
+                  },
+                ),
+          appBar: (controller.getProperty("showAppbar") ?? true)
+              ? PreferredSize(
+                  preferredSize: Size.fromHeight(50.0),
+                  child: controller.getValue<WidGen?>("appBar") != null
+                      ? controller.getValue<WidGen?>("appBar")!
+                      : DragTarget<WidGen>(
+                          onWillAccept: (v) {
+                            if (v is FFActionBar &&
+                                controller.getValue<WidGen?>("appBar") ==
+                                    null) {
+                              return true;
+                            } else {
+                              return false;
+                            }
+                          },
+                          onAccept: (value) {
+                            controller.setValue<WidGen>("appBar", value);
+                          },
+                          onLeave: (value) {
+                            print("Leave");
+                          },
+                          builder: (_, candidateData, rejectedData) {
+                            return controller.getValue<WidGen?>("appBar") !=
+                                    null
+                                ? controller.getValue<WidGen?>("appBar")!
+                                : DragPlaceholder(
+                                    title: "Drag appBar here",
+                                  );
+                          },
+                        ))
+              : null,
+        )));
   }
 }

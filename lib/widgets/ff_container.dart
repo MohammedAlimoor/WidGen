@@ -15,7 +15,38 @@ class FFContainer extends WidGen {
   FFContainer({Key? key, required keyID}) : super(key: key, keyID: keyID);
 
   @override
-  String? get json => "";
+  String? get json {
+    var code = "";
+
+    var eee = controller.widgetsValues.entries
+        .map((val) => '"${val.key}": ${val.value.json},')
+        .toList();
+
+    code = '''
+        {
+          "type": "$name",
+          "alignment": "${AlignmentProperties.getValue(controller.getProperty<Alignment?>("alignment") ?? Alignment.topLeft)}",
+          "padding": "${EdgeInsetsProperties.getValue(controller.getProperty<EdgeInsets?>("padding") ?? EdgeInsets.zero)}",
+          "margin": "${EdgeInsetsProperties.getValue(controller.getProperty<EdgeInsets?>("margin") ?? EdgeInsets.zero)}",
+        ''';
+    if (controller.getProperty("width") != null)
+      code += '"width": ${controller.getProperty("width")},';
+    if (controller.getProperty("height") != null)
+      code += '"height": ${controller.getProperty("height")},';
+    if (controller.getProperty("color") != null)
+      code +=
+          '"color":"#${controller.getProperty<Color?>("color")!.value.toRadixString(16)}",';
+
+    eee.forEach((element) {
+      code += element + "\n";
+    });
+
+    code += " }";
+
+
+    return code.replaceAll(RegExp(r'\,(?=\s*?[\}\]])'), '');
+  }
+
   @override
   String? get name => "Container";
 
@@ -68,7 +99,8 @@ class FFContainer extends WidGen {
                 ),
                 const Gap(4),
                 AlignmentProperties(
-                  alignment: controller.getProperty("alignment"),// ??Alignment.center,
+                  alignment: controller
+                      .getProperty("alignment"), // ??Alignment.center,
                   onSubmitted: (value) {
                     Get.find<WidGenController>(tag: keyID)
                         .setProperty("alignment", value);
@@ -215,7 +247,8 @@ class FFContainer extends WidGen {
           },
           builder: (_, candidateData, rejectedData) {
             return Container(
-              alignment: controller.getProperty("alignment") ,// ??Alignment.center,
+              alignment:
+                  controller.getProperty("alignment"), // ??Alignment.center,
               width: controller.getProperty("width"),
               height: controller.getProperty("height"),
               padding: controller.getProperty("padding"),
