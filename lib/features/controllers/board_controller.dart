@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
@@ -13,9 +15,16 @@ class BoardController extends GetxController with StateMixin {
 
   WidGen? selectedWidget;
   setSelectedWidget(WidGen selectedWidget) {
-    print("selected widget  ${selectedWidget.keyID}");
     this.selectedWidget = selectedWidget;
     update();
+  }
+
+  String prettyJson(dynamic json) {
+    return jsonEncode(jsonDecode(json));
+
+    // var spaces = ' ' * 4;
+    // var encoder = JsonEncoder.withIndent(spaces);
+    // return encoder.convert(json);
   }
 
   void removeWidgetTree(WidGen root, WidGen del) {
@@ -67,7 +76,10 @@ class BoardController extends GetxController with StateMixin {
     var reg = Get.isRegistered<WidGenController>(tag: wid.keyID);
 
     if (reg) {
-      // if (firstTime) print(wid.json);
+      if (firstTime) {
+        print(prettyJson(wid.json));
+      }
+      ;
 
       wid.controller.widgetsValues.forEach((key, value) {
         if (value is WidGen) {

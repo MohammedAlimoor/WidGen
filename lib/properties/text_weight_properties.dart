@@ -15,6 +15,7 @@ class TextWeightProperties extends StatelessWidget {
         return "100";
       case FontWeight.w200:
         return "200";
+ 
       case FontWeight.w300:
         return "300";
       case FontWeight.w400:
@@ -29,6 +30,31 @@ class TextWeightProperties extends StatelessWidget {
         return "800";
       case FontWeight.w900:
         return "900";
+    }
+
+    return null;
+  }
+  static  String? getValue(FontWeight? weight) {
+    switch (weight) {
+    
+      case FontWeight.w100:
+        return "w100";
+      case FontWeight.w200:
+        return "w200";
+      case FontWeight.w300:
+        return "w300";
+      case FontWeight.w400:
+        return "w400";
+      case FontWeight.w500:
+        return "w500";
+      case FontWeight.w600:
+        return "w600";
+      case FontWeight.w700:
+        return "w700";
+      case FontWeight.w800:
+        return "w800";
+      case FontWeight.w900:
+        return "w900";
     }
 
     return null;

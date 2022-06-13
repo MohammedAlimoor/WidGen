@@ -14,33 +14,32 @@ class FFExpanded extends WidGen {
   FFExpanded({Key? key, required keyID}) : super(key: key, keyID: keyID);
 
   @override
-  String? get json => "";
-  @override
   String? get name => "Expanded";
 
   @override
-  Widget get widgetProperties => SingleChildScrollView(
-        child: Column(
-          children: [
-            BootstrapPanel(
-              header: SelectableText('Style'),
-              body: Column(
-                children: [
-                  const Gap(4),
-                  IntProperties(
-                    title: "flex",
-                    onSubmitted: (value) {
-                      Get.find<WidGenController>(tag: keyID)
-                          .setProperty("flex", value);
-                      refreshWidget();
-                    },
-                    value: controller.getProperty("flex"),
-                  ),
-                ],
-              ),
+  String? get json => genJson();
+
+  @override
+  Widget get widgetProperties => Column(
+        children: [
+          BootstrapPanel(
+            header: SelectableText('Style'),
+            body: Column(
+              children: [
+                const Gap(4),
+                IntProperties(
+                  title: "flex",
+                  onSubmitted: (value) {
+                    Get.find<WidGenController>(tag: keyID)
+                        .setProperty("flex", value);
+                    refreshWidget();
+                  },
+                  value: controller.getProperty("flex"),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       );
 
   @override
@@ -60,10 +59,9 @@ class FFExpanded extends WidGen {
             builder: (_, candidateData, rejectedData) {
               return GestureDetector(
                 onTap: () => itemClick(),
-                child:  controller.getValue<WidGen?>("child") != null
-                      ? controller.getValue<WidGen?>("child")!
-                      : DragPlaceholder(),
-                
+                child: controller.getValue<WidGen?>("child") != null
+                    ? controller.getValue<WidGen?>("child")!
+                    : DragPlaceholder(),
               );
             },
           ),

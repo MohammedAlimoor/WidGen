@@ -11,7 +11,7 @@ class FFRow extends WidGen {
   FFRow({Key? key, required keyID}) : super(key: key, keyID: keyID);
 
   @override
-  String? get json => "";
+  String? get json => genJson();
   @override
   String? get name => "Row";
 
@@ -78,7 +78,7 @@ class FFRow extends WidGen {
                     .getProperty<CrossAxisAlignment?>('crossAxisAlignment') ??
                 CrossAxisAlignment.center,
             children: !hasChildren
-                ? [ DragPlaceholder()]
+                ? [DragPlaceholder()]
                 : controller.getValue<List<WidGen>>("children")!,
           );
         }),

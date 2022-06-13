@@ -16,32 +16,7 @@ class FFText extends WidGen {
       : super(key: key, keyID: keyID);
 
   @override
-  String? get json {
-    var code = "";
-
-    var eee = controller.widgetsValues.entries
-        .map((val) => '"${val.key}": ${val.value.json} ,')
-        .toList();
-
-    code = '''
-        {
-          "type": "$name",
-          "data": "${(controller.getProperty<String?>("text") ?? "")}",
-          "maxLines":${(controller.getProperty<double?>("maxLines") ?? 1)}
-          "style": {
-                "color":"#${(controller.getProperty<Color?>("textColor") ?? Colors.white).value.toRadixString(16)}",
-                "fontSize":${(controller.getProperty<double?>("textSize") ?? 15)}
-                "fontFamily":"${getStyle.fontFamily}"
-              }
-        ''';
-    eee.forEach((element) {
-      code += element + "\n";
-    });
-
-    code += " }";
-
-    return code.replaceAll(RegExp(r'\,(?=\s*?[\}\]])'), '');
-  }
+  String? get json => genJson();
 
   String? text;
   @override
@@ -81,21 +56,21 @@ class FFText extends WidGen {
                 ),
                 IntProperties(
                   onSubmitted: (value) {
-                    Get.find<WidGenController>(tag: keyID)
-                        .setProperty("textSize", value);
+                    Get.find<WidGenController>(tag: keyID).setProperty(
+                        "style", getStyle.copyWith(fontSize: value));
                     refreshWidget();
                   },
-                  value: controller.getProperty("textSize") ?? 15,
+                  value: getStyle.fontSize ?? 15,
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 ColorProperties(
-                  currentColor:
-                      controller.getProperty("textColor") ?? Color(0xff443a49),
+                  currentColor: getStyle.color ?? Colors.black,
                   selectColor: (c) {
                     Get.find<WidGenController>(tag: keyID)
-                        .setProperty("textColor", c);
+                        .setProperty("style", getStyle.copyWith(color: c));
+
                     refreshWidget();
                   },
                 ),
@@ -103,10 +78,11 @@ class FFText extends WidGen {
                   height: 10,
                 ),
                 TextWeightProperties(
-                  value: controller.getProperty("textWeight"),
+                  value: getStyle.fontWeight ?? FontWeight.normal,
                   onSubmitted: (c) {
                     Get.find<WidGenController>(tag: keyID)
-                        .setProperty("textWeight", c);
+                        .setProperty("style", getStyle.copyWith(fontWeight: c));
+
                     refreshWidget();
                   },
                 ),
@@ -125,19 +101,20 @@ class FFText extends WidGen {
             ),
           ),
           TextStyleProperties(
-            textStyle: controller.getProperty("StyleGoogleFonts"),
+            textStyle: getStyle,
             enableGoogleFonts:
                 controller.getProperty("EnableGoogleFonts") ?? false,
             onSubmitted: (c) {
-              Get.find<WidGenController>(tag: keyID)
-                  .setProperty("StyleGoogleFonts", c);
+              Get.find<WidGenController>(tag: keyID).setProperty(
+                  "style",
+                  c.copyWith(
+                      fontSize: getStyle.fontSize,
+                      color: getStyle.color,
+                      fontWeight: getStyle.fontWeight));
+
               refreshWidget();
             },
             onSubmittedEnableGoogleFonts: (enable) {
-              if (!enable) {
-                Get.find<WidGenController>(tag: keyID)
-                    .clearProperty("StyleGoogleFonts");
-              }
               Get.find<WidGenController>(tag: keyID)
                   .setProperty("EnableGoogleFonts", enable);
               refreshWidget();
@@ -149,13 +126,20 @@ class FFText extends WidGen {
   BuildContext? context;
 
   TextStyle get getStyle =>
-      Get.find<WidGenController>(tag: keyID)
-          .getProperty<TextStyle?>("StyleGoogleFonts") ??
+      Get.find<WidGenController>(tag: keyID).getProperty<TextStyle?>("style") ??
       const TextStyle();
+
   @override
   Widget build(BuildContext context) {
     putController(context);
 
+    if (!Get.find<WidGenController>(tag: keyID).hasProperty("style")) {
+      controller.setProperty("text", "test text");
+      Get.find<WidGenController>(tag: keyID).setProperty(
+          "style",
+          const TextStyle(
+              color: Colors.black, fontSize: 15, fontWeight: FontWeight.w400));
+    }
     return controller.obx((_) => GestureDetector(
           onTap: () => itemClick(),
           child: Text(controller.getProperty("text") ?? "test text",

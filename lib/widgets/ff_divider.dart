@@ -15,7 +15,7 @@ class FFDivider extends WidGen {
   String? get name => "Divider";
 
   @override
-  String? get json => "";
+  String? get json => genJson();
 
   @override
   Widget get widgetProperties => BootstrapPanel(
@@ -27,13 +27,12 @@ class FFDivider extends WidGen {
             ),
             ColorProperties(
               title: "Color",
-              currentColor: controller.getProperty("color") ,
+              currentColor: controller.getProperty("color"),
               selectColor: (c) {
                 Get.find<WidGenController>(tag: keyID).setProperty("color", c);
                 refreshWidget();
               },
             ),
-      
             Gap(4),
             IntProperties(
               title: "height",
@@ -48,7 +47,8 @@ class FFDivider extends WidGen {
               title: "thickness",
               value: controller.getProperty("thickness"),
               onSubmitted: (c) {
-                Get.find<WidGenController>(tag: keyID).setProperty("thickness", c);
+                Get.find<WidGenController>(tag: keyID)
+                    .setProperty("thickness", c);
                 refreshWidget();
               },
             ),
@@ -60,6 +60,10 @@ class FFDivider extends WidGen {
   Widget build(BuildContext context) {
     putController(context);
 
-    return   controller.obx((_) => Divider(height: controller.getProperty("height"),thickness:controller.getProperty("thickness") , color: controller.getProperty("color") ,));
+    return controller.obx((_) => Divider(
+          height: controller.getProperty("height"),
+          thickness: controller.getProperty("thickness"),
+          color: controller.getProperty("color"),
+        ));
   }
 }

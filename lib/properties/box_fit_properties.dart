@@ -9,6 +9,26 @@ class BoxFitProperties extends StatelessWidget {
   Function(BoxFit)? onSubmitted;
   BoxFit? value;
 
+  static String getValue(BoxFit? box) {
+    if (box == null) return "none";
+    switch (box) {
+      case BoxFit.fill:
+        return "fill";
+      case BoxFit.contain:
+        return "contain";
+      case BoxFit.cover:
+        return "cover";
+      case BoxFit.fitHeight:
+        return "fitHeight";
+      case BoxFit.fitWidth:
+        return "fitWidth";
+      case BoxFit.none:
+        return "none";
+      case BoxFit.scaleDown:
+        return "scaleDown";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ItemProperties(
@@ -25,7 +45,6 @@ class BoxFitProperties extends StatelessWidget {
             BoxFit.fitWidth,
             BoxFit.none,
             BoxFit.scaleDown,
-           
           ].map((BoxFit value) {
             return DropdownMenuItem<BoxFit>(
               value: value,

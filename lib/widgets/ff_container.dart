@@ -1,51 +1,25 @@
+// created by Moammed Alimoor
+// ameral.java@gmail.com
 import 'package:flutter/material.dart';
 import 'package:flutter_bootstrap_widgets/bootstrap_widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:wid_gen/core/property_json_factory.dart';
 import 'package:wid_gen/core/widgets/place_holder.dart';
 import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/properties/alignment_properties.dart';
 import 'package:wid_gen/properties/color_properties.dart';
 import 'package:wid_gen/properties/edgeinsets_properties.dart';
 import 'package:wid_gen/properties/int_properties.dart';
-import 'package:wid_gen/properties/text_align_properties.dart';
 import 'package:wid_gen/wid_gen.dart';
 
 class FFContainer extends WidGen {
   FFContainer({Key? key, required keyID}) : super(key: key, keyID: keyID);
 
+  GlobalKey keyK = GlobalKey();
+
   @override
-  String? get json {
-    var code = "";
-
-    var eee = controller.widgetsValues.entries
-        .map((val) => '"${val.key}": ${val.value.json},')
-        .toList();
-
-    code = '''
-        {
-          "type": "$name",
-          "alignment": "${AlignmentProperties.getValue(controller.getProperty<Alignment?>("alignment") ?? Alignment.topLeft)}",
-          "padding": "${EdgeInsetsProperties.getValue(controller.getProperty<EdgeInsets?>("padding") ?? EdgeInsets.zero)}",
-          "margin": "${EdgeInsetsProperties.getValue(controller.getProperty<EdgeInsets?>("margin") ?? EdgeInsets.zero)}",
-        ''';
-    if (controller.getProperty("width") != null)
-      code += '"width": ${controller.getProperty("width")},';
-    if (controller.getProperty("height") != null)
-      code += '"height": ${controller.getProperty("height")},';
-    if (controller.getProperty("color") != null)
-      code +=
-          '"color":"#${controller.getProperty<Color?>("color")!.value.toRadixString(16)}",';
-
-    eee.forEach((element) {
-      code += element + "\n";
-    });
-
-    code += " }";
-
-
-    return code.replaceAll(RegExp(r'\,(?=\s*?[\}\]])'), '');
-  }
+  String? get json => genJson();
 
   @override
   String? get name => "Container";
@@ -247,6 +221,7 @@ class FFContainer extends WidGen {
           },
           builder: (_, candidateData, rejectedData) {
             return Container(
+              key: keyK,
               alignment:
                   controller.getProperty("alignment"), // ??Alignment.center,
               width: controller.getProperty("width"),

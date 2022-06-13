@@ -18,9 +18,9 @@ import '../properties/main_axis_alignment_properties.dart';
 class FFActionBar extends WidGen {
   FFActionBar({Key? key, this.height, required keyID})
       : super(key: key, keyID: keyID);
-  String? get name => "ActionBar";
+  String? get name => "AppBar";
   @override
-  String? get json => "";
+  String? get json => genJson();
 
   @override
   Widget get widgetProperties => BootstrapPanel(

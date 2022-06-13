@@ -18,26 +18,7 @@ class FFScaffold extends WidGen {
   String? get name => "Scaffold";
 
   @override
-  String? get json {
-    var code = "";
-
-    var eee = controller.widgetsValues.entries
-        .map((val) => '"${val.key}": ${val.value.json} ,')
-        .toList();
-
-    code = '''
-        {
-          "type": "$name",
-          "backgroundColor": "#${(controller.getProperty<Color?>("backgroundColor") ?? Colors.white).value.toRadixString(16)}",
-        ''';
-    eee.forEach((element) {
-      code += element + "\n";
-    });
-
-    code += " }";
-
-    return code.replaceAll(RegExp(r'\,(?=\s*?[\}\]])'), '');
-  }
+  String? get json => genJson();
 
   @override
   Widget get widgetProperties => BootstrapPanel(

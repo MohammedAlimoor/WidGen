@@ -9,11 +9,11 @@ import 'package:wid_gen/properties/string_properties.dart';
 import 'package:wid_gen/wid_gen.dart';
 
 class FFImageNetwork extends WidGen {
-  FFImageNetwork({Key? key, required keyID})
-      : super(key: key, keyID: keyID);
-  String? get name => "Image.network";
+  FFImageNetwork({Key? key, required keyID}) : super(key: key, keyID: keyID);
+  String? get name => "NetworkImage";
+
   @override
-  String? get json => "";
+  String? get json => genJson();
 
   @override
   Widget get widgetProperties => BootstrapPanel(
@@ -64,20 +64,21 @@ class FFImageNetwork extends WidGen {
   // Widget? widTitle;
   // Widget? widLeading;
 
+  GlobalKey keyK = GlobalKey();
+
   get defaultUrl =>
       "https://iconape.com/wp-content/files/yb/61798/png/flutter-logo.png";
   @override
   Widget build(BuildContext context) {
     putController(context);
-    return controller.obx((_) =>  GestureDetector(
-            onTap: () => itemClick(),
-            child: Image.network(
-              controller.getProperty("src") ?? defaultUrl,
-              fit: controller.getProperty("fit"),
-              height: controller.getProperty("height"),
-              width: controller.getProperty("width"),
-            ),
-          )
-        );
+    return controller.obx((_) => GestureDetector(
+          onTap: () => itemClick(),
+          child: Image.network(
+            controller.getProperty("src") ?? defaultUrl,
+            fit: controller.getProperty("fit"),
+            height: controller.getProperty("height"),
+            width: controller.getProperty("width"),
+          ),
+        ));
   }
 }

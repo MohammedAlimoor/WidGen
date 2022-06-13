@@ -11,10 +11,9 @@ class FFColumn extends WidGen {
   FFColumn({Key? key, required keyID}) : super(key: key, keyID: keyID);
 
   @override
-  String? get json => "";
-  @override
   String? get name => "Column";
-
+   @override
+  String? get json => genJson();
   @override
   Widget get widgetProperties => BootstrapPanel(
         header: SelectableText('Style'),
