@@ -30,18 +30,19 @@ class _GoogleFontListViewState extends State<GoogleFontListView> {
       return;
     }
 
-    listFonts.forEach((userDetail) {
-      if (userDetail.key.toLowerCase().contains(text))
+    for (var userDetail in listFonts) {
+      if (userDetail.key.toLowerCase().contains(text)) {
         _searchResult.add(userDetail);
-    });
+      }
+    }
 
     setState(() {});
   }
 
-  List<MapEntry<String, TextStyle Function()>> _searchResult = [];
+  final List<MapEntry<String, TextStyle Function()>> _searchResult = [];
 
   get finalList =>
-      _searchResult.length != 0 || searchTextController.text.isNotEmpty
+      _searchResult.isNotEmpty || searchTextController.text.isNotEmpty
           ? _searchResult
           : listFonts;
 
@@ -50,21 +51,21 @@ class _GoogleFontListViewState extends State<GoogleFontListView> {
     return Column(
       children: [
         Container(
-          color: Color.fromARGB(255, 210, 209, 209),
+          color: const Color.fromARGB(255, 210, 209, 209),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Card(
               elevation: 8.0,
               child: ListTile(
-                leading: Icon(Icons.search),
+                leading: const Icon(Icons.search),
                 title: TextField(
                   controller: searchTextController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       hintText: 'Search', border: InputBorder.none),
                   onChanged: onSearchTextChanged,
                 ),
                 trailing: IconButton(
-                  icon: Icon(Icons.cancel),
+                  icon: const Icon(Icons.cancel),
                   onPressed: () {
                     searchTextController.clear();
                     onSearchTextChanged('');
@@ -81,7 +82,7 @@ class _GoogleFontListViewState extends State<GoogleFontListView> {
               onTap: () {
                 widget.onSubmitted?.call(finalList[index].value());
               },
-              leading: Icon(Icons.font_download),
+              leading: const Icon(Icons.font_download),
               title: Text(
                 finalList[index].key,
                 style: finalList[index].value(),

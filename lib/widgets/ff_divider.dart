@@ -1,11 +1,11 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bootstrap_widgets/bootstrap_widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:wid_gen/core/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/properties/color_properties.dart';
 import 'package:wid_gen/properties/int_properties.dart';
-import 'package:wid_gen/properties/string_properties.dart';
 import 'package:wid_gen/core/wid_gen.dart';
 
 class FFDivider extends WidGen {
@@ -19,10 +19,10 @@ class FFDivider extends WidGen {
 
   @override
   Widget get widgetProperties => BootstrapPanel(
-        header: SelectableText('Style'),
+        header: const SelectableText('Style'),
         body: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             ColorProperties(
@@ -33,7 +33,7 @@ class FFDivider extends WidGen {
                 refreshWidget();
               },
             ),
-            Gap(4),
+            const Gap(4),
             IntProperties(
               title: "height",
               value: controller.getProperty("height"),
@@ -42,7 +42,7 @@ class FFDivider extends WidGen {
                 refreshWidget();
               },
             ),
-            Gap(4),
+            const Gap(4),
             IntProperties(
               title: "thickness",
               value: controller.getProperty("thickness"),

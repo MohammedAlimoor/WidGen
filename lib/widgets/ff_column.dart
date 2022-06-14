@@ -1,8 +1,9 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bootstrap_widgets/bootstrap_widgets.dart';
 import 'package:get/get.dart';
 import 'package:wid_gen/core/widgets/place_holder.dart';
-import 'package:wid_gen/core/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/properties/cross_axis_alignment_properties.dart';
 import 'package:wid_gen/properties/main_axis_alignment_properties.dart';
 import 'package:wid_gen/core/wid_gen.dart';
@@ -16,10 +17,10 @@ class FFColumn extends WidGen {
   String? get json => genJson();
   @override
   Widget get widgetProperties => BootstrapPanel(
-        header: SelectableText('Style'),
+        header: const SelectableText('Style'),
         body: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             MainAxisAlignmentProperties(
@@ -29,10 +30,9 @@ class FFColumn extends WidGen {
                     .setProperty("mainAxisAlignment", c);
                 refreshWidget();
 
-                print("Changed mainAxisAlignment to $c");
               },
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             CrossAxisAlignmentProperties(
@@ -41,7 +41,6 @@ class FFColumn extends WidGen {
                 controller
                     .setProperty("crossAxisAlignment", c);
                 refreshWidget();
-                print("Changed  crossAxisAlignment  to $c");
               },
             ),
           ],
@@ -94,7 +93,7 @@ class FFColumn extends WidGen {
                 CrossAxisAlignment.center,
             children: !hasChildren
                 ? [
-                    DragPlaceholder(color: Colors.black45),
+                    const DragPlaceholder(color: Colors.black45),
                   ]
                 : getChildren(),
           );

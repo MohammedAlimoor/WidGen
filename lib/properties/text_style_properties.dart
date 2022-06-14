@@ -1,8 +1,8 @@
-import 'package:flutter/foundation.dart';
+// ignore_for_file: must_be_immutable, deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bootstrap_widgets/bootstrap_widgets.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:wid_gen/core/google_fonts_list.dart';
 import 'package:wid_gen/core/mac_alert_dialog.dart';
 
@@ -35,11 +35,11 @@ class _TextStylePropertiesState extends State<TextStyleProperties> {
   @override
   Widget build(BuildContext context) {
     return BootstrapPanel(
-        header: SelectableText('Google Fonts'),
+        header: const SelectableText('Google Fonts'),
         body: Column(
           children: [
             CheckboxListTile(
-                title: Text("Enable"),
+                title: const Text("Enable"),
                 contentPadding: EdgeInsets.zero,
                 value: widget.enableGoogleFonts,
                 onChanged: (enable) {
@@ -50,11 +50,11 @@ class _TextStylePropertiesState extends State<TextStyleProperties> {
                   widget.onSubmittedEnableGoogleFonts
                       ?.call(widget.enableGoogleFonts);
                 }),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             if (widget.textStyle != null)
               Row(
                 children: [
-                  Text("Font Family:"),
+                  const Text("Font Family:"),
                   Expanded(
                     child: BootstrapLabel(
                       text: widget.textStyle!.fontFamily ?? " - ",
@@ -63,7 +63,7 @@ class _TextStylePropertiesState extends State<TextStyleProperties> {
                   ),
                 ],
               ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             if (widget.enableGoogleFonts)
               Row(
                 children: [
@@ -71,7 +71,7 @@ class _TextStylePropertiesState extends State<TextStyleProperties> {
                     child: BootstrapButton(
                       type: BootstrapButtonType.primary,
                       size: BootstrapButtonSize.defaults,
-                      child: Text('Select Font'),
+                      child: const Text('Select Font'),
                       outline: true,
                       onPressed: () {
                         showFontsPicker();
@@ -89,7 +89,7 @@ class _TextStylePropertiesState extends State<TextStyleProperties> {
       context: context,
       builder: (BuildContext context) {
         return MacAlertDialog(
-            title: Text('Select Fonts'),
+            title: const Text('Select Fonts'),
             actions: <Widget>[
               RaisedButton(
                 child: const Text('Close'),

@@ -37,7 +37,7 @@ abstract class WidGen extends GetView<WidGenController> {
         var childrenJson =
             (val.value as List<WidGen>).map((val2) => '${val2.json},').toList();
 
-        return '"${val.key}": ${childrenJson}';
+        return '"${val.key}": $childrenJson';
       }
     }).toList();
     var pList = controller.widgetProperties.entries

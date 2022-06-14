@@ -12,10 +12,10 @@ class PropertyJsonFactory {
       return '"$key":"#${object.value.toRadixString(16)}" ,';
     }
     if (object is String) {
-      return '"$key":"${object}" ,';
+      return '"$key":"$object" ,';
     }
     if (object is num) {
-      return '"$key":${object} ,';
+      return '"$key":$object ,';
     }
     if (object is bool) {
       return '"$key":${object.toString()} ,';

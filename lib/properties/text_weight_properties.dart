@@ -1,5 +1,6 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:flutter_bootstrap_widgets/bootstrap_widgets.dart';
 import 'package:wid_gen/core/widgets/item_properties.dart';
 
 class TextWeightProperties extends StatelessWidget {
@@ -83,7 +84,7 @@ class TextWeightProperties extends StatelessWidget {
               value: value,
               // enabled: false,
               child: Text(getTitle(value) ?? "--",
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Color.fromARGB(255, 73, 72, 72), fontSize: 15)),
             );
           }).toList(),

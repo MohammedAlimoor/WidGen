@@ -1,3 +1,4 @@
+// ignore_for_file: must_be_immutable, file_names
 import 'package:flutter/material.dart';
 import 'package:flutter_bootstrap_widgets/bootstrap_widgets.dart';
 import 'package:gap/gap.dart';
@@ -9,6 +10,7 @@ import 'package:wid_gen/core/wid_gen.dart';
 
 class FFImageNetwork extends WidGen {
   FFImageNetwork({Key? key, required keyID}) : super(key: key, keyID: keyID);
+  @override
   String? get name => "NetworkImage";
 
   @override
@@ -16,10 +18,10 @@ class FFImageNetwork extends WidGen {
 
   @override
   Widget get widgetProperties => BootstrapPanel(
-        header: SelectableText('Style'),
+        header: const SelectableText('Style'),
         body: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             StringProperties(
@@ -30,7 +32,7 @@ class FFImageNetwork extends WidGen {
                 refreshWidget();
               },
             ),
-            Gap(4),
+            const Gap(4),
             BoxFitProperties(
               value: controller.getProperty("fit"),
               onSubmitted: (c) {
@@ -38,7 +40,7 @@ class FFImageNetwork extends WidGen {
                 refreshWidget();
               },
             ),
-            Gap(4),
+            const Gap(4),
             IntProperties(
               title: "height",
               value: controller.getProperty("height"),
@@ -47,7 +49,7 @@ class FFImageNetwork extends WidGen {
                 refreshWidget();
               },
             ),
-            Gap(4),
+            const Gap(4),
             IntProperties(
               title: "width",
               value: controller.getProperty("width"),

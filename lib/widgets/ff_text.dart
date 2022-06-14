@@ -1,8 +1,9 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bootstrap_widgets/bootstrap_widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:wid_gen/core/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/properties/color_properties.dart';
 import 'package:wid_gen/properties/int_properties.dart';
 import 'package:wid_gen/properties/string_properties.dart';
@@ -25,7 +26,7 @@ class FFText extends WidGen {
   Widget get widgetProperties => Column(
         children: [
           BootstrapPanel(
-              header: SelectableText('Data'),
+              header: const SelectableText('Data'),
               body: Column(
                 children: [
                   StringProperties(
@@ -36,7 +37,7 @@ class FFText extends WidGen {
                     },
                     currentString: controller.getProperty("text") ?? '',
                   ),
-                  Gap(4),
+                  const Gap(4),
                   IntProperties(
                       title: "Max Lines",
                       onSubmitted: (value) {
@@ -48,10 +49,10 @@ class FFText extends WidGen {
                 ],
               )),
           BootstrapPanel(
-            header: SelectableText('Style'),
+            header: const SelectableText('Style'),
             body: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 IntProperties(
@@ -62,7 +63,7 @@ class FFText extends WidGen {
                   },
                   value: getStyle.fontSize ?? 15,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 ColorProperties(
@@ -74,7 +75,7 @@ class FFText extends WidGen {
                     refreshWidget();
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextWeightProperties(
@@ -86,7 +87,7 @@ class FFText extends WidGen {
                     refreshWidget();
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextAlignProperties(

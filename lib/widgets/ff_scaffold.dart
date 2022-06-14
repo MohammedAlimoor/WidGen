@@ -1,16 +1,14 @@
-import 'package:dotted_border/dotted_border.dart';
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bootstrap_widgets/bootstrap_widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:uuid/uuid.dart';
 import 'package:wid_gen/core/widgets/place_holder.dart';
-import 'package:wid_gen/core/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/properties/bool_properties.dart';
 import 'package:wid_gen/properties/color_properties.dart';
 import 'package:wid_gen/core/wid_gen.dart';
 import 'package:wid_gen/widgets/ff_appbar.dart';
-import 'package:wid_gen/widgets/ff_container.dart';
 
 class FFScaffold extends WidGen {
   FFScaffold({Key? key, required String keyID}) : super(key: key, keyID: keyID);
@@ -22,10 +20,10 @@ class FFScaffold extends WidGen {
 
   @override
   Widget get widgetProperties => BootstrapPanel(
-        header: SelectableText('Style'),
+        header: const SelectableText('Style'),
         body: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             ColorProperties(
@@ -37,7 +35,7 @@ class FFScaffold extends WidGen {
                 refreshWidget();
               },
             ),
-            Gap(4),
+            const Gap(4),
             BoolProperties(
               title: "Show Appbar",
               value: controller.getProperty("showAppbar") ?? true,
@@ -70,17 +68,16 @@ class FFScaffold extends WidGen {
                     controller.setValue<WidGen>("body", value);
                   },
                   onLeave: (value) {
-                    print("Leave");
                   },
                   builder: (_, candidateData, rejectedData) {
                     return controller.getValue<WidGen?>("body") != null
                         ? controller.getValue<WidGen?>("body")!
-                        : DragPlaceholder();
+                        : const DragPlaceholder();
                   },
                 ),
           appBar: (controller.getProperty("showAppbar") ?? true)
               ? PreferredSize(
-                  preferredSize: Size.fromHeight(50.0),
+                  preferredSize: const Size.fromHeight(50.0),
                   child: controller.getValue<WidGen?>("appBar") != null
                       ? controller.getValue<WidGen?>("appBar")!
                       : DragTarget<WidGen>(
@@ -97,13 +94,12 @@ class FFScaffold extends WidGen {
                             controller.setValue<WidGen>("appBar", value);
                           },
                           onLeave: (value) {
-                            print("Leave");
                           },
                           builder: (_, candidateData, rejectedData) {
                             return controller.getValue<WidGen?>("appBar") !=
                                     null
                                 ? controller.getValue<WidGen?>("appBar")!
-                                : DragPlaceholder(
+                                : const DragPlaceholder(
                                     title: "Drag appBar here",
                                   );
                           },

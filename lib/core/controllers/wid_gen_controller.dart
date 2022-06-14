@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:wid_gen/core/controllers/board_controller.dart';
 
 class WidGenController extends GetxController with StateMixin {
   late Map<String, dynamic> widgetsValues = {};
@@ -21,10 +20,6 @@ class WidGenController extends GetxController with StateMixin {
    
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
 
   K? getValue<K>(String key) {
     if (!widgetsValues.containsKey(key)) return null;

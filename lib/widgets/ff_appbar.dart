@@ -1,46 +1,44 @@
-import 'package:dotted_border/dotted_border.dart';
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bootstrap_widgets/bootstrap_widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:uuid/uuid.dart';
 import 'package:wid_gen/core/widgets/place_holder.dart';
-import 'package:wid_gen/core/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/properties/bool_properties.dart';
 import 'package:wid_gen/properties/color_properties.dart';
-import 'package:wid_gen/properties/cross_axis_alignment_properties.dart';
 import 'package:wid_gen/properties/int_properties.dart';
 import 'package:wid_gen/core/wid_gen.dart';
 
-import '../properties/main_axis_alignment_properties.dart';
 
 class FFActionBar extends WidGen {
   FFActionBar({Key? key, this.height, required keyID})
       : super(key: key, keyID: keyID);
+  @override
   String? get name => "AppBar";
   @override
   String? get json => genJson();
 
   @override
   Widget get widgetProperties => BootstrapPanel(
-        header: SelectableText('Style'),
+        header: const SelectableText('Style'),
         body: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             ColorProperties(
               title: "Background Color",
               currentColor: controller.getProperty("backgroundColor") ??
-                  Color(0xff443a49),
+                  const Color(0xff443a49),
               selectColor: (c) {
                 controller
                     .setProperty("backgroundColor", c);
                 refreshWidget();
               },
             ),
-            Gap(4),
+            const Gap(4),
             BoolProperties(
               title: "Center Title",
               value: controller.getProperty("centerTitle") ?? false,
@@ -50,7 +48,7 @@ class FFActionBar extends WidGen {
                 refreshWidget();
               },
             ),
-            Gap(4),
+            const Gap(4),
             IntProperties(
               title: "Elevation",
               value: controller.getProperty("elevation"),
@@ -88,7 +86,7 @@ class FFActionBar extends WidGen {
               builder: (_, candidateData, rejectedData) {
                 return controller.getValue<Widget?>("leading") != null
                     ? controller.getValue<Widget?>("leading")!
-                    : DragPlaceholder(
+                    : const DragPlaceholder(
                         title: "Drag",
                       );
               },
@@ -100,14 +98,13 @@ class FFActionBar extends WidGen {
                     : true;
               },
               onAccept: (value) {
-                print("title accept");
 
                 controller.setValue("title", value);
               },
               builder: (_, candidateData, rejectedData) {
                 return controller.getValue<Widget?>("title") != null
                     ? controller.getValue<Widget?>("title")!
-                    : DragPlaceholder();
+                    : const DragPlaceholder();
               },
             ),
           ),

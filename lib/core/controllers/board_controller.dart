@@ -28,39 +28,34 @@ class BoardController extends GetxController with StateMixin {
   }
 
   String getPrettyJSONString(jsonObject) {
-    var encoder = new JsonEncoder.withIndent("     ");
+    var encoder = const JsonEncoder.withIndent("     ");
     return encoder.convert(jsonObject);
   }
 
   void removeWidgetTree(WidGen root, WidGen del) {
-    print("start remove ${del.keyID}");
 
     var reg = Get.isRegistered<WidGenController>(tag: root.keyID);
 
     if (reg) {
-      print("start remove 2 ${del.keyID}");
       root.controller.widgetsValues.forEach((key, value) {
         if (value is WidGen) {
           if (value.keyID == del.keyID) {
             root.controller.widgetsValues[key] = null;
             root.refreshWidget();
-            print("Found ${del.keyID}");
           }
           removeWidgetTree(value, del);
         } else if (value is List<Widget>) {
-          var index = 0;
           (value as List<WidGen>)
               .removeWhere((element) => element.keyID == del.keyID);
           root.refreshWidget();
 
-          for (var element in value as List<WidGen>) {
+          for (var element in value) {
             if (element.keyID == del.keyID) {
               // value.removeAt(index);
               // root.refreshWidget();
             } else {
               removeWidgetTree(element, del);
             }
-            index++;
           }
         }
       });
@@ -92,10 +87,7 @@ class BoardController extends GetxController with StateMixin {
     var reg = Get.isRegistered<WidGenController>(tag: wid.keyID);
 
     if (reg) {
-      if (firstTime) {
-        print(prettyJson(wid.json));
-      }
-      ;
+   
 
       wid.controller.widgetsValues.forEach((key, value) {
         if (value is WidGen) {

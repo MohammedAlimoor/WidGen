@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:get/get.dart';
@@ -40,7 +42,6 @@ class ColorProperties extends StatelessWidget {
       // cancel: ,
       textCancel: "Cancel",
       onConfirm: () {
-        print("Confirm");
         selectColor(currentColor);
         Get.back();
       },

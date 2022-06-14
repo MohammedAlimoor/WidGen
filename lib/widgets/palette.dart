@@ -43,8 +43,8 @@ class _PaletteWidgetState extends State<PaletteWidget> {
               child:
                   const PaletteItem(title: "AppBar", icon: Icons.drag_handle),
               // The widget to show under the pointer when a drag is under way
-              feedback: Center(
-                child: const Opacity(
+              feedback: const Center(
+                child: Opacity(
                   opacity: 0.4,
                   child: PaletteItem(title: "AppBar", icon: Icons.drag_handle),
                 ),
@@ -191,7 +191,7 @@ class _PaletteWidgetState extends State<PaletteWidget> {
                   width: 105,
                   height: 105,
                   alignment: Alignment.center,
-                  child: PaletteItem(
+                  child: const PaletteItem(
                       title: "Divider", icon: Icons.horizontal_rule_outlined),
                 ),
               ),

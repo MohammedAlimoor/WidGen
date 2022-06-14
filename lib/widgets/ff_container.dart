@@ -1,12 +1,12 @@
 // created by Moammed Alimoor
 // ameral.java@gmail.com
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bootstrap_widgets/bootstrap_widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:wid_gen/core/property_json_factory.dart';
 import 'package:wid_gen/core/widgets/place_holder.dart';
-import 'package:wid_gen/core/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/properties/alignment_properties.dart';
 import 'package:wid_gen/properties/color_properties.dart';
 import 'package:wid_gen/properties/edgeinsets_properties.dart';
@@ -28,7 +28,7 @@ class FFContainer extends WidGen {
   Widget get widgetProperties => Column(
         children: [
           BootstrapPanel(
-            header: SelectableText('Style'),
+            header: const SelectableText('Style'),
             body: Column(
               children: [
                 const Gap(4),
@@ -97,7 +97,7 @@ class FFContainer extends WidGen {
                 ),
                 const Gap(4),
                 BootstrapPanel(
-                    header: SelectableText('Border'),
+                    header: const SelectableText('Border'),
                     body: Column(
                       children: [
                         ColorProperties(
@@ -158,7 +158,7 @@ class FFContainer extends WidGen {
                 // bottomLeft: Radius.circular(controller.getProperty("")),
                 // bottomRight: Radius.circular(controller.getProperty("")),
                 BootstrapPanel(
-                    header: SelectableText('Radius'),
+                    header: const SelectableText('Radius'),
                     body: Column(
                       children: [
                         IntProperties(
@@ -264,7 +264,7 @@ class FFContainer extends WidGen {
               ),
               child: controller.getValue<WidGen?>("child") != null
                   ? controller.getValue<WidGen?>("child")!
-                  : DragPlaceholder(),
+                  : const DragPlaceholder(),
             );
           },
         ),

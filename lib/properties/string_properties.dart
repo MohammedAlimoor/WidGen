@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:wid_gen/core/widgets/item_properties.dart';
 
@@ -15,7 +17,7 @@ class StringProperties extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextEditingController? controller =
-        new TextEditingController(text: currentString);
+        TextEditingController(text: currentString);
 
     return ItemProperties(
         title: title,

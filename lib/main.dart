@@ -78,16 +78,16 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     return Material(
       child: Row(
         children: [
-          Container(
+          SizedBox(
             width: 250,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Container(
                   padding: const EdgeInsets.all(8),
-                  color: Color.fromARGB(255, 49, 49, 49),
+                  color: const Color.fromARGB(255, 49, 49, 49),
                   child: Row(
-                    children: [
+                    children: const [
                       Icon(
                         Icons.palette_outlined,
                         color: Colors.white,
@@ -118,15 +118,15 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                               children: [
                                 Container(
                                   padding: const EdgeInsets.all(8),
-                                  color: Color.fromARGB(255, 49, 49, 49),
+                                  color: const Color.fromARGB(255, 49, 49, 49),
                                   child: Row(
-                                    children: [
-                                      const Icon(
+                                    children: const [
+                                      Icon(
                                         Icons.account_tree_outlined,
                                         color: Colors.white,
                                       ),
-                                      const Gap(5),
-                                      const Text(
+                                      Gap(5),
+                                      Text(
                                         "Tree",
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
@@ -160,12 +160,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     controller: tabController,
                     indicatorColor: Colors.black,
                     tabs: [
-                      Row(children: [
+                      Row(children: const [
                         Icon(Icons.construction_rounded),
                         SizedBox(width: 5),
                         Text("Builder")
                       ]),
-                      Row(children: [
+                      Row(children: const [
                         Icon(Icons.get_app_rounded),
                         SizedBox(width: 5),
                         Text("Dynamic Json")
@@ -217,13 +217,13 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                   decoration: BoxDecoration(
                                       color: Colors.black26,
                                       borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
+                                          const BorderRadius.all(Radius.circular(10)),
                                       border: Border.all(
                                           color: Colors.black26, width: 1)),
-                                  child: Text("Refresh"),
+                                  child: const Text("Refresh"),
                                 ),
                               ),
-                              Gap(10),
+                              const Gap(10),
                               InkWell(
                                 onTap: () {
                                   Get.snackbar(":)", "Json copied to clipboard",
@@ -241,10 +241,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                   decoration: BoxDecoration(
                                       color: Colors.black26,
                                       borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
+                                          const BorderRadius.all(Radius.circular(10)),
                                       border: Border.all(
                                           color: Colors.black26, width: 1)),
-                                  child: Text("Copy Json"),
+                                  child: const Text("Copy Json"),
                                 ),
                               ),
                             ],
@@ -257,7 +257,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               ],
             ),
           ),
-          Container(
+          SizedBox(
             width: 300,
             child: GetBuilder<BoardController>(
                 init: Get.find<BoardController>(tag: "boardController"),
@@ -267,14 +267,14 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     children: [
                       Container(
                         padding: const EdgeInsets.all(8),
-                        color: Color.fromARGB(255, 49, 49, 49),
+                        color: const Color.fromARGB(255, 49, 49, 49),
                         child: Row(
                           children: [
                             Text(
                               controller.selectedWidget?.name ?? "",
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                             ),
-                            Icon(
+                            const Icon(
                               Icons.arrow_back_ios_rounded,
                               color: Colors.white,
                             ),
@@ -283,7 +283,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                               controller.selectedWidget?.keyID ?? "",
                               maxLines: 1,
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 10),
+                                  const TextStyle(color: Colors.white, fontSize: 10),
                             )),
                           ],
                         ),
@@ -297,7 +297,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                           padding: const EdgeInsets.all(8),
                           child: BootstrapButton(
                             type: BootstrapButtonType.danger,
-                            child: Text('Remove Item'),
+                            child: const Text('Remove Item'),
                             onPressed: () {
                               controller.removeWidgetTree(
                                   controller.widTree["scafold"]!,
@@ -315,7 +315,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                             padding: const EdgeInsets.all(8),
                             child: controller.selectedWidget != null
                                 ? controller.selectedWidget!.widgetProperties
-                                : Text("Please select any Item"),
+                                : const Text("Please select any Item"),
                           ),
                         ),
                       ),

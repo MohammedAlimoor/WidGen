@@ -1,6 +1,6 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:get/get.dart';
 import 'package:wid_gen/core/widgets/item_properties.dart';
 
 class IntProperties extends StatelessWidget {

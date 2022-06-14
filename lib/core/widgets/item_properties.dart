@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class ItemProperties extends StatelessWidget {
   const ItemProperties({Key? key, required this.title, required this.child})
@@ -25,18 +23,18 @@ class ItemProperties extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
                 decoration: BoxDecoration(
-                  color: Color(0xffDDDDDD),
+                  color: const Color(0xffDDDDDD),
                   border: Border.all(
-                    color: Color(0xffDDDDDD),
+                    color: const Color(0xffDDDDDD),
                     width: 1,
                   ),
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(5),
                     bottomLeft: Radius.circular(5),
                   ),
                 ),
                 child: Text(title,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Color.fromARGB(255, 73, 72, 72), fontSize: 15)),
               ),
               const SizedBox(width: 10),

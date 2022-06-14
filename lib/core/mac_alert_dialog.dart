@@ -1,4 +1,5 @@
-import 'package:flutter/foundation.dart';
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
 class MacAlertDialog extends StatelessWidget {
@@ -94,15 +95,15 @@ class MacAlertDialog extends StatelessWidget {
         ),
       ));
     } else {
-      switch (defaultTargetPlatform) {
-        case TargetPlatform.iOS:
-          label = semanticLabel;
-          break;
-        case TargetPlatform.android:
-        case TargetPlatform.fuchsia:
-          label = semanticLabel ??
-              MaterialLocalizations.of(context).alertDialogLabel;
-      }
+      // switch (defaultTargetPlatform) {
+      //   case TargetPlatform.iOS:
+      //     label = semanticLabel;
+      //     break;
+      //   case TargetPlatform.android:
+      //   case TargetPlatform.fuchsia:
+      //     label = semanticLabel ??
+      //         MaterialLocalizations.of(context).alertDialogLabel;
+      // }
     }
 
     if (content != null) {
@@ -131,9 +132,10 @@ class MacAlertDialog extends StatelessWidget {
       children: children,
     );
 
-    if (label != null)
+    if (label != null) {
       dialogChild =
           Semantics(namesRoute: true, label: label, child: dialogChild);
+    }
 
     return Dialog(child: dialogChild);
   }

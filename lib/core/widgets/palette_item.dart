@@ -12,7 +12,7 @@ class PaletteItem extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.all(5),
         padding: const EdgeInsets.all(8),
-        constraints: BoxConstraints(minWidth: 70),
+        constraints: const BoxConstraints(minWidth: 70),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           color: Colors.grey[200],
