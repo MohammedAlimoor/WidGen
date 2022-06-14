@@ -6,7 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:wid_gen/core/property_json_factory.dart';
 import 'package:wid_gen/core/widgets/place_holder.dart';
-import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
+import 'package:wid_gen/core/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/properties/alignment_properties.dart';
 import 'package:wid_gen/properties/color_properties.dart';
 import 'package:wid_gen/properties/edgeinsets_properties.dart';
@@ -35,7 +35,7 @@ class FFContainer extends WidGen {
                 IntProperties(
                   title: "width",
                   onSubmitted: (value) {
-                    Get.find<WidGenController>(tag: keyID)
+                    controller
                         .setProperty("width", value);
                     refreshWidget();
                   },
@@ -45,7 +45,7 @@ class FFContainer extends WidGen {
                 IntProperties(
                   title: "height",
                   onSubmitted: (value) {
-                    Get.find<WidGenController>(tag: keyID)
+                    controller
                         .setProperty("height", value);
                     refreshWidget();
                   },
@@ -56,7 +56,7 @@ class FFContainer extends WidGen {
                   title: "Padding",
                   current: controller.getProperty("padding"),
                   selected: (value) {
-                    Get.find<WidGenController>(tag: keyID)
+                    controller
                         .setProperty("padding", value);
                     refreshWidget();
                   },
@@ -66,7 +66,7 @@ class FFContainer extends WidGen {
                   title: "Margin",
                   current: controller.getProperty("margin"),
                   selected: (value) {
-                    Get.find<WidGenController>(tag: keyID)
+                    controller
                         .setProperty("margin", value);
                     refreshWidget();
                   },
@@ -76,7 +76,7 @@ class FFContainer extends WidGen {
                   alignment: controller
                       .getProperty("alignment"), // ??Alignment.center,
                   onSubmitted: (value) {
-                    Get.find<WidGenController>(tag: keyID)
+                    controller
                         .setProperty("alignment", value);
                     refreshWidget();
                   },
@@ -90,7 +90,7 @@ class FFContainer extends WidGen {
                 ColorProperties(
                   currentColor: controller.getProperty("color") ?? Colors.white,
                   selectColor: (c) {
-                    Get.find<WidGenController>(tag: keyID)
+                    controller
                         .setProperty("color", c);
                     refreshWidget();
                   },
@@ -104,7 +104,7 @@ class FFContainer extends WidGen {
                           currentColor: controller.getProperty("BorderColor") ??
                               Colors.white,
                           selectColor: (c) {
-                            Get.find<WidGenController>(tag: keyID)
+                            controller
                                 .setProperty("BorderColor", c);
                             refreshWidget();
                           },
@@ -113,7 +113,7 @@ class FFContainer extends WidGen {
                         IntProperties(
                           title: "Top",
                           onSubmitted: (value) {
-                            Get.find<WidGenController>(tag: keyID)
+                            controller
                                 .setProperty("BorderTop", value);
                             refreshWidget();
                           },
@@ -123,7 +123,7 @@ class FFContainer extends WidGen {
                         IntProperties(
                           title: "Bottom",
                           onSubmitted: (value) {
-                            Get.find<WidGenController>(tag: keyID)
+                            controller
                                 .setProperty("BorderBottom", value);
                             refreshWidget();
                           },
@@ -133,7 +133,7 @@ class FFContainer extends WidGen {
                         IntProperties(
                           title: "Left",
                           onSubmitted: (value) {
-                            Get.find<WidGenController>(tag: keyID)
+                            controller
                                 .setProperty("BorderLeft", value);
                             refreshWidget();
                           },
@@ -143,7 +143,7 @@ class FFContainer extends WidGen {
                         IntProperties(
                           title: "Right",
                           onSubmitted: (value) {
-                            Get.find<WidGenController>(tag: keyID)
+                            controller
                                 .setProperty("BorderRight", value);
                             refreshWidget();
                           },
@@ -164,7 +164,7 @@ class FFContainer extends WidGen {
                         IntProperties(
                           title: "TopLeft",
                           onSubmitted: (value) {
-                            Get.find<WidGenController>(tag: keyID)
+                            controller
                                 .setProperty("BorderTopLeft", value);
                             refreshWidget();
                           },
@@ -174,7 +174,7 @@ class FFContainer extends WidGen {
                         IntProperties(
                           title: "TopRight",
                           onSubmitted: (value) {
-                            Get.find<WidGenController>(tag: keyID)
+                            controller
                                 .setProperty("BorderTopRight", value);
                             refreshWidget();
                           },
@@ -184,7 +184,7 @@ class FFContainer extends WidGen {
                         IntProperties(
                           title: "BottomLeft",
                           onSubmitted: (value) {
-                            Get.find<WidGenController>(tag: keyID)
+                            controller
                                 .setProperty("BorderBottomLeft", value);
                             refreshWidget();
                           },
@@ -194,7 +194,7 @@ class FFContainer extends WidGen {
                         IntProperties(
                           title: "BottomRight",
                           onSubmitted: (value) {
-                            Get.find<WidGenController>(tag: keyID)
+                            controller
                                 .setProperty("BorderBottomRight", value);
                             refreshWidget();
                           },

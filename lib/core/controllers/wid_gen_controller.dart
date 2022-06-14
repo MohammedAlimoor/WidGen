@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:wid_gen/features/controllers/board_controller.dart';
+import 'package:wid_gen/core/controllers/board_controller.dart';
 
 class WidGenController extends GetxController with StateMixin {
   late Map<String, dynamic> widgetsValues = {};

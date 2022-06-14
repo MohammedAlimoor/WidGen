@@ -3,7 +3,7 @@ import 'package:flutter_bootstrap_widgets/bootstrap_widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:wid_gen/core/widgets/place_holder.dart';
-import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
+import 'package:wid_gen/core/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/properties/color_properties.dart';
 import 'package:wid_gen/properties/edgeinsets_properties.dart';
 import 'package:wid_gen/properties/int_properties.dart';
@@ -30,7 +30,7 @@ class FFExpanded extends WidGen {
                 IntProperties(
                   title: "flex",
                   onSubmitted: (value) {
-                    Get.find<WidGenController>(tag: keyID)
+                    controller
                         .setProperty("flex", value);
                     refreshWidget();
                   },

@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:uuid/uuid.dart';
 import 'package:wid_gen/core/widgets/place_holder.dart';
-import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
+import 'package:wid_gen/core/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/properties/bool_properties.dart';
 import 'package:wid_gen/properties/color_properties.dart';
 import 'package:wid_gen/properties/cross_axis_alignment_properties.dart';
@@ -35,7 +35,7 @@ class FFActionBar extends WidGen {
               currentColor: controller.getProperty("backgroundColor") ??
                   Color(0xff443a49),
               selectColor: (c) {
-                Get.find<WidGenController>(tag: keyID)
+                controller
                     .setProperty("backgroundColor", c);
                 refreshWidget();
               },
@@ -45,7 +45,7 @@ class FFActionBar extends WidGen {
               title: "Center Title",
               value: controller.getProperty("centerTitle") ?? false,
               onSubmitted: (c) {
-                Get.find<WidGenController>(tag: keyID)
+                controller
                     .setProperty("centerTitle", c);
                 refreshWidget();
               },
@@ -55,7 +55,7 @@ class FFActionBar extends WidGen {
               title: "Elevation",
               value: controller.getProperty("elevation"),
               onSubmitted: (c) {
-                Get.find<WidGenController>(tag: keyID)
+                controller
                     .setProperty("elevation", c);
                 refreshWidget();
               },

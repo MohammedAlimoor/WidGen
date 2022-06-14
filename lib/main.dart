@@ -4,7 +4,7 @@ import 'package:flutter_bootstrap_widgets/bootstrap_widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:wid_gen/core/widgets/colored_json.dart';
-import 'package:wid_gen/features/controllers/board_controller.dart';
+import 'package:wid_gen/core/controllers/board_controller.dart';
 import 'package:wid_gen/widgets/widgets.dart';
 
 void main() {
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'WedGen',
       enableLog: true,
       defaultTransition: Transition.fade,
       opaqueRoute: Get.isOpaqueRouteDefault,
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'WedGen'),
     );
   }
 }
@@ -158,6 +158,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                   child: TabBar(
                     isScrollable: true,
                     controller: tabController,
+                    indicatorColor: Colors.black,
                     tabs: [
                       Row(children: [
                         Icon(Icons.construction_rounded),
@@ -205,8 +206,24 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                         Positioned(
                           top: 20,
                           right: 20,
-                          child: Column(
+                          child: Row(
                             children: [
+                              InkWell(
+                                onTap: () {
+                                  setState(() {});
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                      color: Colors.black26,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      border: Border.all(
+                                          color: Colors.black26, width: 1)),
+                                  child: Text("Refresh"),
+                                ),
+                              ),
+                              Gap(10),
                               InkWell(
                                 onTap: () {
                                   Get.snackbar(":)", "Json copied to clipboard",

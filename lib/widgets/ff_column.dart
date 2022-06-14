@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bootstrap_widgets/bootstrap_widgets.dart';
 import 'package:get/get.dart';
 import 'package:wid_gen/core/widgets/place_holder.dart';
-import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
+import 'package:wid_gen/core/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/properties/cross_axis_alignment_properties.dart';
 import 'package:wid_gen/properties/main_axis_alignment_properties.dart';
 import 'package:wid_gen/core/wid_gen.dart';
@@ -25,7 +25,7 @@ class FFColumn extends WidGen {
             MainAxisAlignmentProperties(
               alignment: controller.getProperty("mainAxisAlignment"),
               onSubmitted: (c) {
-                Get.find<WidGenController>(tag: keyID)
+                controller
                     .setProperty("mainAxisAlignment", c);
                 refreshWidget();
 
@@ -38,7 +38,7 @@ class FFColumn extends WidGen {
             CrossAxisAlignmentProperties(
               alignment: controller.getProperty("crossAxisAlignment"),
               onSubmitted: (c) {
-                Get.find<WidGenController>(tag: keyID)
+                controller
                     .setProperty("crossAxisAlignment", c);
                 refreshWidget();
                 print("Changed  crossAxisAlignment  to $c");

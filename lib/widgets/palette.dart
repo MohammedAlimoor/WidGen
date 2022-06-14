@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 import 'package:wid_gen/core/widgets/palette_item.dart';
-import 'package:wid_gen/features/controllers/board_controller.dart';
+import 'package:wid_gen/core/controllers/board_controller.dart';
 import 'package:wid_gen/widgets/ff_Image_network.dart';
 import 'package:wid_gen/widgets/ff_scroll.dart';
 import 'package:wid_gen/widgets/ff_expanded.dart';

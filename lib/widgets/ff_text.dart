@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bootstrap_widgets/bootstrap_widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
+import 'package:wid_gen/core/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/properties/color_properties.dart';
 import 'package:wid_gen/properties/int_properties.dart';
 import 'package:wid_gen/properties/string_properties.dart';
@@ -30,7 +30,7 @@ class FFText extends WidGen {
                 children: [
                   StringProperties(
                     onSubmitted: (value) {
-                      Get.find<WidGenController>(tag: keyID)
+                      controller
                           .setProperty("text", value);
                       refreshWidget();
                     },
@@ -40,7 +40,7 @@ class FFText extends WidGen {
                   IntProperties(
                       title: "Max Lines",
                       onSubmitted: (value) {
-                        Get.find<WidGenController>(tag: keyID)
+                        controller
                             .setProperty("maxLines", value);
                         refreshWidget();
                       },
@@ -56,7 +56,7 @@ class FFText extends WidGen {
                 ),
                 IntProperties(
                   onSubmitted: (value) {
-                    Get.find<WidGenController>(tag: keyID).setProperty(
+                    controller.setProperty(
                         "style", getStyle.copyWith(fontSize: value));
                     refreshWidget();
                   },
@@ -68,7 +68,7 @@ class FFText extends WidGen {
                 ColorProperties(
                   currentColor: getStyle.color ?? Colors.black,
                   selectColor: (c) {
-                    Get.find<WidGenController>(tag: keyID)
+                    controller
                         .setProperty("style", getStyle.copyWith(color: c));
 
                     refreshWidget();
@@ -80,7 +80,7 @@ class FFText extends WidGen {
                 TextWeightProperties(
                   value: getStyle.fontWeight ?? FontWeight.normal,
                   onSubmitted: (c) {
-                    Get.find<WidGenController>(tag: keyID)
+                    controller
                         .setProperty("style", getStyle.copyWith(fontWeight: c));
 
                     refreshWidget();
@@ -92,7 +92,7 @@ class FFText extends WidGen {
                 TextAlignProperties(
                   textAlign: controller.getProperty("textAlign"),
                   onSubmitted: (c) {
-                    Get.find<WidGenController>(tag: keyID)
+                    controller
                         .setProperty("textAlign", c);
                     refreshWidget();
                   },
@@ -105,7 +105,7 @@ class FFText extends WidGen {
             enableGoogleFonts:
                 controller.getProperty("EnableGoogleFonts") ?? false,
             onSubmitted: (c) {
-              Get.find<WidGenController>(tag: keyID).setProperty(
+              controller.setProperty(
                   "style",
                   c.copyWith(
                       fontSize: getStyle.fontSize,
@@ -115,7 +115,7 @@ class FFText extends WidGen {
               refreshWidget();
             },
             onSubmittedEnableGoogleFonts: (enable) {
-              Get.find<WidGenController>(tag: keyID)
+              controller
                   .setProperty("EnableGoogleFonts", enable);
               refreshWidget();
             },
@@ -126,16 +126,16 @@ class FFText extends WidGen {
   BuildContext? context;
 
   TextStyle get getStyle =>
-      Get.find<WidGenController>(tag: keyID).getProperty<TextStyle?>("style") ??
+      controller.getProperty<TextStyle?>("style") ??
       const TextStyle();
 
   @override
   Widget build(BuildContext context) {
     putController(context);
 
-    if (!Get.find<WidGenController>(tag: keyID).hasProperty("style")) {
+    if (!controller.hasProperty("style")) {
       controller.setProperty("text", "test text");
-      Get.find<WidGenController>(tag: keyID).setProperty(
+      controller.setProperty(
           "style",
           const TextStyle(
               color: Colors.black, fontSize: 15, fontWeight: FontWeight.w400));

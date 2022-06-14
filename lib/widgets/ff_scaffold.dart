@@ -5,7 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 import 'package:wid_gen/core/widgets/place_holder.dart';
-import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
+import 'package:wid_gen/core/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/properties/bool_properties.dart';
 import 'package:wid_gen/properties/color_properties.dart';
 import 'package:wid_gen/core/wid_gen.dart';
@@ -32,7 +32,7 @@ class FFScaffold extends WidGen {
               title: "Background Color",
               currentColor: controller.getProperty("backgroundColor"),
               selectColor: (c) {
-                Get.find<WidGenController>(tag: keyID)
+                controller
                     .setProperty("backgroundColor", c);
                 refreshWidget();
               },
@@ -42,7 +42,7 @@ class FFScaffold extends WidGen {
               title: "Show Appbar",
               value: controller.getProperty("showAppbar") ?? true,
               onSubmitted: (c) {
-                Get.find<WidGenController>(tag: keyID)
+                controller
                     .setProperty("showAppbar", c);
                 refreshWidget();
               },

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bootstrap_widgets/bootstrap_widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
+import 'package:wid_gen/core/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/properties/color_properties.dart';
 import 'package:wid_gen/properties/int_properties.dart';
 import 'package:wid_gen/properties/string_properties.dart';
@@ -29,7 +29,7 @@ class FFDivider extends WidGen {
               title: "Color",
               currentColor: controller.getProperty("color"),
               selectColor: (c) {
-                Get.find<WidGenController>(tag: keyID).setProperty("color", c);
+                controller.setProperty("color", c);
                 refreshWidget();
               },
             ),
@@ -38,7 +38,7 @@ class FFDivider extends WidGen {
               title: "height",
               value: controller.getProperty("height"),
               onSubmitted: (c) {
-                Get.find<WidGenController>(tag: keyID).setProperty("height", c);
+                controller.setProperty("height", c);
                 refreshWidget();
               },
             ),
@@ -47,7 +47,7 @@ class FFDivider extends WidGen {
               title: "thickness",
               value: controller.getProperty("thickness"),
               onSubmitted: (c) {
-                Get.find<WidGenController>(tag: keyID)
+                controller
                     .setProperty("thickness", c);
                 refreshWidget();
               },

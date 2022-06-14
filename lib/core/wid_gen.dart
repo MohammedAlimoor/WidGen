@@ -3,8 +3,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:wid_gen/core/property_json_factory.dart';
-import 'package:wid_gen/features/controllers/board_controller.dart';
-import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
+import 'package:wid_gen/core/controllers/board_controller.dart';
+import 'package:wid_gen/core/controllers/wid_gen_controller.dart';
 
 abstract class WidGen extends GetView<WidGenController> {
   WidGen({Key? key, required this.keyID}) : super(key: key);

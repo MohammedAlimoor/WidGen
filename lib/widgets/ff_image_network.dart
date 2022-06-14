@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bootstrap_widgets/bootstrap_widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/properties/box_fit_properties.dart';
 import 'package:wid_gen/properties/int_properties.dart';
 import 'package:wid_gen/properties/string_properties.dart';
@@ -27,7 +26,7 @@ class FFImageNetwork extends WidGen {
               title: "Src",
               currentString: controller.getProperty("src") ?? defaultUrl,
               onSubmitted: (c) {
-                Get.find<WidGenController>(tag: keyID).setProperty("src", c);
+                controller.setProperty("src", c);
                 refreshWidget();
               },
             ),
@@ -35,7 +34,7 @@ class FFImageNetwork extends WidGen {
             BoxFitProperties(
               value: controller.getProperty("fit"),
               onSubmitted: (c) {
-                Get.find<WidGenController>(tag: keyID).setProperty("fit", c);
+             controller.setProperty("fit", c);
                 refreshWidget();
               },
             ),
@@ -44,7 +43,7 @@ class FFImageNetwork extends WidGen {
               title: "height",
               value: controller.getProperty("height"),
               onSubmitted: (c) {
-                Get.find<WidGenController>(tag: keyID).setProperty("height", c);
+                controller.setProperty("height", c);
                 refreshWidget();
               },
             ),
@@ -53,7 +52,7 @@ class FFImageNetwork extends WidGen {
               title: "width",
               value: controller.getProperty("width"),
               onSubmitted: (c) {
-                Get.find<WidGenController>(tag: keyID).setProperty("width", c);
+               controller.setProperty("width", c);
                 refreshWidget();
               },
             ),
