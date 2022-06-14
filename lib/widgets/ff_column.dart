@@ -85,7 +85,6 @@ class FFColumn extends WidGen {
           return StreamBuilder<bool>(
               stream: dragDropStreamController.stream,
               builder: (context, snapshot) {
-                print("STRM ::: ${snapshot.data}");
                 return Column(
                   mainAxisAlignment: controller.getProperty<MainAxisAlignment?>(
                           'mainAxisAlignment') ??

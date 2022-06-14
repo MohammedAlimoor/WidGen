@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bootstrap_widgets/bootstrap_widgets.dart';
 import 'package:get/get.dart';
+import 'package:wid_gen/core/controllers/board_controller.dart';
 import 'package:wid_gen/core/widgets/place_holder.dart';
 import 'package:wid_gen/properties/cross_axis_alignment_properties.dart';
 import 'package:wid_gen/properties/main_axis_alignment_properties.dart';
@@ -69,16 +70,21 @@ class FFRow extends WidGen {
 
           refreshWidget();
         }, builder: (_, candidateData, rejectedData) {
-          return Row(
-            mainAxisAlignment: controller
-                    .getProperty<MainAxisAlignment?>('mainAxisAlignment') ??
-                MainAxisAlignment.center,
-            crossAxisAlignment: controller
-                    .getProperty<CrossAxisAlignment?>('crossAxisAlignment') ??
-                CrossAxisAlignment.center,
-            children: !hasChildren
-                ? [const DragPlaceholder()]
-                : controller.getValue<List<WidGen>>("children")!,
+          return StreamBuilder<bool>(
+              stream: dragDropStreamController.stream,
+            builder: (context, snapshot) {
+              return Row(
+                mainAxisAlignment: controller
+                        .getProperty<MainAxisAlignment?>('mainAxisAlignment') ??
+                    MainAxisAlignment.center,
+                crossAxisAlignment: controller
+                        .getProperty<CrossAxisAlignment?>('crossAxisAlignment') ??
+                    CrossAxisAlignment.center,
+                children: (!hasChildren|| snapshot.data == true)
+                    ? [const DragPlaceholder()]
+                    : controller.getValue<List<WidGen>>("children")!,
+              );
+            }
           );
         }),
       );
