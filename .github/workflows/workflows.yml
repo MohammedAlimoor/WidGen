@@ -21,4 +21,8 @@ jobs:
           flutter-version: "3.0.1"
       - run: flutter pub get
       - run: flutter analyze
+      - uses: bluefireteam/flutter-gh-pages@v7
+        with:
+          baseHref: /wedGen/
+      
      
