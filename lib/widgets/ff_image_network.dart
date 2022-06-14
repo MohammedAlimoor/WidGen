@@ -72,6 +72,8 @@ class FFImageNetwork extends WidGen {
   @override
   Widget build(BuildContext context) {
     putController(context);
+    if (!controller.hasValue("src")) controller.setProperty("src", defaultUrl);
+
     return controller.obx((_) => GestureDetector(
           onTap: () => itemClick(),
           child: Image.network(

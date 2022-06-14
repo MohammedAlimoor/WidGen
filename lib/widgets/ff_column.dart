@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bootstrap_widgets/bootstrap_widgets.dart';
 import 'package:get/get.dart';
+import 'package:wid_gen/core/controllers/board_controller.dart';
 import 'package:wid_gen/core/widgets/place_holder.dart';
 import 'package:wid_gen/properties/cross_axis_alignment_properties.dart';
 import 'package:wid_gen/properties/main_axis_alignment_properties.dart';
@@ -13,7 +14,7 @@ class FFColumn extends WidGen {
 
   @override
   String? get name => "column";
-   @override
+  @override
   String? get json => genJson();
   @override
   Widget get widgetProperties => BootstrapPanel(
@@ -26,10 +27,8 @@ class FFColumn extends WidGen {
             MainAxisAlignmentProperties(
               alignment: controller.getProperty("mainAxisAlignment"),
               onSubmitted: (c) {
-                controller
-                    .setProperty("mainAxisAlignment", c);
+                controller.setProperty("mainAxisAlignment", c);
                 refreshWidget();
-
               },
             ),
             const SizedBox(
@@ -38,8 +37,7 @@ class FFColumn extends WidGen {
             CrossAxisAlignmentProperties(
               alignment: controller.getProperty("crossAxisAlignment"),
               onSubmitted: (c) {
-                controller
-                    .setProperty("crossAxisAlignment", c);
+                controller.setProperty("crossAxisAlignment", c);
                 refreshWidget();
               },
             ),
@@ -84,19 +82,25 @@ class FFColumn extends WidGen {
 
           refreshWidget();
         }, builder: (_, candidateData, rejectedData) {
-          return Column(
-            mainAxisAlignment: controller
-                    .getProperty<MainAxisAlignment?>('mainAxisAlignment') ??
-                MainAxisAlignment.center,
-            crossAxisAlignment: controller
-                    .getProperty<CrossAxisAlignment?>('crossAxisAlignment') ??
-                CrossAxisAlignment.center,
-            children: !hasChildren
-                ? [
-                    const DragPlaceholder(color: Colors.black45),
-                  ]
-                : getChildren(),
-          );
+          return StreamBuilder<bool>(
+              stream: dragDropStreamController.stream,
+              builder: (context, snapshot) {
+                print("STRM ::: ${snapshot.data}");
+                return Column(
+                  mainAxisAlignment: controller.getProperty<MainAxisAlignment?>(
+                          'mainAxisAlignment') ??
+                      MainAxisAlignment.center,
+                  crossAxisAlignment:
+                      controller.getProperty<CrossAxisAlignment?>(
+                              'crossAxisAlignment') ??
+                          CrossAxisAlignment.center,
+                  children: (!hasChildren|| snapshot.data == true)
+                      ? [
+                          const DragPlaceholder(color: Colors.black45),
+                        ]
+                      : getChildren(),
+                );
+              });
         }),
       );
     });

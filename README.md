@@ -1,16 +1,50 @@
-# wid_gen
+# WidGen  Widgets GUI  Builder
+<!-- A new Flutter project. -->
 
-A new Flutter project.
+# What is WidGen?
+its a tool to generate json [json_dynamic_widget](https://github.com/peiffer-innovations/json_dynamic_widget) from GUI [Drag/Drop widgets].
+
 
 ## Getting Started
+just drag drop widget  and change properties  , you cant view  widgets on real time
 
-This project is a starting point for a Flutter application.
+## Built With 
+- Flutter version: [Flutter 3.0.1](https://flutter.dev/)
+- State Management: [GetX](https://github.com/jonataslaw/getx)
+- Localization: [GetX](https://github.com/jonataslaw/getx)
 
-A few resources to get you started if this is your first Flutter project:
+### widgets supported in WidGen  
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- [x] Scaffold
+- [x] AppBar
+- [x] Container
+- [x] Column
+- [x] Row
+- [x] Text
+- [x] NetworkImage
+- [x] SvgPicture
+- [x] Divider
+- [x] Expanded
+- [x] SingleChildScrollView
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Support PlatForm  
+
+- [x] Web
+- [x] iOS
+- [x] android
+- [x] Windows
+
+
+## Contributing
+
+Thank you for considering contributing to WidGen! Feel free to contribute in any way you want.
+
+1. Fork the Project
+2. Create your Feature Branch (git checkout -b feature/AmazingFeature)
+3. Commit your Changes (git commit -m 'Add some AmazingFeature')
+4. Push to the Branch (git push origin feature/AmazingFeature)
+5. Open a Pull Request
+
+## License
+
+WidGen is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
