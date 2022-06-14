@@ -27,6 +27,10 @@ class PropertyJsonFactory {
     if (object is CrossAxisAlignment) {
       return '"$key":"${object.name}" , ';
     }
+
+    if (object is TextAlign) {
+      return '"$key":"${object.name}" , ';
+    }
     if (object is EdgeInsets) {
       return '"$key":"${EdgeInsetsProperties.getValue(object)}" , ';
     }

@@ -8,19 +8,21 @@ class PaletteItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(5),
-      padding: const EdgeInsets.all(8),
-      constraints: BoxConstraints(minWidth: 70),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: Colors.grey[200],
-      ),
-      child: Column(
-        children: [
-          Icon(icon),
-          Text(title),
-        ],
+    return Material(
+      child: Container(
+        margin: const EdgeInsets.all(5),
+        padding: const EdgeInsets.all(8),
+        constraints: BoxConstraints(minWidth: 70),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          color: Colors.grey[200],
+        ),
+        child: Column(
+          children: [
+            Icon(icon),
+            Text(title),
+          ],
+        ),
       ),
     );
   }
