@@ -14,7 +14,7 @@ class FFRow extends WidGen {
   @override
   String? get json => genJson();
   @override
-  String? get name => "Row";
+  String? get name => "row";
 
   @override
   Widget get widgetProperties => BootstrapPanel(

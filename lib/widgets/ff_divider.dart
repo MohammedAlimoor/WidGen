@@ -12,7 +12,7 @@ class FFDivider extends WidGen {
   FFDivider({Key? key, required String keyID}) : super(key: key, keyID: keyID);
 
   @override
-  String? get name => "Divider";
+  String? get name => "divider";
 
   @override
   String? get json => genJson();
@@ -47,8 +47,7 @@ class FFDivider extends WidGen {
               title: "thickness",
               value: controller.getProperty("thickness"),
               onSubmitted: (c) {
-                controller
-                    .setProperty("thickness", c);
+                controller.setProperty("thickness", c);
                 refreshWidget();
               },
             ),

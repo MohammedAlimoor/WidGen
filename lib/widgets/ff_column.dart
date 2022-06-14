@@ -12,7 +12,7 @@ class FFColumn extends WidGen {
   FFColumn({Key? key, required keyID}) : super(key: key, keyID: keyID);
 
   @override
-  String? get name => "Column";
+  String? get name => "column";
    @override
   String? get json => genJson();
   @override

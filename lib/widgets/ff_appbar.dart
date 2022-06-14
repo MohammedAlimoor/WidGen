@@ -16,7 +16,7 @@ class FFActionBar extends WidGen {
   FFActionBar({Key? key, this.height, required keyID})
       : super(key: key, keyID: keyID);
   @override
-  String? get name => "AppBar";
+  String? get name => "app_bar";
   @override
   String? get json => genJson();
 

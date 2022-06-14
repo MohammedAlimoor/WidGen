@@ -9,10 +9,11 @@ import 'package:wid_gen/properties/edgeinsets_properties.dart';
 import 'package:wid_gen/core/wid_gen.dart';
 
 class FFSingleChildScrollView extends WidGen {
-  FFSingleChildScrollView({Key? key, required keyID}) : super(key: key, keyID: keyID);
+  FFSingleChildScrollView({Key? key, required keyID})
+      : super(key: key, keyID: keyID);
 
   @override
-  String? get name => "SingleChildScrollView";
+  String? get name => "single_child_scroll_view";
 
   @override
   String? get json => genJson();
@@ -29,8 +30,7 @@ class FFSingleChildScrollView extends WidGen {
                   title: "Padding",
                   current: controller.getProperty("padding"),
                   selected: (value) {
-                    controller
-                        .setProperty("padding", value);
+                    controller.setProperty("padding", value);
                     refreshWidget();
                   },
                 ),

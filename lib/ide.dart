@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:wid_gen/core/controllers/board_controller.dart';
 import 'package:wid_gen/core/widgets/colored_json.dart';
 
-import 'widgets/palette.dart';
+import 'palette/palette.dart';
 
 class IDE extends StatefulWidget {
   IDE({Key? key}) : super(key: key);
@@ -30,13 +30,14 @@ class _IDEState extends State<IDE> with TickerProviderStateMixin {
     );
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    return    Material(
+    return Material(
       child: Row(
         children: [
           SizedBox(
-            width: 250,
+            width: 300,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -173,8 +174,8 @@ class _IDEState extends State<IDE> with TickerProviderStateMixin {
                                   padding: const EdgeInsets.all(8),
                                   decoration: BoxDecoration(
                                       color: Colors.black26,
-                                      borderRadius:
-                                          const BorderRadius.all(Radius.circular(10)),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(10)),
                                       border: Border.all(
                                           color: Colors.black26, width: 1)),
                                   child: const Text("Refresh"),
@@ -197,8 +198,8 @@ class _IDEState extends State<IDE> with TickerProviderStateMixin {
                                   padding: const EdgeInsets.all(8),
                                   decoration: BoxDecoration(
                                       color: Colors.black26,
-                                      borderRadius:
-                                          const BorderRadius.all(Radius.circular(10)),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(10)),
                                       border: Border.all(
                                           color: Colors.black26, width: 1)),
                                   child: const Text("Copy Json"),
@@ -239,8 +240,8 @@ class _IDEState extends State<IDE> with TickerProviderStateMixin {
                                 child: Text(
                               controller.selectedWidget?.keyID ?? "",
                               maxLines: 1,
-                              style:
-                                  const TextStyle(color: Colors.white, fontSize: 10),
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 10),
                             )),
                           ],
                         ),
@@ -283,6 +284,5 @@ class _IDEState extends State<IDE> with TickerProviderStateMixin {
         ],
       ),
     );
-  
   }
 }

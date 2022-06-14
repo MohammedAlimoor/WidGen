@@ -1,15 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:wid_gen/properties/alignment_properties.dart';
-import 'package:wid_gen/properties/box_fit_properties.dart';
-import 'package:wid_gen/properties/edgeinsets_properties.dart';
-import 'package:wid_gen/properties/text_weight_properties.dart';
+import 'package:json_theme/json_theme.dart';
 
 class PropertyJsonFactory {
   static String toJson(String key, object) {
     if (object == null) return "";
 
     if (object is Color) {
-      return '"$key":"#${object.value.toRadixString(16)}" ,';
+      return '"$key": ${jsonEncode(ThemeEncoder.encodeColor(object))} ,';
     }
     if (object is String) {
       return '"$key":"$object" ,';
@@ -29,27 +28,25 @@ class PropertyJsonFactory {
     }
 
     if (object is TextAlign) {
-      return '"$key":"${object.name}" , ';
+      return '"$key": ${jsonEncode(ThemeEncoder.encodeTextAlign(object))} ,';
     }
     if (object is EdgeInsets) {
-      return '"$key":"${EdgeInsetsProperties.getValue(object)}" , ';
+      return '"$key": ${jsonEncode(ThemeEncoder.encodeEdgeInsetsGeometry(object))} ,';
     }
     if (object is Alignment) {
-      return '"$key":"${AlignmentProperties.getValue(object)}" ,';
+      return '"$key": ${jsonEncode(ThemeEncoder.encodeAlignment(object))} ,';
     }
     if (object is BoxFit) {
-      return '"$key":"${BoxFitProperties.getValue(object)}" ,';
+      return '"$key": ${jsonEncode(ThemeEncoder.encodeBoxFit(object))} ,';
     }
+    if (object is BoxDecoration) {
+      return '"$key": ${jsonEncode(ThemeEncoder.encodeBoxDecoration(object))} ,';
+    }
+
     if (object is TextStyle) {
-      return '''
-     "$key": {
-        ${PropertyJsonFactory.toJson("color", object.color)}
-          ${PropertyJsonFactory.toJson("fontSize", object.fontSize)}
-         ${PropertyJsonFactory.toJson("fontFamily", object.fontFamily)}
-          ${PropertyJsonFactory.toJson("fontWeight", TextWeightProperties.getValue(object.fontWeight) ?? "")}
-      },
-      ''';
+      return '"$key": ${jsonEncode(ThemeEncoder.encodeTextStyle(object))} ,';
     }
+
     return "";
   }
 }

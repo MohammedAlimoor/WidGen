@@ -28,9 +28,7 @@ abstract class WidGen extends GetView<WidGenController> {
     //     .where((element) => element.value != null)
     //     .map((val) => '"${val.key}": ${val.value.json},')
     //     .toList();
-   var widgetsList = controller.widgetsValues.entries
-   
-   .map((val) {
+    var widgetsList = controller.widgetsValues.entries.map((val) {
       if (val.value is WidGen) {
         return '"${val.key}": ${val.value.json},';
       } else if ((val.value is List<Widget>)) {
@@ -51,17 +49,21 @@ abstract class WidGen extends GetView<WidGenController> {
       
         ''';
 
+    code += ' "args": {';
     for (var element in pList) {
       code += element + "\n";
     }
+    code += '},';
 
     for (var element in widgetsList) {
-      code += (element ??"" )+ "\n";
+      code += (element ?? "") + "\n";
     }
 
     code += " }";
 
-    return code.replaceAll(RegExp(r'\,(?=\s*?[\}\]])'), '').replaceAll(",,", ",");
+    return code
+        .replaceAll(RegExp(r'\,(?=\s*?[\}\]])'), '')
+        .replaceAll(",,", ",");
   }
 
   itemClick() {

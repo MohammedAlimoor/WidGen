@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
-import 'package:wid_gen/core/widgets/palette_item.dart';
+import 'package:wid_gen/palette/palette_item.dart';
 import 'package:wid_gen/core/controllers/board_controller.dart';
 import 'package:wid_gen/widgets/ff_image_network.dart';
 import 'package:wid_gen/widgets/ff_scroll.dart';
 import 'package:wid_gen/widgets/ff_expanded.dart';
+import 'package:wid_gen/widgets/ff_svg.dart';
 import 'package:wid_gen/widgets/widgets.dart';
 
 class PaletteWidget extends StatefulWidget {
@@ -149,6 +150,25 @@ class _PaletteWidgetState extends State<PaletteWidget> {
               feedback: const Opacity(
                 opacity: 0.4,
                 child: PaletteItem(title: "Image", icon: Icons.image_outlined),
+              ),
+            ),
+            Draggable<Widget>(
+              onDragStarted: () => dragDropStreamController.add(true),
+              onDragCompleted: () => dragDropStreamController.add(false),
+              onDraggableCanceled: (_, __) =>
+                  dragDropStreamController.add(false),
+              onDragEnd: (info) {
+                if (info.wasAccepted) refrshkeys();
+              },
+              data: FFSVGNetwork(
+                keyID: const Uuid().v1(),
+              ),
+              child:
+                  const PaletteItem(title: "SVG", icon: Icons.imagesearch_roller),
+              // The widget to show under the pointer when a drag is under way
+              feedback: const Opacity(
+                opacity: 0.4,
+                child: PaletteItem(title: "SVG", icon: Icons.imagesearch_roller),
               ),
             ),
             Draggable<Widget>(

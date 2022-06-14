@@ -13,7 +13,7 @@ import 'package:wid_gen/widgets/ff_appbar.dart';
 class FFScaffold extends WidGen {
   FFScaffold({Key? key, required String keyID}) : super(key: key, keyID: keyID);
   @override
-  String? get name => "Scaffold";
+  String? get name => "scaffold";
 
   @override
   String? get json => genJson();

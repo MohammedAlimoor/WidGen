@@ -4,4 +4,4 @@ export 'ff_container.dart';
 export 'ff_text.dart';
 export 'ff_divider.dart';
 export 'ff_row.dart';
-export 'palette.dart';
+export '../palette/palette.dart';

@@ -22,7 +22,7 @@ class FFContainer extends WidGen {
   String? get json => genJson();
 
   @override
-  String? get name => "Container";
+  String? get name => "container";
 
   @override
   Widget get widgetProperties => Column(
@@ -35,8 +35,7 @@ class FFContainer extends WidGen {
                 IntProperties(
                   title: "width",
                   onSubmitted: (value) {
-                    controller
-                        .setProperty("width", value);
+                    controller.setProperty("width", value);
                     refreshWidget();
                   },
                   value: controller.getProperty("width"),
@@ -45,8 +44,7 @@ class FFContainer extends WidGen {
                 IntProperties(
                   title: "height",
                   onSubmitted: (value) {
-                    controller
-                        .setProperty("height", value);
+                    controller.setProperty("height", value);
                     refreshWidget();
                   },
                   value: controller.getProperty("height"),
@@ -56,8 +54,7 @@ class FFContainer extends WidGen {
                   title: "Padding",
                   current: controller.getProperty("padding"),
                   selected: (value) {
-                    controller
-                        .setProperty("padding", value);
+                    controller.setProperty("padding", value);
                     refreshWidget();
                   },
                 ),
@@ -66,8 +63,7 @@ class FFContainer extends WidGen {
                   title: "Margin",
                   current: controller.getProperty("margin"),
                   selected: (value) {
-                    controller
-                        .setProperty("margin", value);
+                    controller.setProperty("margin", value);
                     refreshWidget();
                   },
                 ),
@@ -76,8 +72,7 @@ class FFContainer extends WidGen {
                   alignment: controller
                       .getProperty("alignment"), // ??Alignment.center,
                   onSubmitted: (value) {
-                    controller
-                        .setProperty("alignment", value);
+                    controller.setProperty("alignment", value);
                     refreshWidget();
                   },
                 )
@@ -88,10 +83,10 @@ class FFContainer extends WidGen {
               header: const SelectableText('Decoration'),
               body: Column(children: [
                 ColorProperties(
-                  currentColor: controller.getProperty("color") ?? Colors.white,
+                  currentColor: getDecoration.color,
                   selectColor: (c) {
-                    controller
-                        .setProperty("color", c);
+                    controller.setProperty(
+                        "decoration", getDecoration.copyWith(color: c));
                     refreshWidget();
                   },
                 ),
@@ -101,62 +96,49 @@ class FFContainer extends WidGen {
                     body: Column(
                       children: [
                         ColorProperties(
-                          currentColor: controller.getProperty("BorderColor") ??
+                          currentColor: getDecoration.border?.bottom.color ??
                               Colors.white,
                           selectColor: (c) {
-                            controller
-                                .setProperty("BorderColor", c);
+                            if (c == null) return;
+                            if (getDecoration.border?.top != null) {
+                                   var top = (getDecoration.border as Border).top;
+                              controller.setProperty(
+                                  "decoration",getDecoration.copyWith(border: Border.all(color: c,width: top.width)));
+                            } else {
+                              controller.setProperty(
+                                  "decoration",
+                                  getDecoration.copyWith(
+                                      border: Border.all(color: c, width: 1)));
+                            }
+
                             refreshWidget();
                           },
                         ),
                         const Gap(4),
                         IntProperties(
-                          title: "Top",
-                          onSubmitted: (value) {
-                            controller
-                                .setProperty("BorderTop", value);
+                          title: "Border Width",
+                          onSubmitted: (c) {
+                            if (c == null) return;
+
+                            if (getDecoration.border?.top != null) {
+                              var top = (getDecoration.border as Border).top;
+                              controller.setProperty(
+                                  "decoration",getDecoration.copyWith(border: Border.all(color: top.color,width: c)));
+                            } else {
+                              controller.setProperty(
+                                  "decoration",
+                                  getDecoration.copyWith(
+                                      border: Border.all(
+                                          color: Colors.transparent,
+                                          width: c)));
+                            }
                             refreshWidget();
                           },
-                          value: controller.getProperty("BorderTop"),
-                        ),
-                        const Gap(4),
-                        IntProperties(
-                          title: "Bottom",
-                          onSubmitted: (value) {
-                            controller
-                                .setProperty("BorderBottom", value);
-                            refreshWidget();
-                          },
-                          value: controller.getProperty("BorderBottom"),
-                        ),
-                        const Gap(4),
-                        IntProperties(
-                          title: "Left",
-                          onSubmitted: (value) {
-                            controller
-                                .setProperty("BorderLeft", value);
-                            refreshWidget();
-                          },
-                          value: controller.getProperty("BorderLeft"),
-                        ),
-                        const Gap(4),
-                        IntProperties(
-                          title: "Right",
-                          onSubmitted: (value) {
-                            controller
-                                .setProperty("BorderRight", value);
-                            refreshWidget();
-                          },
-                          value: controller.getProperty("BorderRight"),
+                          value: controller.getProperty("BorderWidth"),
                         ),
                       ],
                     )),
                 const Gap(4),
-
-                //               topLeft: Radius.circular(controller.getProperty("BorderTopLeft")),
-                // topRight: Radius.circular(controller.getProperty("")),
-                // bottomLeft: Radius.circular(controller.getProperty("")),
-                // bottomRight: Radius.circular(controller.getProperty("")),
                 BootstrapPanel(
                     header: const SelectableText('Radius'),
                     body: Column(
@@ -164,47 +146,117 @@ class FFContainer extends WidGen {
                         IntProperties(
                           title: "TopLeft",
                           onSubmitted: (value) {
-                            controller
-                                .setProperty("BorderTopLeft", value);
+                            if (value == null) return;
+
+                            if (getDecoration.borderRadius != null &&
+                                getDecoration.borderRadius is BorderRadius) {
+                              var dec = getDecoration.copyWith(
+                                  borderRadius: (getDecoration.borderRadius
+                                          as BorderRadius)
+                                      .copyWith(
+                                          topLeft: Radius.circular(value)));
+                              controller.setProperty("decoration", dec);
+                            } else {
+                              var dec = getDecoration.copyWith(
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(value)));
+                              controller.setProperty("decoration", dec);
+                            }
+
                             refreshWidget();
                           },
-                          value: controller.getProperty("BorderTopLeft"),
+                          value: (getDecoration.borderRadius as BorderRadius?)
+                                  ?.topLeft
+                                  .x ??
+                              0,
                         ),
                         const Gap(4),
                         IntProperties(
                           title: "TopRight",
                           onSubmitted: (value) {
-                            controller
-                                .setProperty("BorderTopRight", value);
-                            refreshWidget();
+                            if (value == null) return;
+
+                            if (getDecoration.borderRadius != null &&
+                                getDecoration.borderRadius is BorderRadius) {
+                              var dec = getDecoration.copyWith(
+                                  borderRadius: (getDecoration.borderRadius
+                                          as BorderRadius)
+                                      .copyWith(
+                                          topRight: Radius.circular(value)));
+                              controller.setProperty("decoration", dec);
+                            } else {
+                              var dec = getDecoration.copyWith(
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(value)));
+                              controller.setProperty("decoration", dec);
+                            }
                           },
-                          value: controller.getProperty("BorderTopRight"),
+                          value: (getDecoration.borderRadius as BorderRadius?)
+                                  ?.topRight
+                                  .x ??
+                              0,
                         ),
                         const Gap(4),
                         IntProperties(
                           title: "BottomLeft",
                           onSubmitted: (value) {
-                            controller
-                                .setProperty("BorderBottomLeft", value);
-                            refreshWidget();
+                            if (value == null) return;
+
+                            if (getDecoration.borderRadius != null &&
+                                getDecoration.borderRadius is BorderRadius) {
+                              var dec = getDecoration.copyWith(
+                                  borderRadius: (getDecoration.borderRadius
+                                          as BorderRadius)
+                                      .copyWith(
+                                          bottomLeft: Radius.circular(value)));
+                              controller.setProperty("decoration", dec);
+                            } else {
+                              var dec = getDecoration.copyWith(
+                                  borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(value)));
+                              controller.setProperty("decoration", dec);
+                            }
                           },
-                          value: controller.getProperty("BorderBottomLeft"),
+                          value: (getDecoration.borderRadius as BorderRadius?)
+                                  ?.bottomLeft
+                                  .x ??
+                              0,
                         ),
                         const Gap(4),
                         IntProperties(
                           title: "BottomRight",
                           onSubmitted: (value) {
-                            controller
-                                .setProperty("BorderBottomRight", value);
-                            refreshWidget();
+                            if (value == null) return;
+
+                            if (getDecoration.borderRadius != null &&
+                                getDecoration.borderRadius is BorderRadius) {
+                              var dec = getDecoration.copyWith(
+                                  borderRadius: (getDecoration.borderRadius
+                                          as BorderRadius)
+                                      .copyWith(
+                                          bottomRight: Radius.circular(value)));
+                              controller.setProperty("decoration", dec);
+                            } else {
+                              var dec = getDecoration.copyWith(
+                                  borderRadius: BorderRadius.only(
+                                      bottomRight: Radius.circular(value)));
+                              controller.setProperty("decoration", dec);
+                            }
                           },
-                          value: controller.getProperty("BorderBottomRight"),
+                          value: (getDecoration.borderRadius as BorderRadius?)
+                                  ?.bottomRight
+                                  .x ??
+                              0,
                         ),
                       ],
                     ))
               ]))
         ],
       );
+
+  BoxDecoration get getDecoration =>
+      controller.getProperty<BoxDecoration?>("decoration") ??
+      const BoxDecoration();
 
   @override
   Widget build(BuildContext context) {
@@ -228,40 +280,8 @@ class FFContainer extends WidGen {
               height: controller.getProperty("height"),
               padding: controller.getProperty("padding"),
               margin: controller.getProperty("margin"),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(
-                      controller.getProperty("BorderTopLeft") ?? 0),
-                  topRight: Radius.circular(
-                      controller.getProperty("BorderTopRight") ?? 0),
-                  bottomLeft: Radius.circular(
-                      controller.getProperty("BorderBottomLeft") ?? 0),
-                  bottomRight: Radius.circular(
-                      controller.getProperty("BorderBottomRight") ?? 0),
-                ),
-                color: controller.getProperty("color"),
-                border: Border(
-                    right: BorderSide(
-                      color: controller.getProperty("BorderColor") ??
-                          Colors.transparent,
-                      width: controller.getProperty("BorderRight") ?? 0,
-                    ),
-                    bottom: BorderSide(
-                      color: controller.getProperty("BorderColor") ??
-                          Colors.transparent,
-                      width: controller.getProperty("BorderBottom") ?? 0,
-                    ),
-                    left: BorderSide(
-                      color: controller.getProperty("BorderColor") ??
-                          Colors.transparent,
-                      width: controller.getProperty("BorderLeft") ?? 0,
-                    ),
-                    top: BorderSide(
-                      color: controller.getProperty("BorderColor") ??
-                          Colors.transparent,
-                      width: controller.getProperty("BorderTop") ?? 0,
-                    )),
-              ),
+
+              decoration: getDecoration,
               child: controller.getValue<WidGen?>("child") != null
                   ? controller.getValue<WidGen?>("child")!
                   : const DragPlaceholder(),

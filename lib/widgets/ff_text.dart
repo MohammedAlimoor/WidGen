@@ -21,7 +21,7 @@ class FFText extends WidGen {
 
   String? text;
   @override
-  String? get name => "Text";
+  String? get name => "text";
   @override
   Widget get widgetProperties => Column(
         children: [
@@ -31,8 +31,7 @@ class FFText extends WidGen {
                 children: [
                   StringProperties(
                     onSubmitted: (value) {
-                      controller
-                          .setProperty("text", value);
+                      controller.setProperty("text", value);
                       refreshWidget();
                     },
                     currentString: controller.getProperty("text") ?? '',
@@ -41,8 +40,7 @@ class FFText extends WidGen {
                   IntProperties(
                       title: "Max Lines",
                       onSubmitted: (value) {
-                        controller
-                            .setProperty("maxLines", value);
+                        controller.setProperty("maxLines", value);
                         refreshWidget();
                       },
                       value: controller.getProperty("maxLines")),
@@ -69,8 +67,8 @@ class FFText extends WidGen {
                 ColorProperties(
                   currentColor: getStyle.color ?? Colors.black,
                   selectColor: (c) {
-                    controller
-                        .setProperty("style", getStyle.copyWith(color: c));
+                    controller.setProperty(
+                        "style", getStyle.copyWith(color: c));
 
                     refreshWidget();
                   },
@@ -81,8 +79,8 @@ class FFText extends WidGen {
                 TextWeightProperties(
                   value: getStyle.fontWeight ?? FontWeight.normal,
                   onSubmitted: (c) {
-                    controller
-                        .setProperty("style", getStyle.copyWith(fontWeight: c));
+                    controller.setProperty(
+                        "style", getStyle.copyWith(fontWeight: c));
 
                     refreshWidget();
                   },
@@ -93,8 +91,7 @@ class FFText extends WidGen {
                 TextAlignProperties(
                   textAlign: controller.getProperty("textAlign"),
                   onSubmitted: (c) {
-                    controller
-                        .setProperty("textAlign", c);
+                    controller.setProperty("textAlign", c);
                     refreshWidget();
                   },
                 ),
@@ -116,8 +113,7 @@ class FFText extends WidGen {
               refreshWidget();
             },
             onSubmittedEnableGoogleFonts: (enable) {
-              controller
-                  .setProperty("EnableGoogleFonts", enable);
+              controller.setProperty("EnableGoogleFonts", enable);
               refreshWidget();
             },
           ),
@@ -127,8 +123,7 @@ class FFText extends WidGen {
   BuildContext? context;
 
   TextStyle get getStyle =>
-      controller.getProperty<TextStyle?>("style") ??
-      const TextStyle();
+      controller.getProperty<TextStyle?>("style") ?? const TextStyle();
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +140,8 @@ class FFText extends WidGen {
           onTap: () => itemClick(),
           child: Text(controller.getProperty("text") ?? "test text",
               textAlign: controller.getProperty("textAlign"),
-              maxLines: controller.getProperty("maxLines"),
+              maxLines:
+                  (controller.getProperty<double?>("maxLines") ?? 1).toInt(),
               style: getStyle.copyWith(
                   fontWeight: controller.getProperty("textWeight"),
                   color: controller.getProperty("textColor"),

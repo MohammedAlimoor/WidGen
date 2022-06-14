@@ -12,7 +12,7 @@ class FFExpanded extends WidGen {
   FFExpanded({Key? key, required keyID}) : super(key: key, keyID: keyID);
 
   @override
-  String? get name => "Expanded";
+  String? get name => "expanded";
 
   @override
   String? get json => genJson();
