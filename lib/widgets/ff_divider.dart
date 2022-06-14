@@ -6,7 +6,7 @@ import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/properties/color_properties.dart';
 import 'package:wid_gen/properties/int_properties.dart';
 import 'package:wid_gen/properties/string_properties.dart';
-import 'package:wid_gen/wid_gen.dart';
+import 'package:wid_gen/core/wid_gen.dart';
 
 class FFDivider extends WidGen {
   FFDivider({Key? key, required String keyID}) : super(key: key, keyID: keyID);

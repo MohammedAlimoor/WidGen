@@ -9,7 +9,7 @@ import 'package:wid_gen/properties/string_properties.dart';
 import 'package:wid_gen/properties/text_align_properties.dart';
 import 'package:wid_gen/properties/text_style_properties.dart';
 import 'package:wid_gen/properties/text_weight_properties.dart';
-import 'package:wid_gen/wid_gen.dart';
+import 'package:wid_gen/core/wid_gen.dart';
 
 class FFText extends WidGen {
   FFText({Key? key, required String keyID, this.text})

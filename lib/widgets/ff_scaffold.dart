@@ -8,7 +8,7 @@ import 'package:wid_gen/core/widgets/place_holder.dart';
 import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/properties/bool_properties.dart';
 import 'package:wid_gen/properties/color_properties.dart';
-import 'package:wid_gen/wid_gen.dart';
+import 'package:wid_gen/core/wid_gen.dart';
 import 'package:wid_gen/widgets/ff_appbar.dart';
 import 'package:wid_gen/widgets/ff_container.dart';
 

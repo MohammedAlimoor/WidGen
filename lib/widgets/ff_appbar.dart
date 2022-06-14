@@ -11,7 +11,7 @@ import 'package:wid_gen/properties/bool_properties.dart';
 import 'package:wid_gen/properties/color_properties.dart';
 import 'package:wid_gen/properties/cross_axis_alignment_properties.dart';
 import 'package:wid_gen/properties/int_properties.dart';
-import 'package:wid_gen/wid_gen.dart';
+import 'package:wid_gen/core/wid_gen.dart';
 
 import '../properties/main_axis_alignment_properties.dart';
 

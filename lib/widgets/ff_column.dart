@@ -5,7 +5,7 @@ import 'package:wid_gen/core/widgets/place_holder.dart';
 import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/properties/cross_axis_alignment_properties.dart';
 import 'package:wid_gen/properties/main_axis_alignment_properties.dart';
-import 'package:wid_gen/wid_gen.dart';
+import 'package:wid_gen/core/wid_gen.dart';
 
 class FFColumn extends WidGen {
   FFColumn({Key? key, required keyID}) : super(key: key, keyID: keyID);

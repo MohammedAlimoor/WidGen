@@ -6,7 +6,7 @@ import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
 import 'package:wid_gen/properties/box_fit_properties.dart';
 import 'package:wid_gen/properties/int_properties.dart';
 import 'package:wid_gen/properties/string_properties.dart';
-import 'package:wid_gen/wid_gen.dart';
+import 'package:wid_gen/core/wid_gen.dart';
 
 class FFImageNetwork extends WidGen {
   FFImageNetwork({Key? key, required keyID}) : super(key: key, keyID: keyID);

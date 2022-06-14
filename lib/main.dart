@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bootstrap_widgets/bootstrap_widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:wid_gen/core/widgets/colored_json.dart';
 import 'package:wid_gen/features/controllers/board_controller.dart';
 import 'package:wid_gen/widgets/widgets.dart';
 
@@ -57,28 +59,27 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
+  TabController? tabController;
+
   @override
   void initState() {
     Get.put(BoardController(), tag: "boardController");
-
+    tabController = TabController(
+      length: 2,
+      vsync: this,
+      initialIndex: 0,
+    );
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Material(
       child: Row(
         children: [
           Container(
-            // color: Colors.grey,
-            width: 300,
+            width: 250,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -135,32 +136,108 @@ class _MyHomePageState extends State<MyHomePage> {
                                     ],
                                   ),
                                 ),
-                                // Text(Get.find<BoardController>(
-                                //         tag: "boardController")
-                                //     .widTree
-                                //     .keys
-                                //     .first),
-                                Get.find<BoardController>(
-                                            tag: "boardController")
-                                        .tree ??
-                                    Container()
+                                Expanded(
+                                  child: SingleChildScrollView(
+                                    child: Get.find<BoardController>(
+                                                tag: "boardController")
+                                            .tree ??
+                                        Container(),
+                                  ),
+                                )
                               ],
                             ))))
               ],
             ),
           ),
           Expanded(
-            child: Container(
-              padding: const EdgeInsets.all(50),
-              color: Colors.grey,
-              child: GetBuilder<BoardController>(
-                init: Get.find<BoardController>(tag: "boardController"),
-                initState: (_) {},
-                builder: (controller) {
-                  return Get.find<BoardController>(tag: "boardController")
-                      .widTree["scafold"]!;
-                },
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  color: Colors.black26,
+                  child: TabBar(
+                    isScrollable: true,
+                    controller: tabController,
+                    tabs: [
+                      Row(children: [
+                        Icon(Icons.construction_rounded),
+                        SizedBox(width: 5),
+                        Text("Builder")
+                      ]),
+                      Row(children: [
+                        Icon(Icons.get_app_rounded),
+                        SizedBox(width: 5),
+                        Text("Dynamic Json")
+                      ]),
+                    ],
+                  ),
+                ),
+                Expanded(
+                    child: TabBarView(
+                  controller: tabController,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(50),
+                      color: Colors.grey,
+                      child: GetBuilder<BoardController>(
+                        init: Get.find<BoardController>(tag: "boardController"),
+                        initState: (_) {},
+                        builder: (controller) {
+                          return Get.find<BoardController>(
+                                  tag: "boardController")
+                              .widTree["scafold"]!;
+                        },
+                      ),
+                    ),
+                    Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SingleChildScrollView(
+                            child: ColoredJson(
+                              data: Get.find<BoardController>(
+                                      tag: "boardController")
+                                  .json,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 20,
+                          right: 20,
+                          child: Column(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Get.snackbar(":)", "Json copied to clipboard",
+                                      backgroundColor: Colors.black38,
+                                      snackPosition: SnackPosition.BOTTOM);
+
+                                  Clipboard.setData(ClipboardData(
+                                          text: Get.find<BoardController>(
+                                                  tag: "boardController")
+                                              .json))
+                                      .then((_) {});
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                      color: Colors.black26,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      border: Border.all(
+                                          color: Colors.black26, width: 1)),
+                                  child: Text("Copy Json"),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ))
+              ],
             ),
           ),
           Container(

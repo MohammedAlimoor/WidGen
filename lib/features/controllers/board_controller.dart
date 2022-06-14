@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wid_gen/features/controllers/wid_gen_controller.dart';
-import 'package:wid_gen/wid_gen.dart';
+import 'package:wid_gen/core/wid_gen.dart';
 import 'package:wid_gen/widgets/ff_scaffold.dart';
 import 'dart:async';
 
@@ -20,11 +20,16 @@ class BoardController extends GetxController with StateMixin {
   }
 
   String prettyJson(dynamic json) {
-    return jsonEncode(jsonDecode(json));
+    return getPrettyJSONString(jsonEncode(jsonDecode(json)));
 
     // var spaces = ' ' * 4;
     // var encoder = JsonEncoder.withIndent(spaces);
     // return encoder.convert(json);
+  }
+
+  String getPrettyJSONString(jsonObject) {
+    var encoder = new JsonEncoder.withIndent("     ");
+    return encoder.convert(jsonObject);
   }
 
   void removeWidgetTree(WidGen root, WidGen del) {
@@ -62,6 +67,17 @@ class BoardController extends GetxController with StateMixin {
     }
 
     update();
+  }
+
+  String get json {
+    var mainWidget = widTree["scafold"];
+
+    var reg = Get.isRegistered<WidGenController>(tag: mainWidget!.keyID);
+
+    if (reg) {
+      return mainWidget.json!;
+    }
+    return "{}";
   }
 
   Widget? get tree => getWidgetTree(widTree["scafold"]!, firstTime: true);

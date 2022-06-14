@@ -11,7 +11,7 @@ import 'package:wid_gen/properties/alignment_properties.dart';
 import 'package:wid_gen/properties/color_properties.dart';
 import 'package:wid_gen/properties/edgeinsets_properties.dart';
 import 'package:wid_gen/properties/int_properties.dart';
-import 'package:wid_gen/wid_gen.dart';
+import 'package:wid_gen/core/wid_gen.dart';
 
 class FFContainer extends WidGen {
   FFContainer({Key? key, required keyID}) : super(key: key, keyID: keyID);
