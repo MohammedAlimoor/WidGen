@@ -23,4 +23,4 @@ jobs:
       - run: flutter analyze
       - uses: bluefireteam/flutter-gh-pages@v7
         with:
-          baseHref: /WidGen/
+          baseHref: ./
