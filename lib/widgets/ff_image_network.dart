@@ -68,7 +68,7 @@ class FFImageNetwork extends WidGen {
   GlobalKey keyK = GlobalKey();
 
   get defaultUrl =>
-      "https://iconape.com/wp-content/files/yb/61798/png/flutter-logo.png";
+      "https://raw.githubusercontent.com/MohammedAlimoor/WidGen/main/flutter-logo.png";
   @override
   Widget build(BuildContext context) {
     putController(context);
