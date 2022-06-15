@@ -69,7 +69,7 @@ class FFSVGNetwork extends WidGen {
   GlobalKey keyK = GlobalKey();
 
   get defaultUrl =>
-      "https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/google.svg";
+      "https://raw.githubusercontent.com/MohammedAlimoor/WidGen/main/google.svg";
   @override
   Widget build(BuildContext context) {
     putController(context);
