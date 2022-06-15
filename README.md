@@ -3,8 +3,7 @@
 ## [Online WidGen](https://mohammedalimoor.github.io/WidGen/)
 # What is WidGen?
 its a tool to generate json [json_dynamic_widget](https://github.com/peiffer-innovations/json_dynamic_widget) from GUI [Drag/Drop widgets].
-
-
+![screenShot](https://raw.githubusercontent.com/MohammedAlimoor/WidGen/main/image.png)
 ## Getting Started
 just drag drop widget  and change properties  , you cant view  widgets on real time
 
