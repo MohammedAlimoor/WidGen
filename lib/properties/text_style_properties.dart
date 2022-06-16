@@ -91,7 +91,7 @@ class _TextStylePropertiesState extends State<TextStyleProperties> {
         return MacAlertDialog(
             title: const Text('Select Fonts'),
             actions: <Widget>[
-              RaisedButton(
+              ElevatedButton(
                 child: const Text('Close'),
                 onPressed: () => Get.back(),
               ),
