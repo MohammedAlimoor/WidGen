@@ -15,6 +15,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'WedGen',
       enableLog: true,
+      debugShowCheckedModeBanner: false,
+
       defaultTransition: Transition.fade,
       opaqueRoute: Get.isOpaqueRouteDefault,
       // popGesture: Get.isPopGestureEnable,
@@ -31,7 +33,11 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home:  IDE(),
+      home: Banner(
+          location: BannerLocation.topEnd,
+          message: "BETA 1.0",
+          color: Colors.blueAccent,
+          child: IDE()),
     );
   }
 }
