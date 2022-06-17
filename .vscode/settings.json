@@ -1,7 +1,0 @@
-{
-    "dart.flutterSdkPath": ".fvm/flutter_sdk",
-    "yaml.schemas": {
-        "file:///c%3A/Users/M.S.I/.vscode/extensions/atlassian.atlascode-2.10.12/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml",
-        "https://json.schemastore.org/github-action.json": "file:///c%3A/Users/M.S.I/Documents/git/wid_gen/.github/workflows/workflows.yml"
-    },
-}
